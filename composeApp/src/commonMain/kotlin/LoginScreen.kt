@@ -42,7 +42,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navigateToPinScreen: () -> Unit,
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -66,7 +68,7 @@ fun LoginScreen() {
         BankMainButton(
             text = "K&H mobilbank belépés",
             backgroundColor = Color.White,
-            onClick = {},
+            onClick = navigateToPinScreen,
         )
     }
 }
