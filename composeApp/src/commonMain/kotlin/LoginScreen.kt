@@ -188,6 +188,12 @@ fun PreviewKHandHMobileBankingApp() {
 }
 
 object BankColors {
-    val main = Color(0xFF00AEEF)
+    val main = Color(0xFF00bcf3)
     val dark = Color(0xFF6085A4)
+    val darker = Color(0xff004b78)
+    val light = Color(0xFFf5f9fc)
+
+    val white = Color.White
+
+    val cardSilver = Color(0xFFe9e9e9)
 }
