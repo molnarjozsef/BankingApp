@@ -18,10 +18,16 @@ fun BankingApp() {
             )
         }
         composable(RoutePin) {
-            PinScreen()
+            PinScreen(
+                navigateToDashboard = { navController.navigate(RouteDashboard) }
+            )
+        }
+        composable(RouteDashboard) {
+            DashboardScreen()
         }
     }
 }
 
 val RouteLogin = "login"
 val RoutePin = "pin"
+val RouteDashboard = "dashboard"

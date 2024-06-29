@@ -189,4 +189,5 @@ fun PreviewKHandHMobileBankingApp() {
 
 object BankColors {
     val main = Color(0xFF00AEEF)
+    val dark = Color(0xFF6085A4)
 }
