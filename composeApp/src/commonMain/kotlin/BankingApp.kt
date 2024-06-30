@@ -1,7 +1,16 @@
+import Routes.RouteDashboard
+import Routes.RouteLogin
+import Routes.RoutePin
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import features.dashboard.DashboardScreen
+import features.login.LoginScreen
+import features.pin.PinScreen
 
 
 @Composable
@@ -10,7 +19,9 @@ fun BankingApp() {
 
     NavHost(
         navController = navController,
-        startDestination = RouteLogin
+        startDestination = RouteLogin,
+        enterTransition = { fadeIn(animationSpec = tween(200)) },
+        exitTransition = { fadeOut(animationSpec = tween(200)) },
     ) {
         composable(RouteLogin) {
             LoginScreen(
@@ -28,6 +39,8 @@ fun BankingApp() {
     }
 }
 
-val RouteLogin = "login"
-val RoutePin = "pin"
-val RouteDashboard = "dashboard"
+object Routes {
+    val RouteLogin = "login"
+    val RoutePin = "pin"
+    val RouteDashboard = "dashboard"
+}
