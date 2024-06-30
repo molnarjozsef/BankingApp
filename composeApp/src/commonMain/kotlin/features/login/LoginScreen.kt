@@ -1,3 +1,6 @@
+package features.login
+
+import Strings
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -6,18 +9,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.runtime.Composable
@@ -30,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +35,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.logo
+import components.BankMainButton
+import components.BankSecondaryButton
+import org.jetbrains.compose.resources.painterResource
+import theme.BankColors
+import theme.dp16
+import theme.dp24
+import theme.dp48
+import theme.dp56
+import theme.dp64
 
 
 @Composable
@@ -50,26 +57,33 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(BankColors.main)
-            .padding(40.dp)
+            .padding(
+                top = dp56,
+                bottom = dp64,
+            )
     ) {
         AnimatedBubbles()
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(dp24))
 
-        BankSecondaryButton(
-            text = "K&H e-bank kódbeolvasás",
-            icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
-            textColor = Color.White,
-            onClick = {}
-        )
+        Column(
+            modifier = Modifier.padding(horizontal = dp48)
+        ) {
+            BankSecondaryButton(
+                text = Strings.Login.QrButton,
+                icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
+                textColor = Color.White,
+                onClick = {}
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dp16))
 
-        BankMainButton(
-            text = "K&H mobilbank belépés",
-            backgroundColor = Color.White,
-            onClick = navigateToPinScreen,
-        )
+            BankMainButton(
+                text = Strings.Login.LoginButton,
+                backgroundColor = Color.White,
+                onClick = navigateToPinScreen,
+            )
+        }
     }
 }
 
@@ -81,9 +95,9 @@ fun ColumnScope.AnimatedBubbles() {
         targetValue = IntOffset(
             y = 0,
             x = if (isShown) {
-                150
+                0
             } else {
-                500
+                with(density) { 100.dp.roundToPx() }
             },
         ),
         animationSpec = tween(1000)
@@ -100,12 +114,11 @@ fun ColumnScope.AnimatedBubbles() {
             .background(Color.White.copy(alpha = 0.4f)),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "K&H",
-            color = Color.White,
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+        Icon(
+            modifier = Modifier.size(dp64),
+            painter = painterResource(Res.drawable.logo),
+            contentDescription = null,
+            tint = BankColors.white
         )
     }
 
@@ -122,78 +135,4 @@ fun ColumnScope.AnimatedBubbles() {
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center
     )
-}
-
-@Composable
-fun BankMainButton(
-    text: String,
-    backgroundColor: Color,
-    onClick: () -> Unit,
-) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = backgroundColor,
-            contentColor = BankColors.main,
-        ),
-        shape = CircleShape,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp),
-        elevation = null,
-    ) {
-        Text(
-            text = text,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
-fun BankSecondaryButton(
-    text: String,
-    icon: Painter? = null,
-    textColor: Color = Color.White,
-    onClick: () -> Unit,
-) {
-    TextButton(
-        onClick = onClick,
-        colors = ButtonDefaults.textButtonColors(contentColor = textColor),
-        shape = CircleShape,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(40.dp),
-    ) {
-        icon?.let {
-            Icon(
-                painter = icon,
-                contentDescription = null,
-            )
-            Spacer(Modifier.width(8.dp))
-        }
-        Text(
-            text = text,
-            color = textColor,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Preview
-@Composable
-fun PreviewKHandHMobileBankingApp() {
-    BankingApp()
-}
-
-object BankColors {
-    val main = Color(0xFF00bcf3)
-    val dark = Color(0xFF6085A4)
-    val darker = Color(0xff004b78)
-    val light = Color(0xFFf5f9fc)
-
-    val white = Color.White
-
-    val cardSilver = Color(0xFFe9e9e9)
 }
