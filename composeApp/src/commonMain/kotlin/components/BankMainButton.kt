@@ -35,7 +35,7 @@ fun BankMainButton(
         Text(
             text = text,
             fontSize = 14.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
         )
     }
 }

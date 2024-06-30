@@ -11,30 +11,33 @@ import androidx.navigation.compose.rememberNavController
 import features.dashboard.DashboardScreen
 import features.login.LoginScreen
 import features.pin.PinScreen
+import theme.AppTheme
 
 
 @Composable
 fun BankingApp() {
     val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = RouteLogin,
-        enterTransition = { fadeIn(animationSpec = tween(200)) },
-        exitTransition = { fadeOut(animationSpec = tween(200)) },
-    ) {
-        composable(RouteLogin) {
-            LoginScreen(
-                navigateToPinScreen = { navController.navigate(RoutePin) }
-            )
-        }
-        composable(RoutePin) {
-            PinScreen(
-                navigateToDashboard = { navController.navigate(RouteDashboard) }
-            )
-        }
-        composable(RouteDashboard) {
-            DashboardScreen()
+    AppTheme {
+        NavHost(
+            navController = navController,
+            startDestination = RouteLogin,
+            enterTransition = { fadeIn(animationSpec = tween(200)) },
+            exitTransition = { fadeOut(animationSpec = tween(200)) },
+        ) {
+            composable(RouteLogin) {
+                LoginScreen(
+                    navigateToPinScreen = { navController.navigate(RoutePin) }
+                )
+            }
+            composable(RoutePin) {
+                PinScreen(
+                    navigateToDashboard = { navController.navigate(RouteDashboard) }
+                )
+            }
+            composable(RouteDashboard) {
+                DashboardScreen()
+            }
         }
     }
 }
