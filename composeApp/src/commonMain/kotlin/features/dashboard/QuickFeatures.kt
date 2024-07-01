@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -25,13 +25,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import theme.BankColors
 import theme.dp16
-import theme.dp24
+import theme.dp32
 import theme.dp8
 
 @Composable
 fun QuickFeatures() {
     Row(
-        modifier = Modifier.padding(horizontal = dp24),
         horizontalArrangement = Arrangement.spacedBy(dp16)
     ) {
         QuickFeatureButton(
@@ -70,7 +69,8 @@ private fun RowScope.QuickFeatureButton(
         ) {
             Icon(
                 painter = icon,
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.size(dp32),
             )
             Text(
                 text = title,

@@ -1,7 +1,8 @@
 package components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -13,9 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.BankColors
+import theme.dp8
 
 @Composable
-fun BankMainButton(
+fun MainButton(
     text: String,
     backgroundColor: Color,
     onClick: () -> Unit,
@@ -29,7 +31,8 @@ fun BankMainButton(
         shape = CircleShape,
         modifier = Modifier
             .fillMaxWidth()
-            .height(40.dp),
+            .heightIn(min = 40.dp),
+        contentPadding = PaddingValues(dp8),
         elevation = null,
     ) {
         Text(

@@ -2,10 +2,10 @@ package features.dashboard
 
 import Strings
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.BankColors
 import theme.dp16
+import theme.dp4
 import theme.dp8
 
 @Composable
@@ -54,16 +55,20 @@ private fun Account() {
                     .background(BankColors.white)
                     .fillMaxWidth()
                     .padding(dp8),
-                verticalArrangement = Arrangement.spacedBy(dp8)
             ) {
                 Text(
-                    text = "${Strings.BankName} számlacsomag",
-                    fontSize = 12.sp
+                    text = Strings.Dashboard.AccountName,
+                    fontSize = 12.sp,
+                    color = BankColors.lightDark
                 )
+
+                Spacer(Modifier.height(dp4))
+
                 Text(
                     text = "47 000 Ft",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp
+                    fontSize = 16.sp,
+                    color = BankColors.darker,
                 )
             }
         }

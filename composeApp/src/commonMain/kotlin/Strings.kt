@@ -17,6 +17,8 @@ object Strings {
     object Dashboard {
         val Title = "kezdőlap"
 
+        val AccountName = "${Strings.BankName} számlacsomag"
+
         val QuickSettingsCurrentTransfer = "forintátutalás"
         val QuickSettingsLimitChange = "limitmódosítás"
         val QuickSettingsBillPayment = "csekkbefizetés"
@@ -24,5 +26,11 @@ object Strings {
         val BottomNavigationHome = "kezdőlap"
         val BottomNavigationProducts = "termékek"
         val BottomNavigationExtras = "$BankName+"
+
+        val MoreTransactions = "további tranzakciók"
+
+        val Todos = "teendőim"
+        val FinancialTransactions = "pénzügyi tranzakciók"
+        val AdministrativeTransactions = "adminisztratív tranzakciók"
     }
 }

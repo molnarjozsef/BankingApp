@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.BankColors
 import theme.dp16
-import theme.dp24
 
 @Composable
 fun PinPad(
@@ -28,7 +27,7 @@ fun PinPad(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(dp24),
+        verticalArrangement = Arrangement.spacedBy(dp16),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         PinRow(listOf(1, 2, 3), { onClick(it) })
@@ -67,13 +66,13 @@ private fun PinButton(
             .aspectRatio(1f)
             .clip(CircleShape)
             .clickable { onClick() }
-            .border(border = BorderStroke(2.dp, BankColors.dark), shape = CircleShape),
+            .border(border = BorderStroke(1.dp, BankColors.dark), shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
             color = BankColors.dark,
-            fontSize = 24.sp,
+            fontSize = 22.sp,
         )
     }
 }
