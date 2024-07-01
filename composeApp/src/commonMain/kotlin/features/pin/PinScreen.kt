@@ -34,7 +34,7 @@ fun PinScreen(
     var pinCount by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(pinCount) {
-        if (pinCount == 6) {
+        if (pinCount >= 6) {
             navigateToDashboard()
         }
     }
@@ -46,7 +46,6 @@ fun PinScreen(
             modifier = Modifier.fillMaxSize().padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Text(
                 text = Strings.Pin.Heading,
                 fontSize = 20.sp,
@@ -58,7 +57,8 @@ fun PinScreen(
             Spacer(Modifier.height(dp24))
 
             Text(
-                text = buildString { repeat(pinCount) { append("•") } },
+                text = buildString { repeat(pinCount) { append("•") } }
+                    .ifBlank { " " },
                 fontSize = 40.sp,
                 color = BankColors.main,
                 textAlign = TextAlign.Center,

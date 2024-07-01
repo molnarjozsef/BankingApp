@@ -7,7 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import components.Header
@@ -24,12 +29,12 @@ fun DashboardScreen(
         topBar = {
             Header(
                 title = Strings.Dashboard.Title,
-                backgroundColor = BankColors.light
+                backgroundColor = BankColors.light,
+                startButton = { MenuButton() },
+                endButton = { ProfileButton() }
             )
         },
-        bottomBar = {
-            BankBottomNavigation()
-        }
+        bottomBar = { BankBottomNavigation() }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
@@ -54,5 +59,27 @@ fun DashboardScreen(
 
             Spacer(Modifier.height(dp56))
         }
+    }
+}
+
+@Composable
+private fun MenuButton() {
+    IconButton(onClick = {}) {
+        Icon(
+            imageVector = Icons.Outlined.Menu,
+            tint = BankColors.dark,
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun ProfileButton() {
+    IconButton(onClick = {}) {
+        Icon(
+            imageVector = Icons.Outlined.Person,
+            tint = BankColors.main,
+            contentDescription = null
+        )
     }
 }
