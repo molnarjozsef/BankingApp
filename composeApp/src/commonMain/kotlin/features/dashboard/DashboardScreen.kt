@@ -27,6 +27,9 @@ fun DashboardScreen(
                 backgroundColor = BankColors.light
             )
         },
+        bottomBar = {
+            BankBottomNavigation()
+        }
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
