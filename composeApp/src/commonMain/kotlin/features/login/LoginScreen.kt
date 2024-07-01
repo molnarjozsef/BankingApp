@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.logo
-import components.BankMainButton
-import components.BankSecondaryButton
+import components.MainButton
+import components.SecondaryButton
 import org.jetbrains.compose.resources.painterResource
 import theme.BankColors
 import theme.dp16
@@ -69,7 +69,7 @@ fun LoginScreen(
         Column(
             modifier = Modifier.padding(horizontal = dp48)
         ) {
-            BankSecondaryButton(
+            SecondaryButton(
                 text = Strings.Login.QrButton,
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
                 textColor = Color.White,
@@ -78,7 +78,7 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(dp16))
 
-            BankMainButton(
+            MainButton(
                 text = Strings.Login.LoginButton,
                 backgroundColor = Color.White,
                 onClick = navigateToPinScreen,

@@ -1,8 +1,9 @@
 package components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ButtonDefaults
@@ -14,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.BankColors
-import theme.dp40
 import theme.dp8
 
 @Composable
-fun BankSecondaryButton(
+fun SecondaryButton(
     text: String,
     icon: Painter? = null,
     textColor: Color = BankColors.white,
@@ -32,7 +33,8 @@ fun BankSecondaryButton(
         shape = CircleShape,
         modifier = Modifier
             .fillMaxWidth()
-            .height(dp40),
+            .heightIn(min = 40.dp),
+        contentPadding = PaddingValues(dp8),
     ) {
         icon?.let {
             Icon(

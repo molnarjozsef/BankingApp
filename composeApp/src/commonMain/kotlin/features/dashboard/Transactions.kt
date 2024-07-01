@@ -42,12 +42,12 @@ private fun Transaction() {
             text = "BKK AUTOMATA",
             modifier = Modifier.weight(1f),
             color = BankColors.darker,
-            fontSize = 13.sp
+            fontSize = 14.sp
         )
         Text(
             text = "-9000 Ft",
             color = BankColors.darker,
-            fontSize = 16.sp
+            fontSize = 14.sp
         )
     }
 }

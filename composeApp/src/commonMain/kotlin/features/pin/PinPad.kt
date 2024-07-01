@@ -72,7 +72,7 @@ private fun PinButton(
         Text(
             text = text,
             color = BankColors.dark,
-            fontSize = 24.sp,
+            fontSize = 22.sp,
         )
     }
 }

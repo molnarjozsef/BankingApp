@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import theme.BankColors
 import theme.dp56
 
@@ -38,7 +39,8 @@ fun Header(
             text = title,
             color = BankColors.darker,
             textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            fontSize = 14.sp,
         )
 
         Box(
