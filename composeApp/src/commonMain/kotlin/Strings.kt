@@ -16,8 +16,13 @@ object Strings {
 
     object Dashboard {
         val Title = "kezdőlap"
+
         val QuickSettingsCurrentTransfer = "forintátutalás"
         val QuickSettingsLimitChange = "limitmódosítás"
         val QuickSettingsBillPayment = "csekkbefizetés"
+
+        val BottomNavigationHome = "kezdőlap"
+        val BottomNavigationProducts = "termékek"
+        val BottomNavigationExtras = "$BankName+"
     }
 }
