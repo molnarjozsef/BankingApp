@@ -28,6 +28,7 @@ import theme.dp24
 
 @Composable
 fun Menu(
+    navigateToAtmFinder: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -52,7 +53,7 @@ fun Menu(
         MenuItem(
             title = Strings.Dashboard.MenuAtmFinder,
             icon = Icons.Outlined.LocationOn,
-            onClick = { },
+            onClick = navigateToAtmFinder,
         )
         MenuItem(
             title = Strings.Dashboard.MenuSettings,
