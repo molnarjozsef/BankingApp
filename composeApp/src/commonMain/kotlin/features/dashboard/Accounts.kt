@@ -24,18 +24,18 @@ import theme.dp4
 import theme.dp8
 
 @Composable
-fun Accounts() {
+fun Accounts(money: String) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = dp16)
     ) {
         item {
-            Account()
+            Account(money = money)
         }
     }
 }
 
 @Composable
-private fun Account() {
+private fun Account(money: String) {
     Card(
         modifier = Modifier
             .height(200.dp)
@@ -65,7 +65,7 @@ private fun Account() {
                 Spacer(Modifier.height(dp4))
 
                 Text(
-                    text = "47 000 Ft",
+                    text = money,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = BankColors.darker,
