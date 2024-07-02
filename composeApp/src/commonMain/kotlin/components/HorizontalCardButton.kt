@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -26,12 +26,13 @@ fun HorizontalCardButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = BankColors.white,
+            containerColor = BankColors.white,
             contentColor = BankColors.main,
         ),
         shape = RoundedCornerShape(dp8),
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(dp16)
+        contentPadding = PaddingValues(dp16),
+        elevation = ButtonDefaults.elevatedButtonElevation()
     ) {
         Icon(
             painter = icon,
