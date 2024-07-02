@@ -8,14 +8,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ReceiptLong
 import androidx.compose.material.icons.outlined.Payments
 import androidx.compose.material.icons.outlined.Speed
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,10 +59,12 @@ private fun RowScope.QuickFeatureButton(
         modifier = Modifier.weight(1f),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = BankColors.main,
+            containerColor = BankColors.main,
             contentColor = BankColors.white,
         ),
-        contentPadding = PaddingValues(dp8)
+        contentPadding = PaddingValues(dp8),
+        shape = RoundedCornerShape(dp8),
+        elevation = ButtonDefaults.elevatedButtonElevation(),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
