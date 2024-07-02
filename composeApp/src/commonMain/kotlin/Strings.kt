@@ -32,5 +32,13 @@ object Strings {
         val Todos = "teendőim"
         val FinancialTransactions = "pénzügyi tranzakciók"
         val AdministrativeTransactions = "adminisztratív tranzakciók"
+
+        val MenuTitle = "menü"
+
+        val MenuExtras = "további funkciók és beállítások"
+        val MenuSzepCard = "$BankName SZÉP Kártya"
+        val MenuAtmFinder = "ATM & ügyfélpontkereső"
+        val MenuSettings = "beállítások"
+        val MenuContact = "kapcsolat"
     }
 }
