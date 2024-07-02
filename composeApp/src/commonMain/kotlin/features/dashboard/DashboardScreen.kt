@@ -38,6 +38,16 @@ import theme.dp8
 
 @Composable
 fun DashboardScreen(
+    viewModel: DashboardViewModel,
+) {
+    DashboardScreenContent(
+        money = viewModel.money
+    )
+}
+
+@Composable
+fun DashboardScreenContent(
+    money: String,
 ) {
     Scaffold(
         topBar = {
@@ -62,7 +72,9 @@ fun DashboardScreen(
             ) {
                 Spacer(Modifier.height(dp16))
 
-                Accounts()
+                Accounts(
+                    money = money
+                )
 
                 Spacer(Modifier.height(dp24))
 
@@ -117,6 +129,7 @@ fun DashboardScreen(
             }
         }
     }
+
 }
 
 @Composable
