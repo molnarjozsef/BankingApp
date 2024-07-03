@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
+    id("de.jensklingenberg.ktorfit") version "2.0.0"
 }
 
 kotlin {
@@ -57,6 +59,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.ktor.client.core)
+            implementation(libs.ktorfit.lib)
         }
     }
 }
