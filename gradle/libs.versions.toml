@@ -10,7 +10,10 @@ androidx-core-ktx = "1.13.1"
 androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
+biometry = "0.4.0"
+biometryCompose = "0.4.0"
 compose-plugin = "1.6.10"
+fragment = "1.8.1"
 junit = "4.13.2"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.21"
@@ -35,6 +38,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
 
@@ -51,6 +55,9 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 
 ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
+
+biometry-compose = { module = "dev.icerock.moko:biometry-compose", version.ref = "biometryCompose" }
+biometry = { module = "dev.icerock.moko:biometry", version.ref = "biometry" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

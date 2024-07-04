@@ -11,6 +11,9 @@ object Strings {
         val Title = "azonosítás"
         val Heading = "add meg az mPIN kódodat"
         val ForgotPinButton = "elfelejtettem az mPIN-kódomat"
+
+        val BiometricTitle = "add meg a biometrikus azonosítód"
+        val BiometricCancel = "inkább mPIN-t használok"
     }
 
 

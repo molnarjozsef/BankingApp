@@ -1,8 +1,10 @@
 package di
 
 import de.jensklingenberg.ktorfit.Ktorfit
+import dev.icerock.moko.biometry.BiometryAuthenticator
 import features.atmfinder.AtmFinderViewModel
 import features.dashboard.DashboardViewModel
+import features.pin.PinViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -41,6 +43,11 @@ val sharedModule = module {
 
     viewModel {
         DashboardViewModel()
+    }
+    viewModel { (biometryAuthenticator: BiometryAuthenticator) ->
+        PinViewModel(
+            biometryAuthenticator = biometryAuthenticator
+        )
     }
     viewModel {
         AtmFinderViewModel(
