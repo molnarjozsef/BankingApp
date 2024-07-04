@@ -9,6 +9,7 @@ fun AppTheme(
 ) {
     MaterialTheme(
         typography = defaultTypography,
-        content = content
+        content = content,
+        colorScheme = MaterialTheme.colorScheme.copy(background = BankColors.white)
     )
 }

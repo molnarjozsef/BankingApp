@@ -1,5 +1,6 @@
 package features.dashboard
 
+import Routes
 import Strings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import components.Header
 import components.HorizontalCardButton
 import components.VerticalCardButton
@@ -48,9 +50,11 @@ import theme.dp8
 @Composable
 fun DashboardScreen(
     viewModel: DashboardViewModel,
+    navController: NavController,
 ) {
     DashboardScreenContent(
-        money = viewModel.money
+        money = viewModel.money,
+        navigateToAtmFinder = { navController.navigate(Routes.RouteAtmFinder) },
     )
 }
 
@@ -58,6 +62,7 @@ fun DashboardScreen(
 @Composable
 fun DashboardScreenContent(
     money: String,
+    navigateToAtmFinder: () -> Unit,
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
@@ -73,7 +78,6 @@ fun DashboardScreenContent(
         bottomBar = { BankBottomNavigation() },
     ) { contentPadding ->
 
-
         if (showMenu) {
             ModalBottomSheet(
                 sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
@@ -85,7 +89,10 @@ fun DashboardScreenContent(
                     topEnd = dp8,
                 ),
             ) {
-                Menu(Modifier.navigationBarsPadding())
+                Menu(
+                    navigateToAtmFinder = navigateToAtmFinder,
+                    modifier = Modifier.navigationBarsPadding(),
+                )
             }
         }
 

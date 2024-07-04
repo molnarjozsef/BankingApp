@@ -1,5 +1,6 @@
 package features.pin
 
+import Routes
 import Strings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import components.BackButton
 import components.Header
 import theme.BankColors
 import theme.dp24
@@ -29,7 +32,18 @@ import theme.dp24
 
 @Composable
 fun PinScreen(
+    navController: NavController,
+) {
+    PinScreenContent(
+        navigateToDashboard = { navController.navigate(Routes.RouteDashboard) },
+        navigateBack = navController::navigateUp,
+    )
+}
+
+@Composable
+fun PinScreenContent(
     navigateToDashboard: () -> Unit,
+    navigateBack: () -> Unit,
 ) {
     var pinCount by remember { mutableIntStateOf(0) }
 
@@ -40,7 +54,12 @@ fun PinScreen(
     }
 
     Scaffold(
-        topBar = { Header(title = Strings.Pin.Title) }
+        topBar = {
+            Header(
+                title = Strings.Pin.Title,
+                startButton = { BackButton(navigateBack = navigateBack) },
+            )
+        }
     ) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize()

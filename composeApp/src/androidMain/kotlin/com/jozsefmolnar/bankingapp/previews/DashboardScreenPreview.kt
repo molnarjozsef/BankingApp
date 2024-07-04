@@ -8,6 +8,7 @@ import features.dashboard.DashboardScreenContent
 @Composable
 fun DashboardScreenPreview() {
     DashboardScreenContent(
-        money = "12 345 Ft"
+        money = "12 345 Ft",
+        navigateToAtmFinder = { }
     )
 }

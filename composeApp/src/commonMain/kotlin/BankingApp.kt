@@ -1,3 +1,4 @@
+import Routes.RouteAtmFinder
 import Routes.RouteDashboard
 import Routes.RouteLogin
 import Routes.RoutePin
@@ -8,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import features.atmfinder.AtmFinderScreen
+import features.atmfinder.AtmFinderViewModel
 import features.dashboard.DashboardScreen
 import features.dashboard.DashboardViewModel
 import features.login.LoginScreen
@@ -36,7 +39,7 @@ fun BankingApp() {
                 }
                 composable(RoutePin) {
                     PinScreen(
-                        navigateToDashboard = { navController.navigate(RouteDashboard) }
+                        navController = navController,
                     )
                 }
                 composable(RouteDashboard) {
@@ -44,6 +47,15 @@ fun BankingApp() {
 
                     DashboardScreen(
                         viewModel = viewModel,
+                        navController = navController,
+                    )
+                }
+                composable(RouteAtmFinder) {
+                    val viewModel = koinViewModel<AtmFinderViewModel>()
+
+                    AtmFinderScreen(
+                        viewModel = viewModel,
+                        navController = navController,
                     )
                 }
             }
@@ -55,4 +67,5 @@ object Routes {
     val RouteLogin = "login"
     val RoutePin = "pin"
     val RouteDashboard = "dashboard"
+    val RouteAtmFinder = "atmfinder"
 }

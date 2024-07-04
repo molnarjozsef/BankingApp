@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,5 +54,23 @@ fun Header(
         ) {
             endButton?.invoke()
         }
+    }
+}
+
+@Composable
+fun BackButton(
+    navigateBack: () -> Unit,
+) {
+    IconButton(
+        onClick = navigateBack,
+        modifier = Modifier.size(dp56),
+        colors = IconButtonDefaults.iconButtonColors(
+            contentColor = BankColors.main,
+        )
+    ) {
+        Icon(
+            imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+            contentDescription = null
+        )
     }
 }
