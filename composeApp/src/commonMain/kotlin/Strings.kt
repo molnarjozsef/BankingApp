@@ -41,4 +41,9 @@ object Strings {
         val MenuSettings = "beállítások"
         val MenuContact = "kapcsolat"
     }
+
+    object AtmFinder {
+        val Title = "ATM és ügyfélpontkereső"
+        val DefaultAtmName = "ATM"
+    }
 }
