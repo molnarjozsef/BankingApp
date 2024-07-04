@@ -20,11 +20,24 @@ class DefaultBankingRepository(
                 Atm(
                     lat = element.lat,
                     lon = element.lon,
-                    brand = element.tags.brand
+                    name = element.tags.brand ?: element.tags.operator ?: element.tags.name,
+                    postcode = element.tags.addrPostcode,
+                    city = element.tags.addrCity,
+                    street = element.tags.addrStreet,
+                    houseNumber = element.tags.addrHouseNumber,
+                    wheelchair = mapOsmToBoolean(element.tags.wheelchair),
+                    indoor = mapOsmToBoolean(element.tags.indoor),
+                    cashIn = mapOsmToBoolean(element.tags.cashIn),
                 )
             }
 
             atms.value = fetchedAtms
         }
+    }
+
+    private fun mapOsmToBoolean(osmBoolean: String?) = when (osmBoolean) {
+        "yes" -> true
+        "no" -> false
+        else -> null
     }
 }

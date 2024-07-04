@@ -1,5 +1,6 @@
 package model.api
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -25,4 +26,18 @@ data class Element(
 data class Tags(
     val amenity: String,
     val brand: String?,
+    val name: String?,
+    val operator: String?,
+    @SerialName("addr:city")
+    val addrCity: String?,
+    @SerialName("addr:housenumber")
+    val addrHouseNumber: String?,
+    @SerialName("addr:postcode")
+    val addrPostcode: String?,
+    @SerialName("addr:street")
+    val addrStreet: String?,
+    val wheelchair: String?,
+    val indoor: String?,
+    @SerialName("cash_in")
+    val cashIn: String?,
 )

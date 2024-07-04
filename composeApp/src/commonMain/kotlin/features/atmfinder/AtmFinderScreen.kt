@@ -13,6 +13,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
+import androidx.compose.material.icons.outlined.Accessible
+import androidx.compose.material.icons.outlined.AttachMoney
+import androidx.compose.material.icons.outlined.House
+import androidx.compose.material.icons.outlined.MoneyOff
+import androidx.compose.material.icons.outlined.NaturePeople
+import androidx.compose.material.icons.outlined.NotAccessible
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -85,32 +91,98 @@ private fun Atm(
             modifier = Modifier.padding(dp16).fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(dp8),
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Icon(
-                    imageVector = Icons.Filled.Circle,
-                    tint = BankColors.darker,
-                    contentDescription = null
-                )
-                if ((index + 1) in 1..5) {
-                    Text(
-                        text = (index + 1).toString(),
-                        fontSize = 8.sp,
-                        color = BankColors.white
-                    )
-                }
-            }
+            AtmPinIcon(index = index)
             Column {
                 Text(
-                    text = atm.brand ?: Strings.AtmFinder.DefaultAtmName,
+                    text = atm.name ?: Strings.AtmFinder.DefaultAtmName,
                     fontSize = 13.sp,
                     color = BankColors.darker
                 )
+                atm.getFullAddress()?.let { fullAddress ->
+                    Text(
+                        text = fullAddress,
+                        fontSize = 10.sp,
+                        color = BankColors.darker,
+                    )
+                }
                 Text(
                     text = "${atm.lat}, ${atm.lon}",
                     fontSize = 10.sp,
                     color = BankColors.darker,
                 )
+                AtmFeatures(atm = atm)
             }
         }
     }
 }
+
+@Composable
+private fun AtmPinIcon(
+    index: Int,
+) {
+    Box(contentAlignment = Alignment.Center) {
+        Icon(
+            imageVector = Icons.Filled.Circle,
+            tint = BankColors.darker,
+            contentDescription = null
+        )
+        if ((index + 1) in 1..5) {
+            Text(
+                text = (index + 1).toString(),
+                fontSize = 8.sp,
+                color = BankColors.white
+            )
+        }
+    }
+}
+
+@Composable
+private fun AtmFeatures(
+    atm: Atm,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(dp8)
+    ) {
+        if (atm.wheelchair != null) {
+            Icon(
+                imageVector = if (atm.wheelchair) {
+                    Icons.Outlined.Accessible
+                } else {
+                    Icons.Outlined.NotAccessible
+                },
+                tint = BankColors.main,
+                contentDescription = null
+            )
+        }
+        if (atm.indoor != null) {
+            Icon(
+                imageVector = if (atm.indoor) {
+                    Icons.Outlined.House
+                } else {
+                    Icons.Outlined.NaturePeople
+                },
+                tint = BankColors.main,
+                contentDescription = null
+            )
+        }
+        if (atm.cashIn != null) {
+            Icon(
+                imageVector = if (atm.cashIn) {
+                    Icons.Outlined.AttachMoney
+                } else {
+                    Icons.Outlined.MoneyOff
+                },
+                tint = BankColors.main,
+                contentDescription = null
+            )
+        }
+
+    }
+}
+
+private fun Atm.getFullAddress(): String? =
+    if (postcode == null && city == null && street == null && houseNumber == null) {
+        null
+    } else {
+        listOfNotNull(postcode, city, street, houseNumber).joinToString(" ")
+    }
