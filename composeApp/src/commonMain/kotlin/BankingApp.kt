@@ -9,14 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.icerock.moko.biometry.compose.rememberBiometryAuthenticatorFactory
 import features.atmfinder.AtmFinderScreen
 import features.atmfinder.AtmFinderViewModel
 import features.dashboard.DashboardScreen
 import features.dashboard.DashboardViewModel
 import features.login.LoginScreen
 import features.pin.PinScreen
+import features.pin.PinViewModel
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import theme.AppTheme
 
 
@@ -38,8 +41,14 @@ fun BankingApp() {
                     )
                 }
                 composable(RoutePin) {
+                    val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
+                    val viewModel = koinViewModel<PinViewModel> {
+                        parametersOf(biometryAuthenticatorFactory.createBiometryAuthenticator())
+                    }
+
                     PinScreen(
                         navController = navController,
+                        viewModel = viewModel
                     )
                 }
                 composable(RouteDashboard) {

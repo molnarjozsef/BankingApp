@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -24,18 +25,43 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import components.BackButton
 import components.Header
+import dev.icerock.moko.biometry.compose.BindBiometryAuthenticatorEffect
 import theme.BankColors
 import theme.dp24
 
 
 @Composable
 fun PinScreen(
+    viewModel: PinViewModel,
     navController: NavController,
 ) {
+    val biometricResult = viewModel.biometricResult.collectAsState().value
+    val navigateToDashboard = {
+        navController.navigate(
+            route = Routes.RouteDashboard,
+            navOptions = NavOptions.Builder()
+                .setPopUpTo(Routes.RouteLogin, inclusive = false)
+                .build()
+        )
+    }
+
+    BindBiometryAuthenticatorEffect(viewModel.biometryAuthenticator)
+
+    LaunchedEffect(Unit) {
+        viewModel.tryToAuth()
+    }
+
+    LaunchedEffect(biometricResult) {
+        if (biometricResult == BiometricResult.Success) {
+            navigateToDashboard()
+        }
+    }
+
     PinScreenContent(
-        navigateToDashboard = { navController.navigate(Routes.RouteDashboard) },
+        navigateToDashboard = navigateToDashboard,
         navigateBack = navController::navigateUp,
     )
 }

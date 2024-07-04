@@ -35,6 +35,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.fragment)
 
             implementation(libs.ktor.client.okhttp)
         }
@@ -63,6 +64,9 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktorfit.lib)
+
+            api(libs.biometry)
+            api(libs.biometry.compose)
         }
     }
 }
