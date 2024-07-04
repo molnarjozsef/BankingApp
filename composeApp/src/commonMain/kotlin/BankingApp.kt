@@ -39,7 +39,7 @@ fun BankingApp() {
                 }
                 composable(RoutePin) {
                     PinScreen(
-                        navigateToDashboard = { navController.navigate(RouteDashboard) }
+                        navController = navController,
                     )
                 }
                 composable(RouteDashboard) {
@@ -55,6 +55,7 @@ fun BankingApp() {
 
                     AtmFinderScreen(
                         viewModel = viewModel,
+                        navController = navController,
                     )
                 }
             }

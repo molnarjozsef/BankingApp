@@ -35,11 +35,14 @@ object Strings {
 
         val MenuTitle = "menü"
 
+        val MenuNavigation = "navigáció"
+
         val MenuExtras = "további funkciók és beállítások"
         val MenuSzepCard = "$BankName SZÉP Kártya"
         val MenuAtmFinder = "ATM & ügyfélpontkereső"
         val MenuSettings = "beállítások"
         val MenuContact = "kapcsolat"
+        val MenuWhatsNew = "újdonságok"
     }
 
     object AtmFinder {

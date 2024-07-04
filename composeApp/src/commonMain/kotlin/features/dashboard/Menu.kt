@@ -12,8 +12,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.outlined.BeachAccess
 import androidx.compose.material.icons.outlined.Call
+import androidx.compose.material.icons.outlined.Celebration
+import androidx.compose.material.icons.outlined.ConfirmationNumber
+import androidx.compose.material.icons.outlined.House
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Store
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +29,7 @@ import components.Header
 import theme.BankColors
 import theme.dp16
 import theme.dp24
+import theme.dp32
 
 @Composable
 fun Menu(
@@ -36,37 +41,82 @@ fun Menu(
 
         Spacer(Modifier.height(dp16))
 
-        Text(
-            modifier = Modifier.padding(horizontal = dp24),
-            text = Strings.Dashboard.MenuExtras,
-            fontSize = 14.sp,
-            color = BankColors.lightDark
-        )
+        NavigationSection()
 
-        Spacer(Modifier.height(dp16))
+        Spacer(Modifier.height(dp32))
 
-        MenuItem(
-            title = Strings.Dashboard.MenuSzepCard,
-            icon = Icons.Outlined.BeachAccess,
-            onClick = { },
-        )
-        MenuItem(
-            title = Strings.Dashboard.MenuAtmFinder,
-            icon = Icons.Outlined.LocationOn,
-            onClick = navigateToAtmFinder,
-        )
-        MenuItem(
-            title = Strings.Dashboard.MenuSettings,
-            icon = Icons.Outlined.Settings,
-            onClick = { },
-        )
-        MenuItem(
-            title = Strings.Dashboard.MenuContact,
-            icon = Icons.Outlined.Call,
-            onClick = { },
-        )
+        ExtrasSection(navigateToAtmFinder = navigateToAtmFinder)
     }
 }
+
+@Composable
+private fun NavigationSection() {
+    Text(
+        modifier = Modifier.padding(horizontal = dp24),
+        text = Strings.Dashboard.MenuNavigation,
+        fontSize = 14.sp,
+        color = BankColors.lightDark
+    )
+
+    Spacer(Modifier.height(dp16))
+
+    MenuItem(
+        title = Strings.Dashboard.BottomNavigationHome,
+        icon = Icons.Outlined.House,
+        onClick = { },
+    )
+    MenuItem(
+        title = Strings.Dashboard.BottomNavigationProducts,
+        icon = Icons.Outlined.Store,
+        onClick = { },
+    )
+    MenuItem(
+        title = Strings.Dashboard.BottomNavigationExtras,
+        icon = Icons.Outlined.ConfirmationNumber,
+        onClick = { },
+    )
+}
+
+@Composable
+private fun ExtrasSection(
+    navigateToAtmFinder: () -> Unit,
+) {
+    Text(
+        modifier = Modifier.padding(horizontal = dp24),
+        text = Strings.Dashboard.MenuExtras,
+        fontSize = 14.sp,
+        color = BankColors.lightDark
+    )
+
+    Spacer(Modifier.height(dp16))
+
+    MenuItem(
+        title = Strings.Dashboard.MenuSzepCard,
+        icon = Icons.Outlined.BeachAccess,
+        onClick = { },
+    )
+    MenuItem(
+        title = Strings.Dashboard.MenuAtmFinder,
+        icon = Icons.Outlined.LocationOn,
+        onClick = navigateToAtmFinder,
+    )
+    MenuItem(
+        title = Strings.Dashboard.MenuSettings,
+        icon = Icons.Outlined.Settings,
+        onClick = { },
+    )
+    MenuItem(
+        title = Strings.Dashboard.MenuContact,
+        icon = Icons.Outlined.Call,
+        onClick = { },
+    )
+    MenuItem(
+        title = Strings.Dashboard.MenuWhatsNew,
+        icon = Icons.Outlined.Celebration,
+        onClick = { },
+    )
+}
+
 
 @Composable
 private fun MenuItem(

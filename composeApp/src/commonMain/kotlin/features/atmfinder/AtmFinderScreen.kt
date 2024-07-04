@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.outlined.Accessible
 import androidx.compose.material.icons.outlined.AttachMoney
 import androidx.compose.material.icons.outlined.House
@@ -29,6 +30,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import components.BackButton
 import components.Header
 import model.domain.Atm
 import theme.BankColors
@@ -40,11 +43,26 @@ import theme.dp8
 @Composable
 fun AtmFinderScreen(
     viewModel: AtmFinderViewModel,
+    navController: NavHostController,
 ) {
-    val atms = viewModel.atms.collectAsState().value
+    AtmFinderScreenContent(
+        atms = viewModel.atms.collectAsState().value,
+        navigateBack = navController::navigateUp,
+    )
+}
 
+@Composable
+fun AtmFinderScreenContent(
+    atms: List<Atm>?,
+    navigateBack: () -> Unit,
+) {
     Scaffold(
-        topBar = { Header(title = Strings.AtmFinder.Title) }
+        topBar = {
+            Header(
+                title = Strings.AtmFinder.Title,
+                startButton = { BackButton(navigateBack = navigateBack) },
+            )
+        }
     ) { contentPadding ->
         Box(Modifier.padding(contentPadding)) {
             if (atms == null) {
@@ -120,13 +138,19 @@ private fun Atm(
 private fun AtmPinIcon(
     index: Int,
 ) {
+    val isIndexed = (index + 1) in 1..5
+
     Box(contentAlignment = Alignment.Center) {
         Icon(
-            imageVector = Icons.Filled.Circle,
+            imageVector = if (isIndexed) {
+                Icons.Filled.Circle
+            } else {
+                Icons.Filled.LocationOn
+            },
             tint = BankColors.darker,
             contentDescription = null
         )
-        if ((index + 1) in 1..5) {
+        if (isIndexed) {
             Text(
                 text = (index + 1).toString(),
                 fontSize = 8.sp,

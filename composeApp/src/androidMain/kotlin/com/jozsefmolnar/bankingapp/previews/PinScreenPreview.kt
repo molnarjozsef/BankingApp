@@ -1,13 +1,14 @@
 package com.jozsefmolnar.bankingapp.previews
 
-import features.pin.PinScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import features.pin.PinScreenContent
 
 @Preview
 @Composable
 fun PinScreenPreview() {
-    PinScreen(
-        navigateToDashboard = {}
+    PinScreenContent(
+        navigateToDashboard = {},
+        navigateBack = {},
     )
 }
