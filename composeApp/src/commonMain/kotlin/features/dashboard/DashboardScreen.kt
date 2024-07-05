@@ -39,7 +39,7 @@ import androidx.navigation.NavController
 import components.Header
 import components.HorizontalCardButton
 import components.VerticalCardButton
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp32
@@ -70,7 +70,7 @@ fun DashboardScreenContent(
         topBar = {
             Header(
                 title = Strings.Dashboard.Title,
-                backgroundColor = BankColors.light,
+                backgroundColor = AppTheme.colors.lightBackground,
                 startButton = { MenuButton(onClick = { showMenu = true }) },
                 endButton = { ProfileButton() }
             )
@@ -82,7 +82,7 @@ fun DashboardScreenContent(
             ModalBottomSheet(
                 sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
                 onDismissRequest = { showMenu = false },
-                containerColor = BankColors.white,
+                containerColor = AppTheme.colors.background,
                 dragHandle = null,
                 shape = RoundedCornerShape(
                     topStart = dp8,
@@ -98,7 +98,7 @@ fun DashboardScreenContent(
 
         Column(
             modifier = Modifier
-                .background(BankColors.light)
+                .background(AppTheme.colors.lightBackground)
                 .padding(contentPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -121,7 +121,7 @@ fun DashboardScreenContent(
 
             Column(
                 Modifier
-                    .background(BankColors.white)
+                    .background(AppTheme.colors.background)
                     .padding(horizontal = dp16)
             ) {
                 Spacer(Modifier.height(dp24))
@@ -174,7 +174,7 @@ private fun MenuButton(
     IconButton(onClick = onClick) {
         Icon(
             imageVector = Icons.Outlined.Menu,
-            tint = BankColors.dark,
+            tint = AppTheme.colors.dark,
             contentDescription = null
         )
     }
@@ -185,7 +185,7 @@ private fun ProfileButton() {
     IconButton(onClick = {}) {
         Icon(
             imageVector = Icons.Outlined.Person,
-            tint = BankColors.main,
+            tint = AppTheme.colors.main,
             contentDescription = null
         )
     }

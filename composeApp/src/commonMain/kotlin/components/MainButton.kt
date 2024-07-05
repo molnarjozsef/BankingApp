@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp8
 
 @Composable
@@ -26,7 +26,7 @@ fun MainButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
-            contentColor = BankColors.main,
+            contentColor = AppTheme.colors.main,
         ),
         shape = CircleShape,
         modifier = Modifier

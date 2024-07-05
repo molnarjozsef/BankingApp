@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp24
 import theme.dp32
 
@@ -36,17 +36,17 @@ private fun Transaction() {
         Text(
             text = "06.26.",
             fontSize = 10.sp,
-            color = BankColors.darker,
+            color = AppTheme.colors.darker,
         )
         Text(
             text = "BKK AUTOMATA",
             modifier = Modifier.weight(1f),
-            color = BankColors.darker,
+            color = AppTheme.colors.darker,
             fontSize = 14.sp
         )
         Text(
             text = "-9000 Ft",
-            color = BankColors.darker,
+            color = AppTheme.colors.darker,
             fontSize = 14.sp
         )
     }

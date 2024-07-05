@@ -17,14 +17,13 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.BankColors
 import theme.dp8
 
 @Composable
 fun SecondaryButton(
     text: String,
     icon: Painter? = null,
-    textColor: Color = BankColors.white,
+    textColor: Color,
     onClick: () -> Unit,
 ) {
     TextButton(

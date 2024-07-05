@@ -1,3 +1,4 @@
+
 import Routes.RouteAtmFinder
 import Routes.RouteDashboard
 import Routes.RouteLogin
@@ -21,7 +22,6 @@ import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import theme.AppTheme
-
 
 @Composable
 fun BankingApp() {

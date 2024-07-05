@@ -29,7 +29,7 @@ import androidx.navigation.NavOptions
 import components.BackButton
 import components.Header
 import dev.icerock.moko.biometry.compose.BindBiometryAuthenticatorEffect
-import theme.BankColors
+import theme.AppTheme
 import theme.dp24
 
 
@@ -96,7 +96,7 @@ fun PinScreenContent(
             Text(
                 text = Strings.Pin.Heading,
                 fontSize = 20.sp,
-                color = BankColors.dark,
+                color = AppTheme.colors.dark,
                 textAlign = TextAlign.Center,
             )
 
@@ -107,7 +107,7 @@ fun PinScreenContent(
                 text = buildString { repeat(pinCount) { append("•") } }
                     .ifBlank { " " },
                 fontSize = 40.sp,
-                color = BankColors.main,
+                color = AppTheme.colors.main,
                 textAlign = TextAlign.Center,
             )
 
@@ -123,7 +123,7 @@ fun PinScreenContent(
 
             TextButton(
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = BankColors.main
+                    contentColor = AppTheme.colors.main
                 ),
                 onClick = {},
             ) {

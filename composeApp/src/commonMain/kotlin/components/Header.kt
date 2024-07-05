@@ -17,13 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp56
 
 @Composable
 fun Header(
     title: String,
-    backgroundColor: Color = BankColors.white,
+    backgroundColor: Color = AppTheme.colors.background,
     startButton: @Composable (() -> Unit)? = null,
     endButton: @Composable (() -> Unit)? = null,
 ) {
@@ -42,7 +42,7 @@ fun Header(
 
         Text(
             text = title,
-            color = BankColors.darker,
+            color = AppTheme.colors.darker,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f),
             fontSize = 14.sp,
@@ -65,7 +65,7 @@ fun BackButton(
         onClick = navigateBack,
         modifier = Modifier.size(dp56),
         colors = IconButtonDefaults.iconButtonColors(
-            contentColor = BankColors.main,
+            contentColor = AppTheme.colors.main,
         )
     ) {
         Icon(

@@ -37,7 +37,7 @@ import bankingapp.composeapp.generated.resources.login_arrows
 import components.MainButton
 import components.SecondaryButton
 import org.jetbrains.compose.resources.painterResource
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp48
@@ -54,7 +54,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(BankColors.main)
+            .background(AppTheme.colors.mainBackground)
             .padding(
                 top = dp56,
                 bottom = dp64,
@@ -70,7 +70,7 @@ fun LoginScreen(
             SecondaryButton(
                 text = Strings.Login.QrButton,
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
-                textColor = Color.White,
+                textColor = AppTheme.colors.linkOnMain,
                 onClick = {}
             )
 
@@ -120,14 +120,14 @@ fun ColumnScope.AnimatedBubbles() {
             .align(Alignment.End)
             .size(IconBubbleSize)
             .clip(CircleShape)
-            .background(Color.White.copy(alpha = 0.4f)),
+            .background(AppTheme.colors.mainOnMain),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             modifier = Modifier.size(80.dp),
             painter = painterResource(Config.currentBank.iconRes),
             contentDescription = null,
-            tint = BankColors.white
+            tint = AppTheme.colors.onMain
         )
     }
 
@@ -140,7 +140,7 @@ fun ColumnScope.AnimatedBubbles() {
             .align(Alignment.Start),
         painter = painterResource(Res.drawable.login_arrows),
         contentDescription = null,
-        tint = Color.White.copy(alpha = 0.4f),
+        tint = AppTheme.colors.lightOnMain,
     )
 }
 

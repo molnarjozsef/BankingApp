@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp32
 import theme.dp8
@@ -59,8 +59,8 @@ private fun RowScope.QuickFeatureButton(
         modifier = Modifier.weight(1f),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = BankColors.main,
-            contentColor = BankColors.white,
+            containerColor = AppTheme.colors.main,
+            contentColor = AppTheme.colors.background,
         ),
         contentPadding = PaddingValues(dp8),
         shape = RoundedCornerShape(dp8),

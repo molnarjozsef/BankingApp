@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
 import components.Header
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp32
@@ -55,7 +55,7 @@ private fun NavigationSection() {
         modifier = Modifier.padding(horizontal = dp24),
         text = Strings.Dashboard.MenuNavigation,
         fontSize = 14.sp,
-        color = BankColors.lightDark
+        color = AppTheme.colors.lightDark
     )
 
     Spacer(Modifier.height(dp16))
@@ -85,7 +85,7 @@ private fun ExtrasSection(
         modifier = Modifier.padding(horizontal = dp24),
         text = Strings.Dashboard.MenuExtras,
         fontSize = 14.sp,
-        color = BankColors.lightDark
+        color = AppTheme.colors.lightDark
     )
 
     Spacer(Modifier.height(dp16))
@@ -136,18 +136,18 @@ private fun MenuItem(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = BankColors.main,
+            tint = AppTheme.colors.main,
         )
         Text(
             text = title,
             modifier = Modifier.weight(1f),
-            color = BankColors.darker,
+            color = AppTheme.colors.darker,
             fontSize = 16.sp
         )
         Icon(
             imageVector = Icons.Filled.ChevronRight,
             contentDescription = null,
-            tint = BankColors.dark,
+            tint = AppTheme.colors.dark,
         )
     }
 }
