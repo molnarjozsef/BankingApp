@@ -1,6 +1,6 @@
 object Strings {
 
-    val BankName = "OTP"
+    val BankName = Config.currentBank.bankName
 
     object Login {
         val QrButton = "$BankName e-bank kódbeolvasás"
@@ -20,7 +20,7 @@ object Strings {
     object Dashboard {
         val Title = "kezdőlap"
 
-        val AccountName = "${Strings.BankName} számlacsomag"
+        val AccountName = "$BankName számlacsomag"
 
         val QuickSettingsCurrentTransfer = "forintátutalás"
         val QuickSettingsLimitChange = "limitmódosítás"

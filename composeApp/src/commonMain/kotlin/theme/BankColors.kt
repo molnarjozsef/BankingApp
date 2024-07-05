@@ -13,4 +13,3 @@ object BankColors {
 
     val cardSilver = Color(0xFFe9e9e9)
 }
-
