@@ -7,55 +7,71 @@ internal val LocalColors = staticCompositionLocalOf { lightColors }
 
 data class Colors(
     val main: Color,
-    val onMain: Color,
-    val linkOnMain: Color,
-    val mainOnMain: Color,
-    val lightOnMain: Color,
 
-    val dark: Color,
-    val darker: Color,
-    val lightDark: Color,
+    val contentOnMainBackground: Color,
+    val contentOnMainSurface: Color,
 
-    val mainBackground: Color,
-    val background: Color,
-    val lightBackground: Color,
+    val textDark: Color,
+    val textDarkHighContrast: Color,
+    val textDarker: Color,
+    val textLight: Color,
 
-    val surface: Color,
+    val backgroundMain: Color,
+    val backgroundNeutral: Color,
+    val backgroundColored: Color,
+
+    val surfaceNeutral: Color,
+    val surfaceNeutralOnColored: Color,
+
+    val bubbleOnMain: Color,
+    val arrowsOnMain: Color,
+    val bubbleOnColoredBackground: Color,
+
     val cardSilver: Color,
 )
 
 val lightColors = Colors(
-    main = Color(0xFF00bcf3),
-    onMain = Color(0xFFFFFFFF),
-    linkOnMain = Color(0xFFFFFFFF),
-    mainOnMain = Color(0xFF80D6F7),
-    lightOnMain = Color(0xFF80D6F7),
+    contentOnMainBackground = Color(0xFFFFFFFF),
+    contentOnMainSurface = Color(0xFFFFFFFF),
 
-    dark = Color(0xFF4b7293),
-    darker = Color(0xFF003665),
-    lightDark = Color(0xFF6686a3),
+    textDark = Color(0xFF4B7293),
+    textDarkHighContrast = Color(0xFF4B7293),
+    textDarker = Color(0xFF003665),
+    textLight = Color(0xFF6786A3),
 
-    background = Color(0xFFFFFFFF),
-    lightBackground = Color(0xFFf5f9fc),
-    mainBackground = Color(0xFF00bcf3),
+    backgroundNeutral = Color(0xFFFFFFFF),
+    backgroundColored = Color(0xFFF3F8FB),
+    backgroundMain = Color(0xFF00bcf3),
+
+    main = Color(0xFF00ADEF),
+    surfaceNeutral = Color(0xFFFFFFFF),
+    surfaceNeutralOnColored = Color(0xFFFFFFFF),
+
+    bubbleOnMain = Color(0xFF80D6F7),
+    arrowsOnMain = Color(0xFF80D6F7),
+    bubbleOnColoredBackground = Color(0xFFE4EDF4),
 
     cardSilver = Color(0xFFe9e9e9),
-    surface = Color(0xFFFFFFFF)
 )
 
 val darkColors = lightColors.copy(
-    mainOnMain = Color(0xFF00bcf3),
-    lightOnMain = Color(0xFF2E2E2E),
-    linkOnMain = Color(0xFF00bcf3),
+    contentOnMainBackground = Color(0xFF00ADEF),
+    contentOnMainSurface = Color(0xFFFFFFFF),
 
-    dark = Color(0xFFFFFFFF),
-    darker = Color(0xFFFFFFFF),
-    lightDark = Color(0xFFFFFFFF),
+    textDark = Color(0xFFAEAEAE),
+    textDarkHighContrast = Color(0xFFD6D6D6),
+    textDarker = Color(0xFFF0F0F0),
+    textLight = Color(0xFFD7D7D7),
 
-    background = Color(0xFF141414),
-    mainBackground = Color(0xFF141414),
-    lightBackground = Color(0xFFf5f9fc),
+    backgroundNeutral = Color(0xFF141414),
+    backgroundColored = Color(0xFF292929),
+    backgroundMain = Color(0xFF141414),
 
-    cardSilver = Color(0xFFe9e9e9),
-    surface = Color(0xFF242424)
+    main = Color(0xFF00ADEF),
+    surfaceNeutral = Color(0xFF242424),
+    surfaceNeutralOnColored = Color(0xFF383838),
+
+    bubbleOnMain = Color(0xFF00ADEF),
+    arrowsOnMain = Color(0xFF2E2E2E),
+    bubbleOnColoredBackground = Color(0xFF4D4D4D),
 )

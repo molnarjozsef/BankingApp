@@ -14,11 +14,11 @@ fun AppTheme(
 
     val colors = if (darkTheme) darkColors else lightColors
 
-    MaterialTheme(
-        typography = defaultTypography,
-        colorScheme = MaterialTheme.colorScheme.copy(background = AppTheme.colors.background)
-    ) {
-        CompositionLocalProvider(LocalColors provides colors) {
+    CompositionLocalProvider(LocalColors provides colors) {
+        MaterialTheme(
+            typography = defaultTypography,
+            colorScheme = MaterialTheme.colorScheme.copy(background = AppTheme.colors.backgroundNeutral)
+        ) {
             content()
         }
     }

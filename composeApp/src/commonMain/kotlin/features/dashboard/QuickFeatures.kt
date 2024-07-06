@@ -60,7 +60,7 @@ private fun RowScope.QuickFeatureButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = AppTheme.colors.main,
-            contentColor = AppTheme.colors.background,
+            contentColor = AppTheme.colors.contentOnMainSurface,
         ),
         contentPadding = PaddingValues(dp8),
         shape = RoundedCornerShape(dp8),

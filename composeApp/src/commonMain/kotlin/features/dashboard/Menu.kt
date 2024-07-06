@@ -55,7 +55,7 @@ private fun NavigationSection() {
         modifier = Modifier.padding(horizontal = dp24),
         text = Strings.Dashboard.MenuNavigation,
         fontSize = 14.sp,
-        color = AppTheme.colors.lightDark
+        color = AppTheme.colors.textLight
     )
 
     Spacer(Modifier.height(dp16))
@@ -85,7 +85,7 @@ private fun ExtrasSection(
         modifier = Modifier.padding(horizontal = dp24),
         text = Strings.Dashboard.MenuExtras,
         fontSize = 14.sp,
-        color = AppTheme.colors.lightDark
+        color = AppTheme.colors.textLight
     )
 
     Spacer(Modifier.height(dp16))
@@ -141,13 +141,13 @@ private fun MenuItem(
         Text(
             text = title,
             modifier = Modifier.weight(1f),
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
             fontSize = 16.sp
         )
         Icon(
             imageVector = Icons.Filled.ChevronRight,
             contentDescription = null,
-            tint = AppTheme.colors.dark,
+            tint = AppTheme.colors.textDark,
         )
     }
 }

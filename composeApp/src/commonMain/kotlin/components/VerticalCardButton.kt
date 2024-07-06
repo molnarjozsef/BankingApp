@@ -27,7 +27,7 @@ fun VerticalCardButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppTheme.colors.surface,
+            containerColor = AppTheme.colors.surfaceNeutral,
             contentColor = AppTheme.colors.main,
         ),
         shape = RoundedCornerShape(dp8),
@@ -45,7 +45,7 @@ fun VerticalCardButton(
             Text(
                 text = text,
                 fontSize = 12.sp,
-                color = AppTheme.colors.lightDark,
+                color = AppTheme.colors.textLight,
                 letterSpacing = 0.sp,
             )
         }

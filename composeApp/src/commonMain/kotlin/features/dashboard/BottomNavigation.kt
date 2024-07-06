@@ -32,8 +32,8 @@ fun BankBottomNavigation() {
     var selected by remember { mutableStateOf(BottomNavigationRoute.Dashboard) }
 
     NavigationBar(
-        containerColor = AppTheme.colors.background,
-        contentColor = AppTheme.colors.lightDark
+        containerColor = AppTheme.colors.backgroundNeutral,
+        contentColor = AppTheme.colors.textLight
     ) {
         NavigationBarItem(
             route = BottomNavigationRoute.Dashboard,
@@ -82,9 +82,9 @@ private fun RowScope.NavigationBarItem(
         colors = NavigationBarItemDefaults.colors(
             selectedIconColor = AppTheme.colors.main,
             selectedTextColor = AppTheme.colors.main,
-            unselectedIconColor = AppTheme.colors.lightDark,
-            unselectedTextColor = AppTheme.colors.lightDark,
-            indicatorColor = AppTheme.colors.lightBackground,
+            unselectedIconColor = AppTheme.colors.textLight,
+            unselectedTextColor = AppTheme.colors.textLight,
+            indicatorColor = AppTheme.colors.backgroundColored,
         ),
     )
 }

@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -89,6 +91,7 @@ fun PinScreenContent(
     ) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(contentPadding)
                 .padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -96,7 +99,7 @@ fun PinScreenContent(
             Text(
                 text = Strings.Pin.Heading,
                 fontSize = 20.sp,
-                color = AppTheme.colors.dark,
+                color = AppTheme.colors.textDark,
                 textAlign = TextAlign.Center,
             )
 

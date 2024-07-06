@@ -23,7 +23,7 @@ import theme.dp56
 @Composable
 fun Header(
     title: String,
-    backgroundColor: Color = AppTheme.colors.background,
+    backgroundColor: Color = AppTheme.colors.backgroundNeutral,
     startButton: @Composable (() -> Unit)? = null,
     endButton: @Composable (() -> Unit)? = null,
 ) {
@@ -42,7 +42,7 @@ fun Header(
 
         Text(
             text = title,
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f),
             fontSize = 14.sp,

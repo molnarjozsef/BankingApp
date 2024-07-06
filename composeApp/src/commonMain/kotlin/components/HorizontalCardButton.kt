@@ -26,7 +26,7 @@ fun HorizontalCardButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppTheme.colors.background,
+            containerColor = AppTheme.colors.surfaceNeutral,
             contentColor = AppTheme.colors.main,
         ),
         shape = RoundedCornerShape(dp8),
@@ -44,7 +44,7 @@ fun HorizontalCardButton(
         Text(
             text = text,
             fontSize = 16.sp,
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
             modifier = Modifier.weight(1f),
             letterSpacing = 0.sp,
         )

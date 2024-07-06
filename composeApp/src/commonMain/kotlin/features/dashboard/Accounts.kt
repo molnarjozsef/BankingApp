@@ -42,6 +42,9 @@ private fun Account(money: String) {
             .height(200.dp)
             .aspectRatio(1.5f),
         elevation = CardDefaults.elevatedCardElevation(),
+        colors = CardDefaults.cardColors(
+            containerColor = AppTheme.colors.surfaceNeutralOnColored,
+        )
     ) {
         Column {
             Box(
@@ -53,14 +56,12 @@ private fun Account(money: String) {
             Column(
                 modifier = Modifier
                     .weight(2f)
-                    .background(AppTheme.colors.background)
-                    .fillMaxWidth()
                     .padding(dp8),
             ) {
                 Text(
                     text = Strings.Dashboard.AccountName,
                     fontSize = 12.sp,
-                    color = AppTheme.colors.lightDark
+                    color = AppTheme.colors.textLight
                 )
 
                 Spacer(Modifier.height(dp4))
@@ -69,7 +70,7 @@ private fun Account(money: String) {
                     text = money,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = AppTheme.colors.darker,
+                    color = AppTheme.colors.textDarker,
                 )
             }
         }

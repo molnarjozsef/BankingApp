@@ -102,7 +102,7 @@ private fun Atm(
 ) {
     Surface(
         shadowElevation = dp8,
-        color = AppTheme.colors.background,
+        color = AppTheme.colors.surfaceNeutral,
         shape = RoundedCornerShape(dp8),
     ) {
         Row(
@@ -114,19 +114,19 @@ private fun Atm(
                 Text(
                     text = atm.name ?: Strings.AtmFinder.DefaultAtmName,
                     fontSize = 13.sp,
-                    color = AppTheme.colors.darker
+                    color = AppTheme.colors.textDarker
                 )
                 atm.getFullAddress()?.let { fullAddress ->
                     Text(
                         text = fullAddress,
                         fontSize = 10.sp,
-                        color = AppTheme.colors.darker,
+                        color = AppTheme.colors.textDarker,
                     )
                 }
                 Text(
                     text = "${atm.lat}, ${atm.lon}",
                     fontSize = 10.sp,
-                    color = AppTheme.colors.darker,
+                    color = AppTheme.colors.textDarker,
                 )
                 AtmFeatures(atm = atm)
             }
@@ -147,14 +147,14 @@ private fun AtmPinIcon(
             } else {
                 Icons.Filled.LocationOn
             },
-            tint = AppTheme.colors.darker,
+            tint = AppTheme.colors.textDarker,
             contentDescription = null
         )
         if (isIndexed) {
             Text(
                 text = (index + 1).toString(),
                 fontSize = 8.sp,
-                color = AppTheme.colors.background
+                color = AppTheme.colors.backgroundNeutral
             )
         }
     }

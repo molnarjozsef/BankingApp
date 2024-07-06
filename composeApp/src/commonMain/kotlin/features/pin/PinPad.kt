@@ -66,12 +66,18 @@ private fun PinButton(
             .aspectRatio(1f)
             .clip(CircleShape)
             .clickable { onClick() }
-            .border(border = BorderStroke(1.dp, AppTheme.colors.dark), shape = CircleShape),
+            .border(
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = AppTheme.colors.textDark
+                ),
+                shape = CircleShape
+            ),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = AppTheme.colors.dark,
+            color = AppTheme.colors.textDarkHighContrast,
             fontSize = 22.sp,
         )
     }

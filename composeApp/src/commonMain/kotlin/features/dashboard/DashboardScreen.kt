@@ -3,6 +3,7 @@ package features.dashboard
 import Routes
 import Strings
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,14 +11,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.SyncAlt
-import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -43,6 +46,7 @@ import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp32
+import theme.dp4
 import theme.dp56
 import theme.dp8
 
@@ -70,7 +74,7 @@ fun DashboardScreenContent(
         topBar = {
             Header(
                 title = Strings.Dashboard.Title,
-                backgroundColor = AppTheme.colors.lightBackground,
+                backgroundColor = AppTheme.colors.backgroundColored,
                 startButton = { MenuButton(onClick = { showMenu = true }) },
                 endButton = { ProfileButton() }
             )
@@ -82,7 +86,7 @@ fun DashboardScreenContent(
             ModalBottomSheet(
                 sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
                 onDismissRequest = { showMenu = false },
-                containerColor = AppTheme.colors.background,
+                containerColor = AppTheme.colors.backgroundNeutral,
                 dragHandle = null,
                 shape = RoundedCornerShape(
                     topStart = dp8,
@@ -98,7 +102,7 @@ fun DashboardScreenContent(
 
         Column(
             modifier = Modifier
-                .background(AppTheme.colors.lightBackground)
+                .background(AppTheme.colors.backgroundColored)
                 .padding(contentPadding)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -121,7 +125,7 @@ fun DashboardScreenContent(
 
             Column(
                 Modifier
-                    .background(AppTheme.colors.background)
+                    .background(AppTheme.colors.backgroundNeutral)
                     .padding(horizontal = dp16)
             ) {
                 Spacer(Modifier.height(dp24))
@@ -142,6 +146,7 @@ fun DashboardScreenContent(
                     text = Strings.Dashboard.Todos,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
+                    color = AppTheme.colors.textDarker
                 )
 
                 Spacer(Modifier.height(dp16))
@@ -172,21 +177,40 @@ private fun MenuButton(
     onClick: () -> Unit,
 ) {
     IconButton(onClick = onClick) {
-        Icon(
-            imageVector = Icons.Outlined.Menu,
-            tint = AppTheme.colors.dark,
-            contentDescription = null
-        )
+        Box(
+            modifier = Modifier
+                .size(dp24)
+                .background(
+                    shape = CircleShape,
+                    color = AppTheme.colors.bubbleOnColoredBackground
+                )
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.MoreHoriz,
+                tint = AppTheme.colors.textDarker,
+                contentDescription = null
+            )
+        }
     }
 }
 
 @Composable
 private fun ProfileButton() {
     IconButton(onClick = {}) {
-        Icon(
-            imageVector = Icons.Outlined.Person,
-            tint = AppTheme.colors.main,
-            contentDescription = null
-        )
+        Box(
+            modifier = Modifier
+                .size(dp24)
+                .background(
+                    shape = CircleShape,
+                    color = AppTheme.colors.main
+                )
+        ) {
+            Icon(
+                modifier = Modifier.padding(dp4),
+                imageVector = Icons.Outlined.Person,
+                tint = AppTheme.colors.contentOnMainSurface,
+                contentDescription = null
+            )
+        }
     }
 }

@@ -36,17 +36,17 @@ private fun Transaction() {
         Text(
             text = "06.26.",
             fontSize = 10.sp,
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
         )
         Text(
             text = "BKK AUTOMATA",
             modifier = Modifier.weight(1f),
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
             fontSize = 14.sp
         )
         Text(
             text = "-9000 Ft",
-            color = AppTheme.colors.darker,
+            color = AppTheme.colors.textDarker,
             fontSize = 14.sp
         )
     }
