@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp8
 
@@ -26,8 +26,8 @@ fun HorizontalCardButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = BankColors.white,
-            contentColor = BankColors.main,
+            containerColor = AppTheme.colors.surfaceNeutral,
+            contentColor = AppTheme.colors.main,
         ),
         shape = RoundedCornerShape(dp8),
         modifier = Modifier.fillMaxWidth(),
@@ -44,7 +44,7 @@ fun HorizontalCardButton(
         Text(
             text = text,
             fontSize = 16.sp,
-            color = BankColors.darker,
+            color = AppTheme.colors.textDarker,
             modifier = Modifier.weight(1f),
             letterSpacing = 0.sp,
         )

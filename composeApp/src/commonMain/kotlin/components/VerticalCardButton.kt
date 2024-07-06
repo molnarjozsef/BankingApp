@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp32
 import theme.dp8
 
@@ -27,8 +27,8 @@ fun VerticalCardButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = BankColors.white,
-            contentColor = BankColors.main,
+            containerColor = AppTheme.colors.surfaceNeutral,
+            contentColor = AppTheme.colors.main,
         ),
         shape = RoundedCornerShape(dp8),
         modifier = Modifier.fillMaxWidth(),
@@ -45,7 +45,7 @@ fun VerticalCardButton(
             Text(
                 text = text,
                 fontSize = 12.sp,
-                color = BankColors.lightDark,
+                color = AppTheme.colors.textLight,
                 letterSpacing = 0.sp,
             )
         }

@@ -8,7 +8,7 @@ import bankingapp.composeapp.generated.resources.logo_revolut
 import org.jetbrains.compose.resources.DrawableResource
 
 object Config {
-    val currentBank = BankConfig.Raiffeisen
+    val currentBank = BankConfig.Erste
 }
 
 enum class BankConfig(

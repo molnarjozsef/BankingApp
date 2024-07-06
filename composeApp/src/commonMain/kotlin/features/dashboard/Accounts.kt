@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp4
 import theme.dp8
@@ -42,25 +42,26 @@ private fun Account(money: String) {
             .height(200.dp)
             .aspectRatio(1.5f),
         elevation = CardDefaults.elevatedCardElevation(),
+        colors = CardDefaults.cardColors(
+            containerColor = AppTheme.colors.surfaceNeutralOnColored,
+        )
     ) {
         Column {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(3f)
-                    .background(BankColors.cardSilver)
+                    .background(AppTheme.colors.cardSilver)
             )
             Column(
                 modifier = Modifier
                     .weight(2f)
-                    .background(BankColors.white)
-                    .fillMaxWidth()
                     .padding(dp8),
             ) {
                 Text(
                     text = Strings.Dashboard.AccountName,
                     fontSize = 12.sp,
-                    color = BankColors.lightDark
+                    color = AppTheme.colors.textLight
                 )
 
                 Spacer(Modifier.height(dp4))
@@ -69,7 +70,7 @@ private fun Account(money: String) {
                     text = money,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = BankColors.darker,
+                    color = AppTheme.colors.textDarker,
                 )
             }
         }

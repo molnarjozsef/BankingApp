@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 
 @Composable
@@ -66,12 +66,18 @@ private fun PinButton(
             .aspectRatio(1f)
             .clip(CircleShape)
             .clickable { onClick() }
-            .border(border = BorderStroke(1.dp, BankColors.dark), shape = CircleShape),
+            .border(
+                border = BorderStroke(
+                    width = 1.dp,
+                    color = AppTheme.colors.textDark
+                ),
+                shape = CircleShape
+            ),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
-            color = BankColors.dark,
+            color = AppTheme.colors.textDarkHighContrast,
             fontSize = 22.sp,
         )
     }

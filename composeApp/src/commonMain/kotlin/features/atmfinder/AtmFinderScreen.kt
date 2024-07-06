@@ -34,7 +34,7 @@ import androidx.navigation.NavHostController
 import components.BackButton
 import components.Header
 import model.domain.Atm
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp8
@@ -70,7 +70,7 @@ fun AtmFinderScreenContent(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(color = BankColors.main)
+                    CircularProgressIndicator(color = AppTheme.colors.main)
                 }
             } else {
                 LazyColumn(
@@ -102,7 +102,7 @@ private fun Atm(
 ) {
     Surface(
         shadowElevation = dp8,
-        color = BankColors.white,
+        color = AppTheme.colors.surfaceNeutral,
         shape = RoundedCornerShape(dp8),
     ) {
         Row(
@@ -114,19 +114,19 @@ private fun Atm(
                 Text(
                     text = atm.name ?: Strings.AtmFinder.DefaultAtmName,
                     fontSize = 13.sp,
-                    color = BankColors.darker
+                    color = AppTheme.colors.textDarker
                 )
                 atm.getFullAddress()?.let { fullAddress ->
                     Text(
                         text = fullAddress,
                         fontSize = 10.sp,
-                        color = BankColors.darker,
+                        color = AppTheme.colors.textDarker,
                     )
                 }
                 Text(
                     text = "${atm.lat}, ${atm.lon}",
                     fontSize = 10.sp,
-                    color = BankColors.darker,
+                    color = AppTheme.colors.textDarker,
                 )
                 AtmFeatures(atm = atm)
             }
@@ -147,14 +147,14 @@ private fun AtmPinIcon(
             } else {
                 Icons.Filled.LocationOn
             },
-            tint = BankColors.darker,
+            tint = AppTheme.colors.textDarker,
             contentDescription = null
         )
         if (isIndexed) {
             Text(
                 text = (index + 1).toString(),
                 fontSize = 8.sp,
-                color = BankColors.white
+                color = AppTheme.colors.backgroundNeutral
             )
         }
     }
@@ -174,7 +174,7 @@ private fun AtmFeatures(
                 } else {
                     Icons.Outlined.NotAccessible
                 },
-                tint = BankColors.main,
+                tint = AppTheme.colors.main,
                 contentDescription = null
             )
         }
@@ -185,7 +185,7 @@ private fun AtmFeatures(
                 } else {
                     Icons.Outlined.NaturePeople
                 },
-                tint = BankColors.main,
+                tint = AppTheme.colors.main,
                 contentDescription = null
             )
         }
@@ -196,7 +196,7 @@ private fun AtmFeatures(
                 } else {
                     Icons.Outlined.MoneyOff
                 },
-                tint = BankColors.main,
+                tint = AppTheme.colors.main,
                 contentDescription = null
             )
         }

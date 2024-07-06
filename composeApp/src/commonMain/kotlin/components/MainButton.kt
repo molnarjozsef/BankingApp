@@ -9,24 +9,22 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import theme.BankColors
+import theme.AppTheme
 import theme.dp8
 
 @Composable
 fun MainButton(
     text: String,
-    backgroundColor: Color,
     onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor,
-            contentColor = BankColors.main,
+            containerColor = AppTheme.colors.contentOnMainBackground,
+            contentColor = AppTheme.colors.backgroundMain,
         ),
         shape = CircleShape,
         modifier = Modifier

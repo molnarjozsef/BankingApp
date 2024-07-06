@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,7 +31,7 @@ import androidx.navigation.NavOptions
 import components.BackButton
 import components.Header
 import dev.icerock.moko.biometry.compose.BindBiometryAuthenticatorEffect
-import theme.BankColors
+import theme.AppTheme
 import theme.dp24
 
 
@@ -89,6 +91,7 @@ fun PinScreenContent(
     ) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(contentPadding)
                 .padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -96,7 +99,7 @@ fun PinScreenContent(
             Text(
                 text = Strings.Pin.Heading,
                 fontSize = 20.sp,
-                color = BankColors.dark,
+                color = AppTheme.colors.textDark,
                 textAlign = TextAlign.Center,
             )
 
@@ -107,7 +110,7 @@ fun PinScreenContent(
                 text = buildString { repeat(pinCount) { append("•") } }
                     .ifBlank { " " },
                 fontSize = 40.sp,
-                color = BankColors.main,
+                color = AppTheme.colors.main,
                 textAlign = TextAlign.Center,
             )
 
@@ -123,7 +126,7 @@ fun PinScreenContent(
 
             TextButton(
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = BankColors.main
+                    contentColor = AppTheme.colors.main
                 ),
                 onClick = {},
             ) {

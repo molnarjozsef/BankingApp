@@ -27,7 +27,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
@@ -37,7 +36,7 @@ import bankingapp.composeapp.generated.resources.login_arrows
 import components.MainButton
 import components.SecondaryButton
 import org.jetbrains.compose.resources.painterResource
-import theme.BankColors
+import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp48
@@ -54,7 +53,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(BankColors.main)
+            .background(AppTheme.colors.backgroundMain)
             .padding(
                 top = dp56,
                 bottom = dp64,
@@ -70,7 +69,7 @@ fun LoginScreen(
             SecondaryButton(
                 text = Strings.Login.QrButton,
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
-                textColor = Color.White,
+                textColor = AppTheme.colors.contentOnMainBackground,
                 onClick = {}
             )
 
@@ -78,7 +77,6 @@ fun LoginScreen(
 
             MainButton(
                 text = Strings.Login.LoginButton,
-                backgroundColor = Color.White,
                 onClick = navigateToPinScreen,
             )
         }
@@ -120,14 +118,14 @@ fun ColumnScope.AnimatedBubbles() {
             .align(Alignment.End)
             .size(IconBubbleSize)
             .clip(CircleShape)
-            .background(Color.White.copy(alpha = 0.4f)),
+            .background(AppTheme.colors.bubbleOnMain),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             modifier = Modifier.size(80.dp),
             painter = painterResource(Config.currentBank.iconRes),
             contentDescription = null,
-            tint = BankColors.white
+            tint = AppTheme.colors.contentOnMainSurface
         )
     }
 
@@ -140,7 +138,7 @@ fun ColumnScope.AnimatedBubbles() {
             .align(Alignment.Start),
         painter = painterResource(Res.drawable.login_arrows),
         contentDescription = null,
-        tint = Color.White.copy(alpha = 0.4f),
+        tint = AppTheme.colors.arrowsOnMain,
     )
 }
 

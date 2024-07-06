@@ -25,15 +25,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import theme.BankColors
+import theme.AppTheme
 
 @Composable
 fun BankBottomNavigation() {
     var selected by remember { mutableStateOf(BottomNavigationRoute.Dashboard) }
 
     NavigationBar(
-        containerColor = BankColors.white,
-        contentColor = BankColors.lightDark
+        containerColor = AppTheme.colors.backgroundNeutral,
+        contentColor = AppTheme.colors.textLight
     ) {
         NavigationBarItem(
             route = BottomNavigationRoute.Dashboard,
@@ -80,11 +80,11 @@ private fun RowScope.NavigationBarItem(
             )
         },
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = BankColors.main,
-            selectedTextColor = BankColors.main,
-            unselectedIconColor = BankColors.lightDark,
-            unselectedTextColor = BankColors.lightDark,
-            indicatorColor = BankColors.light,
+            selectedIconColor = AppTheme.colors.main,
+            selectedTextColor = AppTheme.colors.main,
+            unselectedIconColor = AppTheme.colors.textLight,
+            unselectedTextColor = AppTheme.colors.textLight,
+            indicatorColor = AppTheme.colors.backgroundColored,
         ),
     )
 }
