@@ -8,14 +8,14 @@ import bankingapp.composeapp.generated.resources.logo_revolut
 import org.jetbrains.compose.resources.DrawableResource
 
 object Config {
-    val currentBank = BankConfig.Erste
+    val currentBank = BankConfig.Otp
 }
 
 enum class BankConfig(
     val bankName: String,
     val iconRes: DrawableResource,
 ) {
-    OTP(
+    Otp(
         bankName = "OTP",
         iconRes = Res.drawable.logo_otp
     ),
@@ -23,7 +23,7 @@ enum class BankConfig(
         bankName = "Raiffeisen",
         iconRes = Res.drawable.logo_raiffeisen
     ),
-    KH(
+    Kh(
         bankName = "K&H",
         iconRes = Res.drawable.logo_kh
     ),
