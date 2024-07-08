@@ -1,7 +1,6 @@
 package features.login
 
 import Config
-import Strings
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -33,9 +32,12 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.login_arrows
+import bankingapp.composeapp.generated.resources.login_login_button
+import bankingapp.composeapp.generated.resources.login_qr_button
 import components.MainButton
 import components.SecondaryButton
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -67,7 +69,7 @@ fun LoginScreen(
             modifier = Modifier.padding(horizontal = dp48)
         ) {
             SecondaryButton(
-                text = Strings.Login.QrButton,
+                text = stringResource(Res.string.login_qr_button, Config.currentBank.bankName),
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
                 textColor = AppTheme.colors.contentOnMainBackground,
                 onClick = {}
@@ -76,7 +78,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(dp8))
 
             MainButton(
-                text = Strings.Login.LoginButton,
+                text = stringResource(Res.string.login_login_button, Config.currentBank.bankName),
                 onClick = navigateToPinScreen,
             )
         }

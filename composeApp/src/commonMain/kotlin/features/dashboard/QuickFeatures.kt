@@ -1,6 +1,5 @@
 package features.dashboard
 
-import Strings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +23,11 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.dashboard_quick_settings_bill_payment
+import bankingapp.composeapp.generated.resources.dashboard_quick_settings_current_transfer
+import bankingapp.composeapp.generated.resources.dashboard_quick_settings_limit_change
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp32
@@ -35,15 +39,15 @@ fun QuickFeatures() {
         horizontalArrangement = Arrangement.spacedBy(dp16)
     ) {
         QuickFeatureButton(
-            title = Strings.Dashboard.QuickSettingsCurrentTransfer,
+            title = stringResource(Res.string.dashboard_quick_settings_current_transfer),
             icon = rememberVectorPainter(Icons.Outlined.Payments)
         )
         QuickFeatureButton(
-            title = Strings.Dashboard.QuickSettingsLimitChange,
+            title = stringResource(Res.string.dashboard_quick_settings_limit_change),
             icon = rememberVectorPainter(Icons.Outlined.Speed)
         )
         QuickFeatureButton(
-            title = Strings.Dashboard.QuickSettingsBillPayment,
+            title = stringResource(Res.string.dashboard_quick_settings_bill_payment),
             icon = rememberVectorPainter(Icons.AutoMirrored.Outlined.ReceiptLong)
         )
     }

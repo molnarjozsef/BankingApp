@@ -1,7 +1,6 @@
 package features.dashboard
 
 import Routes
-import Strings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,9 +38,16 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.dashboard_administrative_transactions
+import bankingapp.composeapp.generated.resources.dashboard_financial_transactions
+import bankingapp.composeapp.generated.resources.dashboard_more_transactions
+import bankingapp.composeapp.generated.resources.dashboard_title
+import bankingapp.composeapp.generated.resources.dashboard_todos
 import components.Header
 import components.HorizontalCardButton
 import components.VerticalCardButton
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -73,7 +79,7 @@ fun DashboardScreenContent(
     Scaffold(
         topBar = {
             Header(
-                title = Strings.Dashboard.Title,
+                title = stringResource(Res.string.dashboard_title),
                 backgroundColor = AppTheme.colors.backgroundColored,
                 startButton = { MenuButton(onClick = { showMenu = true }) },
                 endButton = { ProfileButton() }
@@ -135,7 +141,7 @@ fun DashboardScreenContent(
                 Spacer(Modifier.height(dp24))
 
                 VerticalCardButton(
-                    text = Strings.Dashboard.MoreTransactions,
+                    text = stringResource(Res.string.dashboard_more_transactions),
                     icon = rememberVectorPainter(Icons.Filled.MoreHoriz),
                     onClick = {},
                 )
@@ -143,7 +149,7 @@ fun DashboardScreenContent(
                 Spacer(Modifier.height(dp32))
 
                 Text(
-                    text = Strings.Dashboard.Todos,
+                    text = stringResource(Res.string.dashboard_todos),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = AppTheme.colors.textDarker
@@ -152,7 +158,7 @@ fun DashboardScreenContent(
                 Spacer(Modifier.height(dp16))
 
                 HorizontalCardButton(
-                    text = Strings.Dashboard.FinancialTransactions,
+                    text = stringResource(Res.string.dashboard_financial_transactions),
                     icon = rememberVectorPainter(Icons.Filled.SyncAlt),
                     onClick = {},
                 )
@@ -160,7 +166,7 @@ fun DashboardScreenContent(
                 Spacer(Modifier.height(dp16))
 
                 HorizontalCardButton(
-                    text = Strings.Dashboard.AdministrativeTransactions,
+                    text = stringResource(Res.string.dashboard_administrative_transactions),
                     icon = rememberVectorPainter(Icons.Filled.Description),
                     onClick = {},
                 )

@@ -1,6 +1,6 @@
 package features.dashboard
 
-import Strings
+import Config
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_extras
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_home
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_products
+import bankingapp.composeapp.generated.resources.dashboard_menu_atm_finder
+import bankingapp.composeapp.generated.resources.dashboard_menu_contact
+import bankingapp.composeapp.generated.resources.dashboard_menu_extras
+import bankingapp.composeapp.generated.resources.dashboard_menu_navigation
+import bankingapp.composeapp.generated.resources.dashboard_menu_settings
+import bankingapp.composeapp.generated.resources.dashboard_menu_szep_card
+import bankingapp.composeapp.generated.resources.dashboard_menu_title
+import bankingapp.composeapp.generated.resources.dashboard_menu_whats_new
 import components.Header
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -37,7 +50,7 @@ fun Menu(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        Header(title = Strings.Dashboard.MenuTitle)
+        Header(title = stringResource(Res.string.dashboard_menu_title))
 
         Spacer(Modifier.height(dp16))
 
@@ -53,7 +66,7 @@ fun Menu(
 private fun NavigationSection() {
     Text(
         modifier = Modifier.padding(horizontal = dp24),
-        text = Strings.Dashboard.MenuNavigation,
+        text = stringResource(Res.string.dashboard_menu_navigation),
         fontSize = 14.sp,
         color = AppTheme.colors.textLight
     )
@@ -61,17 +74,17 @@ private fun NavigationSection() {
     Spacer(Modifier.height(dp16))
 
     MenuItem(
-        title = Strings.Dashboard.BottomNavigationHome,
+        title = stringResource(Res.string.dashboard_bottom_navigation_home),
         icon = Icons.Outlined.House,
         onClick = { },
     )
     MenuItem(
-        title = Strings.Dashboard.BottomNavigationProducts,
+        title = stringResource(Res.string.dashboard_bottom_navigation_products),
         icon = Icons.Outlined.Store,
         onClick = { },
     )
     MenuItem(
-        title = Strings.Dashboard.BottomNavigationExtras,
+        title = stringResource(Res.string.dashboard_bottom_navigation_extras, Config.currentBank.bankName),
         icon = Icons.Outlined.ConfirmationNumber,
         onClick = { },
     )
@@ -83,7 +96,7 @@ private fun ExtrasSection(
 ) {
     Text(
         modifier = Modifier.padding(horizontal = dp24),
-        text = Strings.Dashboard.MenuExtras,
+        text = stringResource(Res.string.dashboard_menu_extras),
         fontSize = 14.sp,
         color = AppTheme.colors.textLight
     )
@@ -91,27 +104,27 @@ private fun ExtrasSection(
     Spacer(Modifier.height(dp16))
 
     MenuItem(
-        title = Strings.Dashboard.MenuSzepCard,
+        title = stringResource(Res.string.dashboard_menu_szep_card, Config.currentBank.bankName),
         icon = Icons.Outlined.BeachAccess,
         onClick = { },
     )
     MenuItem(
-        title = Strings.Dashboard.MenuAtmFinder,
+        title = stringResource(Res.string.dashboard_menu_atm_finder),
         icon = Icons.Outlined.LocationOn,
         onClick = navigateToAtmFinder,
     )
     MenuItem(
-        title = Strings.Dashboard.MenuSettings,
+        title = stringResource(Res.string.dashboard_menu_settings),
         icon = Icons.Outlined.Settings,
         onClick = { },
     )
     MenuItem(
-        title = Strings.Dashboard.MenuContact,
+        title = stringResource(Res.string.dashboard_menu_contact),
         icon = Icons.Outlined.Call,
         onClick = { },
     )
     MenuItem(
-        title = Strings.Dashboard.MenuWhatsNew,
+        title = stringResource(Res.string.dashboard_menu_whats_new),
         icon = Icons.Outlined.Celebration,
         onClick = { },
     )

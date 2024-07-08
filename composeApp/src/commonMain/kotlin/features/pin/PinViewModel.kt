@@ -1,6 +1,5 @@
 package features.pin
 
-import Strings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.icerock.moko.biometry.BiometryAuthenticator
@@ -15,12 +14,16 @@ class PinViewModel(
     private val _biometricResult = MutableStateFlow<BiometricResult?>(null)
     val biometricResult = _biometricResult.asStateFlow()
 
-    fun tryToAuth() = viewModelScope.launch {
+    fun tryToAuth(
+        title: String,
+        description: String,
+        cancelButtonText: String,
+    ) = viewModelScope.launch {
         try {
             val isSuccess = biometryAuthenticator.checkBiometryAuthentication(
-                requestTitle = Strings.Pin.BiometricTitle.desc(),
-                requestReason = Strings.Pin.BiometricDescription.desc(),
-                failureButtonText = Strings.Pin.BiometricCancel.desc(),
+                requestTitle = title.desc(),
+                requestReason = description.desc(),
+                failureButtonText = cancelButtonText.desc(),
                 allowDeviceCredentials = false
             )
 
