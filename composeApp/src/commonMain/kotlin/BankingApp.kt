@@ -1,4 +1,3 @@
-
 import Routes.RouteAtmFinder
 import Routes.RouteDashboard
 import Routes.RouteLogin
@@ -7,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,48 +29,58 @@ fun BankingApp() {
 
     AppTheme {
         KoinContext {
-            NavHost(
+            BackGestureHandler(
                 navController = navController,
-                startDestination = RouteLogin,
-                enterTransition = { fadeIn(animationSpec = tween(200)) },
-                exitTransition = { fadeOut(animationSpec = tween(200)) },
             ) {
-                composable(RouteLogin) {
-                    LoginScreen(
-                        navigateToPinScreen = { navController.navigate(RoutePin) }
-                    )
-                }
-                composable(RoutePin) {
-                    val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
-                    val viewModel = koinViewModel<PinViewModel> {
-                        parametersOf(biometryAuthenticatorFactory.createBiometryAuthenticator())
+                NavHost(
+                    navController = navController,
+                    startDestination = RouteLogin,
+                    enterTransition = { fadeIn(animationSpec = tween(200)) },
+                    exitTransition = { fadeOut(animationSpec = tween(200)) },
+                ) {
+                    composable(RouteLogin) {
+                        LoginScreen(
+                            navigateToPinScreen = { navController.navigate(RoutePin) }
+                        )
                     }
+                    composable(RoutePin) {
+                        val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
+                        val viewModel = koinViewModel<PinViewModel> {
+                            parametersOf(biometryAuthenticatorFactory.createBiometryAuthenticator())
+                        }
 
-                    PinScreen(
-                        navController = navController,
-                        viewModel = viewModel
-                    )
-                }
-                composable(RouteDashboard) {
-                    val viewModel = koinViewModel<DashboardViewModel>()
+                        PinScreen(
+                            navController = navController,
+                            viewModel = viewModel
+                        )
+                    }
+                    composable(RouteDashboard) {
+                        val viewModel = koinViewModel<DashboardViewModel>()
 
-                    DashboardScreen(
-                        viewModel = viewModel,
-                        navController = navController,
-                    )
-                }
-                composable(RouteAtmFinder) {
-                    val viewModel = koinViewModel<AtmFinderViewModel>()
+                        DashboardScreen(
+                            viewModel = viewModel,
+                            navController = navController,
+                        )
+                    }
+                    composable(RouteAtmFinder) {
+                        val viewModel = koinViewModel<AtmFinderViewModel>()
 
-                    AtmFinderScreen(
-                        viewModel = viewModel,
-                        navController = navController,
-                    )
+                        AtmFinderScreen(
+                            viewModel = viewModel,
+                            navController = navController,
+                        )
+                    }
                 }
             }
         }
     }
 }
+
+@Composable
+expect fun BackGestureHandler(
+    navController: NavHostController,
+    content: @Composable () -> Unit,
+)
 
 object Routes {
     val RouteLogin = "login"

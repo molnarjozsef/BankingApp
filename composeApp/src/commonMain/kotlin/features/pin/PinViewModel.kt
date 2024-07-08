@@ -19,7 +19,7 @@ class PinViewModel(
         try {
             val isSuccess = biometryAuthenticator.checkBiometryAuthentication(
                 requestTitle = Strings.Pin.BiometricTitle.desc(),
-                requestReason = "?".desc(),
+                requestReason = Strings.Pin.BiometricDescription.desc(),
                 failureButtonText = Strings.Pin.BiometricCancel.desc(),
                 allowDeviceCredentials = false
             )
