@@ -1,4 +1,5 @@
 package features.home
+
 import Routes.RouteDashboard
 import Routes.RouteExtras
 import Routes.RouteHome
@@ -14,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import features.dashboard.DashboardScreen
 import features.dashboard.DashboardViewModel
+import features.extras.ExtrasScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -29,10 +31,7 @@ fun HomeNavGraph(
         composable(RouteDashboard) {
             val viewModel = koinViewModel<DashboardViewModel>()
 
-            DashboardScreen(
-                viewModel = viewModel,
-                navController = appNavController
-            )
+            DashboardScreen(viewModel = viewModel)
         }
         composable(RouteProducts) {
             Text(
@@ -42,11 +41,7 @@ fun HomeNavGraph(
             )
         }
         composable(RouteExtras) {
-            Text(
-                text = "extras",
-                modifier = Modifier.fillMaxSize(),
-                textAlign = TextAlign.Center,
-            )
+            ExtrasScreen()
         }
     }
 }

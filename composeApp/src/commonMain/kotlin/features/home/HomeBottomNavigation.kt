@@ -1,4 +1,4 @@
-package features.dashboard
+package features.home
 
 import Config
 import Routes
@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun BankBottomNavigation(
+fun HomeBottomNavigation(
     homeNavController: NavController,
 ) {
     val items = mutableListOf(

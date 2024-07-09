@@ -40,6 +40,22 @@
     <string name="dashboard_menu_contact">kapcsolat</string>
     <string name="dashboard_menu_whats_new">news</string>
 
+    <string name="extras_title">%1$s+</string>
+    <string name="extras_available_extras">available %1$s services</string>
+
+    <string name="extras_offers">offers</string>
+    <string name="extras_offer_cashback">%1$s+ cashback</string>
+
+    <string name="extras_public_transport">public transport</string>
+    <string name="extras_public_transport_local">local tickets/passes</string>
+    <string name="extras_public_transport_interurban">interurban tickets/passes</string>
+
+    <string name="extras_top_up_payment">top-up, pay-in</string>
+    <string name="extras_top_up">mobile top-up</string>
+    <string name="extras_cheque_payment">cheque payment</string>
+
+    <string name="extras_purchase_history">purchase history</string>
+
     <string name="atm_finder_title">ATM &amp; branch locator</string>
     <string name="atm_finder_default_atm_name">ATM</string>
 </resources>
