@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_qr_button">%1$s e-bank kódbeolvasás</string>
-    <string name="login_login_button">%1$s mobilbank belépés</string>
+    <string name="login_qr_button">%1$s e-bank code reading</string>
+    <string name="login_login_button">%1$s mobilbank login</string>
 
-    <string name="pin_title">azonosítás</string>
-    <string name="pin_heading">add meg az mPIN kódodat</string>
-    <string name="pin_forgot_pin_button">elfelejtettem az mPIN-kódomat</string>
+    <string name="pin_title">authentication</string>
+    <string name="pin_heading">enter your mPIN</string>
+    <string name="pin_forgot_pin_button">forgot my mPIN code</string>
 
-    <string name="pin_biometric_title">add meg a biometrikus azonosítód</string>
-    <string name="pin_biometric_description">Kérjük azonosítsd magad!</string>
-    <string name="pin_biometric_cancel">inkább mPIN-t használok</string>
+    <string name="pin_biometric_title">verify your biometric identity</string>
+    <string name="pin_biometric_description">Please authenticate to proceed!</string>
+    <string name="pin_biometric_cancel">use mPIN instead</string>
 
+    <string name="dashboard_title">dashboard</string>
 
-    <string name="dashboard_title">kezdőlap</string>
+    <string name="dashboard_account_name">%1$s bank account</string>
 
-    <string name="dashboard_account_name">%1$s számlacsomag</string>
+    <string name="dashboard_quick_settings_current_transfer">HUF payment</string>
+    <string name="dashboard_quick_settings_limit_change">limit modification</string>
+    <string name="dashboard_quick_settings_bill_payment">cheque payment</string>
 
-    <string name="dashboard_quick_settings_current_transfer">forintátutalás</string>
-    <string name="dashboard_quick_settings_limit_change">limitmódosítás</string>
-    <string name="dashboard_quick_settings_bill_payment">csekkbefizetés</string>
-
-    <string name="dashboard_bottom_navigation_home">kezdőlap</string>
-    <string name="dashboard_bottom_navigation_products">termékek</string>
+    <string name="dashboard_bottom_navigation_home">dashboard</string>
+    <string name="dashboard_bottom_navigation_products">products</string>
     <string name="dashboard_bottom_navigation_extras">%1$s+</string>
 
-    <string name="dashboard_more_transactions">további tranzakciók</string>
+    <string name="dashboard_more_transactions">further transactions</string>
 
-    <string name="dashboard_todos">teendőim</string>
-    <string name="dashboard_financial_transactions">pénzügyi tranzakciók</string>
-    <string name="dashboard_administrative_transactions">adminisztratív tranzakciók</string>
+    <string name="dashboard_todos">my todos</string>
+    <string name="dashboard_financial_transactions">financial transactions</string>
+    <string name="dashboard_administrative_transactions">administrative transactions</string>
 
-    <string name="dashboard_menu_title">menü</string>
+    <string name="dashboard_menu_title">menu</string>
 
-    <string name="dashboard_menu_navigation">navigáció</string>
+    <string name="dashboard_menu_navigation">navigation</string>
 
-    <string name="dashboard_menu_extras">további funkciók és beállítások</string>
-    <string name="dashboard_menu_szep_card">%1$s SZÉP Kártya</string>
-    <string name="dashboard_menu_atm_finder">ATM &amp; ügyfélpontkereső</string>
-    <string name="dashboard_menu_settings">beállítások</string>
+    <string name="dashboard_menu_extras">additional features and settings</string>
+    <string name="dashboard_menu_szep_card">%1$s SZÉP Card</string>
+    <string name="dashboard_menu_atm_finder">ATM &amp; branch locator</string>
+    <string name="dashboard_menu_settings">settings</string>
     <string name="dashboard_menu_contact">kapcsolat</string>
-    <string name="dashboard_menu_whats_new">újdonságok</string>
+    <string name="dashboard_menu_whats_new">news</string>
 
-    <string name="atm_finder_title">ATM és ügyfélpontkereső</string>
+    <string name="atm_finder_title">ATM &amp; branch locator</string>
     <string name="atm_finder_default_atm_name">ATM</string>
 </resources>
