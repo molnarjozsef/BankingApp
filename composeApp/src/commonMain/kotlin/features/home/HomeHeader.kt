@@ -1,5 +1,6 @@
 package features.home
 
+import Config
 import Routes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -35,13 +36,13 @@ fun HomeHeader(
     val title = when (currentDestination?.route) {
         Routes.RouteDashboard -> stringResource(Res.string.dashboard_title)
         Routes.RouteProducts -> "???"
-        Routes.RouteExtras -> stringResource(Res.string.extras_title)
+        Routes.RouteExtras -> stringResource(Res.string.extras_title, Config.currentBank.bankName)
         else -> null
     }
 
     title?.let {
         Header(
-            title = stringResource(Res.string.dashboard_title),
+            title = title,
             backgroundColor = AppTheme.colors.backgroundColored,
             startButton = { MenuButton(onClick = showMenu) },
             endButton = { ProfileButton() }

@@ -86,9 +86,9 @@ private fun Offers() {
             Product(
                 name = stringResource(Res.string.extras_offer_cashback, Config.currentBank.bankName),
                 icon = Icons.Outlined.Loyalty,
-                color = AppTheme.colors.main,
             )
-        )
+        ),
+        color = AppTheme.colors.main,
     )
 }
 
@@ -106,7 +106,8 @@ private fun PublicTransport() {
                 name = stringResource(Res.string.extras_public_transport_interurban),
                 icon = Icons.Outlined.DirectionsBus,
             ),
-        )
+        ),
+        color = AppTheme.colors.productPurple,
     )
 }
 
@@ -123,7 +124,8 @@ private fun TopUpPayment() {
                 name = stringResource(Res.string.extras_cheque_payment),
                 icon = Icons.AutoMirrored.Outlined.ReceiptLong,
             ),
-        )
+        ),
+        color = AppTheme.colors.productOrange,
     )
 }
 
@@ -131,6 +133,7 @@ private fun TopUpPayment() {
 fun ProductSection(
     title: String,
     products: List<Product>,
+    color: Color,
 ) {
     Column {
         Text(
@@ -153,7 +156,7 @@ fun ProductSection(
                 FeatureCard(
                     text = product.name,
                     icon = product.icon,
-                    color = product.color,
+                    color = color,
                 )
             }
         }
@@ -163,7 +166,6 @@ fun ProductSection(
 data class Product(
     val name: String,
     val icon: ImageVector,
-    val color: Color = Color.Unspecified,
 )
 
 @Composable

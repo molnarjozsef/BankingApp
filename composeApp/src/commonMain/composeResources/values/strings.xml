@@ -41,7 +41,7 @@
     <string name="dashboard_menu_whats_new">news</string>
 
     <string name="extras_title">%1$s+</string>
-    <string name="extras_available_extras">available %1$s services</string>
+    <string name="extras_available_extras">available %1$s+ services</string>
 
     <string name="extras_offers">offers</string>
     <string name="extras_offer_cashback">%1$s+ cashback</string>
