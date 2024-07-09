@@ -1,7 +1,6 @@
 package features.pin
 
 import Routes
-import Strings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,9 +27,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.pin_biometric_cancel
+import bankingapp.composeapp.generated.resources.pin_biometric_description
+import bankingapp.composeapp.generated.resources.pin_biometric_title
+import bankingapp.composeapp.generated.resources.pin_forgot_pin_button
+import bankingapp.composeapp.generated.resources.pin_heading
+import bankingapp.composeapp.generated.resources.pin_title
 import components.BackButton
 import components.Header
 import dev.icerock.moko.biometry.compose.BindBiometryAuthenticatorEffect
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp24
 
@@ -50,10 +57,18 @@ fun PinScreen(
         )
     }
 
+    val biometricTitle = stringResource(Res.string.pin_biometric_title)
+    val biometricDescription = stringResource(Res.string.pin_biometric_description)
+    val biometricCancelButtonText = stringResource(Res.string.pin_biometric_cancel)
+
     BindBiometryAuthenticatorEffect(viewModel.biometryAuthenticator)
 
     LaunchedEffect(Unit) {
-        viewModel.tryToAuth()
+        viewModel.tryToAuth(
+            title = biometricTitle,
+            description = biometricDescription,
+            cancelButtonText = biometricCancelButtonText,
+        )
     }
 
     LaunchedEffect(biometricResult) {
@@ -84,7 +99,7 @@ fun PinScreenContent(
     Scaffold(
         topBar = {
             Header(
-                title = Strings.Pin.Title,
+                title = stringResource(Res.string.pin_title),
                 startButton = { BackButton(navigateBack = navigateBack) },
             )
         }
@@ -97,7 +112,7 @@ fun PinScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = Strings.Pin.Heading,
+                text = stringResource(Res.string.pin_heading),
                 fontSize = 20.sp,
                 color = AppTheme.colors.textDark,
                 textAlign = TextAlign.Center,
@@ -131,7 +146,7 @@ fun PinScreenContent(
                 onClick = {},
             ) {
                 Text(
-                    text = Strings.Pin.ForgotPinButton,
+                    text = stringResource(Res.string.pin_forgot_pin_button),
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
                     letterSpacing = 0.sp,

@@ -1,6 +1,6 @@
 package features.dashboard
 
-import Strings
+import Config
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.dashboard_account_name
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp4
@@ -59,7 +62,7 @@ private fun Account(money: String) {
                     .padding(dp8),
             ) {
                 Text(
-                    text = Strings.Dashboard.AccountName,
+                    text = stringResource(Res.string.dashboard_account_name, Config.currentBank.bankName),
                     fontSize = 12.sp,
                     color = AppTheme.colors.textLight
                 )

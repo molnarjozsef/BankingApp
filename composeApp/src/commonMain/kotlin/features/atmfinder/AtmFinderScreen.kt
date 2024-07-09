@@ -1,6 +1,5 @@
 package features.atmfinder
 
-import Strings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,9 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.atm_finder_default_atm_name
+import bankingapp.composeapp.generated.resources.atm_finder_title
 import components.BackButton
 import components.Header
 import model.domain.Atm
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -59,7 +62,7 @@ fun AtmFinderScreenContent(
     Scaffold(
         topBar = {
             Header(
-                title = Strings.AtmFinder.Title,
+                title = stringResource(Res.string.atm_finder_title),
                 startButton = { BackButton(navigateBack = navigateBack) },
             )
         }
@@ -112,7 +115,7 @@ private fun Atm(
             AtmPinIcon(index = index)
             Column {
                 Text(
-                    text = atm.name ?: Strings.AtmFinder.DefaultAtmName,
+                    text = atm.name ?: stringResource(Res.string.atm_finder_default_atm_name),
                     fontSize = 13.sp,
                     color = AppTheme.colors.textDarker
                 )

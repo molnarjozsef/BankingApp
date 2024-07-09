@@ -1,6 +1,6 @@
 package features.dashboard
 
-import Strings
+import Config
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.RowScope
@@ -25,6 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_extras
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_home
+import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_products
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
@@ -75,7 +80,7 @@ private fun RowScope.NavigationBarItem(
         label = {
             Text(
                 modifier = Modifier.scale(1 + (animation * 0.1f)),
-                text = route.label,
+                text = route.label(),
                 fontWeight = fontWeight,
             )
         },
@@ -92,21 +97,21 @@ private fun RowScope.NavigationBarItem(
 enum class BottomNavigationRoute(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val label: String,
+    val label: @Composable () -> String,
 ) {
     Dashboard(
         selectedIcon = Icons.Filled.House,
         unselectedIcon = Icons.Outlined.House,
-        label = Strings.Dashboard.BottomNavigationHome,
+        label = { stringResource(Res.string.dashboard_bottom_navigation_home) },
     ),
     Products(
         selectedIcon = Icons.Filled.Store,
         unselectedIcon = Icons.Outlined.Store,
-        label = Strings.Dashboard.BottomNavigationProducts,
+        label = { stringResource(Res.string.dashboard_bottom_navigation_products) },
     ),
     Extras(
         selectedIcon = Icons.Filled.ConfirmationNumber,
         unselectedIcon = Icons.Outlined.ConfirmationNumber,
-        label = Strings.Dashboard.BottomNavigationExtras,
+        label = { stringResource(Res.string.dashboard_bottom_navigation_extras, Config.currentBank.bankName) },
     )
 }
