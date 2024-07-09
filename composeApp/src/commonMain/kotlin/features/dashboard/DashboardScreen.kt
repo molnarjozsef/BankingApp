@@ -85,7 +85,6 @@ fun DashboardScreenContent(
                 endButton = { ProfileButton() }
             )
         },
-        bottomBar = { BankBottomNavigation() },
     ) { contentPadding ->
 
         if (showMenu) {

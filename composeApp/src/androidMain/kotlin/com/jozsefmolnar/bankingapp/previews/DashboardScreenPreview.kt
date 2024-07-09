@@ -9,6 +9,6 @@ import features.dashboard.DashboardScreenContent
 fun DashboardScreenPreview() {
     DashboardScreenContent(
         money = "12 345 Ft",
-        navigateToAtmFinder = { }
+        navigateToAtmFinder = { },
     )
 }
