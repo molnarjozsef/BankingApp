@@ -40,6 +40,25 @@
     <string name="dashboard_menu_contact">kapcsolat</string>
     <string name="dashboard_menu_whats_new">news</string>
 
+    <string name="products_title">products</string>
+    <string name="products_my_products">my products</string>
+    <string name="products_available_products">available products</string>
+
+    <string name="products_loans">loans</string>
+    <string name="products_loans_personal_loan">%1$s personal loan request</string>
+
+    <string name="products_insurances">insurances</string>
+    <string name="products_insurances_travel">%1$s travel insurance</string>
+    <string name="products_insurances_home">%1$s home insurance</string>
+    <string name="products_insurances_motor_third_party_liability">%1$s motor third party liability insurance</string>
+    <string name="products_insurances_casco">%1$s casco insurance</string>
+    <string name="products_insurances_life">%1$s life insurance</string>
+    <string name="products_insurances_sme">%1$s SME insurances</string>
+
+    <string name="products_investments">investments</string>
+    <string name="products_investments_regular">regular investment</string>
+    <string name="products_investments_lump_sum">lump sum investment</string>
+
     <string name="extras_title">%1$s+</string>
     <string name="extras_available_extras">available %1$s+ services</string>
 

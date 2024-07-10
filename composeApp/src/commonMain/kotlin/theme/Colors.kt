@@ -30,6 +30,7 @@ data class Colors(
     val cardSilver: Color,
     val productPurple: Color,
     val productOrange: Color,
+    val productYellow: Color,
 )
 
 val lightColors = Colors(
@@ -56,6 +57,7 @@ val lightColors = Colors(
     cardSilver = Color(0xFFe9e9e9),
     productPurple = Color(0xFF8964A7),
     productOrange = Color(0xFFEE7179),
+    productYellow = Color(0xFFEBC000),
 )
 
 val darkColors = lightColors.copy(

@@ -1,15 +1,10 @@
 package features.extras
 
 import Config
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,15 +14,9 @@ import androidx.compose.material.icons.automirrored.outlined.SendToMobile
 import androidx.compose.material.icons.outlined.DirectionsBus
 import androidx.compose.material.icons.outlined.Loyalty
 import androidx.compose.material.icons.outlined.Tram
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import bankingapp.composeapp.generated.resources.Res
@@ -40,13 +29,13 @@ import bankingapp.composeapp.generated.resources.extras_public_transport_interur
 import bankingapp.composeapp.generated.resources.extras_public_transport_local
 import bankingapp.composeapp.generated.resources.extras_top_up
 import bankingapp.composeapp.generated.resources.extras_top_up_payment
+import components.Product
+import components.ProductSection
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp40
-import theme.dp72
-import theme.dp8
 
 @Composable
 fun ExtrasScreen() {
@@ -128,85 +117,3 @@ private fun TopUpPayment() {
         color = AppTheme.colors.productOrange,
     )
 }
-
-@Composable
-fun ProductSection(
-    title: String,
-    products: List<Product>,
-    color: Color,
-) {
-    Column {
-        Text(
-            text = title,
-            color = AppTheme.colors.textDark,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(horizontal = dp16)
-        )
-
-        Spacer(Modifier.height(dp16))
-
-        Row(
-            modifier = Modifier
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = dp16),
-            horizontalArrangement = Arrangement.spacedBy(dp16),
-
-            ) {
-            products.forEach { product ->
-                FeatureCard(
-                    text = product.name,
-                    icon = product.icon,
-                    color = color,
-                )
-            }
-        }
-    }
-}
-
-data class Product(
-    val name: String,
-    val icon: ImageVector,
-)
-
-@Composable
-private fun FeatureCard(
-    text: String,
-    icon: ImageVector,
-    color: Color,
-) {
-    Card(
-        modifier = Modifier
-            .height(dp72)
-            .aspectRatio(2f),
-        colors = CardDefaults.cardColors(
-            containerColor = AppTheme.colors.surfaceNeutral,
-            contentColor = AppTheme.colors.textDarker,
-        ),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = dp8)
-    ) {
-        Row {
-            Text(
-                text = text,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = dp16)
-                    .padding(vertical = dp16),
-                fontSize = 12.sp,
-                lineHeight = 14.sp,
-                letterSpacing = 0.sp
-            )
-            Icon(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize()
-                    .offset(x = dp16, y = dp16)
-                    .rotate(IconRotationDegrees),
-                imageVector = icon,
-                tint = color,
-                contentDescription = null,
-            )
-        }
-    }
-}
-
-val IconRotationDegrees = -15f

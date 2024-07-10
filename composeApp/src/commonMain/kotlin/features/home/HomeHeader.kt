@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.dashboard_title
 import bankingapp.composeapp.generated.resources.extras_title
+import bankingapp.composeapp.generated.resources.products_title
 import components.Header
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
@@ -35,7 +36,7 @@ fun HomeHeader(
     val currentDestination = navBackStackEntry?.destination
     val title = when (currentDestination?.route) {
         Routes.RouteDashboard -> stringResource(Res.string.dashboard_title)
-        Routes.RouteProducts -> "???"
+        Routes.RouteProducts -> stringResource(Res.string.products_title)
         Routes.RouteExtras -> stringResource(Res.string.extras_title, Config.currentBank.bankName)
         else -> null
     }

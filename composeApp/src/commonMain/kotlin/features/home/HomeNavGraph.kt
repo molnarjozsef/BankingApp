@@ -4,11 +4,7 @@ import Routes.RouteDashboard
 import Routes.RouteExtras
 import Routes.RouteHome
 import Routes.RouteProducts
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -16,6 +12,7 @@ import androidx.navigation.compose.composable
 import features.dashboard.DashboardScreen
 import features.dashboard.DashboardViewModel
 import features.extras.ExtrasScreen
+import features.products.ProductsScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -34,11 +31,7 @@ fun HomeNavGraph(
             DashboardScreen(viewModel = viewModel)
         }
         composable(RouteProducts) {
-            Text(
-                text = "products",
-                modifier = Modifier.fillMaxSize(),
-                textAlign = TextAlign.Center,
-            )
+            ProductsScreen()
         }
         composable(RouteExtras) {
             ExtrasScreen()
