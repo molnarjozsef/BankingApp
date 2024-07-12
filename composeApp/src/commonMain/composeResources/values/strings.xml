@@ -13,7 +13,9 @@
 
     <string name="dashboard_title">dashboard</string>
 
-    <string name="dashboard_account_name">%1$s bank account</string>
+    <string name="dashboard_debit_account_name">%1$s debit account</string>
+    <string name="dashboard_credit_account_name">%1$s credit account</string>
+    <string name="dashboard_savings_account_name">%1$s savings account</string>
 
     <string name="dashboard_quick_settings_current_transfer">HUF payment</string>
     <string name="dashboard_quick_settings_limit_change">limit modification</string>
@@ -41,7 +43,27 @@
     <string name="dashboard_menu_whats_new">news</string>
 
     <string name="products_title">products</string>
+
     <string name="products_my_products">my products</string>
+
+    <string name="products_my_products_cards">my cards</string>
+    <plurals name="products_my_products_cards_count">
+        <item quantity="one">%1$d card</item>
+        <item quantity="other">%1$d cards</item>
+    </plurals>
+
+    <string name="products_my_products_loans">my loans</string>
+    <plurals name="products_my_products_loans_count">
+        <item quantity="one">%1$d loan</item>
+        <item quantity="other">%1$d loans</item>
+    </plurals>
+
+    <string name="products_my_products_insurances">my insurances</string>
+    <plurals name="products_my_products_insurances_count">
+        <item quantity="one">%1$d insurance</item>
+        <item quantity="other">%1$d insurances</item>
+    </plurals>
+
     <string name="products_available_products">available products</string>
 
     <string name="products_loans">loans</string>

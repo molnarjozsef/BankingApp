@@ -1,7 +1,10 @@
 package features.products
 
 import Config
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -13,13 +16,17 @@ import androidx.compose.material.icons.outlined.AttachMoney
 import androidx.compose.material.icons.outlined.BusinessCenter
 import androidx.compose.material.icons.outlined.CarCrash
 import androidx.compose.material.icons.outlined.CarRepair
+import androidx.compose.material.icons.outlined.CreditCard
 import androidx.compose.material.icons.outlined.CurrencyExchange
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Flight
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Payments
+import androidx.compose.material.icons.outlined.RealEstateAgent
+import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -38,13 +45,22 @@ import bankingapp.composeapp.generated.resources.products_investments_regular
 import bankingapp.composeapp.generated.resources.products_loans
 import bankingapp.composeapp.generated.resources.products_loans_personal_loan
 import bankingapp.composeapp.generated.resources.products_my_products
+import bankingapp.composeapp.generated.resources.products_my_products_cards
+import bankingapp.composeapp.generated.resources.products_my_products_cards_count
+import bankingapp.composeapp.generated.resources.products_my_products_insurances
+import bankingapp.composeapp.generated.resources.products_my_products_insurances_count
+import bankingapp.composeapp.generated.resources.products_my_products_loans
+import bankingapp.composeapp.generated.resources.products_my_products_loans_count
+import components.MyProductCard
 import components.Product
 import components.ProductSection
+import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp40
+import kotlin.random.Random
 
 @Composable
 fun ProductsScreen() {
@@ -61,6 +77,8 @@ fun ProductsScreen() {
             fontWeight = FontWeight.Bold,
             fontSize = 19.sp
         )
+
+        Spacer(Modifier.height(dp16))
 
         MyProducts()
 
@@ -90,7 +108,44 @@ fun ProductsScreen() {
 
 @Composable
 private fun MyProducts() {
+    val cardCount: Int = rememberSaveable { Random.nextInt(1, 3) }
+    val loanCount: Int = rememberSaveable { Random.nextInt(1, 3) }
+    val insuranceCount: Int = rememberSaveable { Random.nextInt(1, 3) }
 
+    Row(
+        modifier = Modifier
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = dp16),
+        horizontalArrangement = Arrangement.spacedBy(dp16),
+    ) {
+        MyProductCard(
+            text = stringResource(Res.string.products_my_products_cards),
+            subtitle = pluralStringResource(
+                resource = Res.plurals.products_my_products_cards_count,
+                quantity = cardCount,
+                cardCount
+            ),
+            icon = Icons.Outlined.CreditCard,
+        )
+        MyProductCard(
+            text = stringResource(Res.string.products_my_products_loans),
+            subtitle = pluralStringResource(
+                resource = Res.plurals.products_my_products_loans_count,
+                quantity = loanCount,
+                loanCount
+            ),
+            icon = Icons.Outlined.RealEstateAgent,
+        )
+        MyProductCard(
+            text = stringResource(Res.string.products_my_products_insurances),
+            subtitle = pluralStringResource(
+                resource = Res.plurals.products_my_products_insurances_count,
+                quantity = insuranceCount,
+                insuranceCount
+            ),
+            icon = Icons.Outlined.Shield,
+        )
+    }
 }
 
 @Composable

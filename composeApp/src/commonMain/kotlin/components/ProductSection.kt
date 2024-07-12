@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
 import theme.AppTheme
+import theme.ProductCardWidth
 import theme.dp16
-import theme.dp72
 import theme.dp8
 
 @Composable
@@ -47,10 +48,9 @@ fun ProductSection(
                 .horizontalScroll(rememberScrollState())
                 .padding(horizontal = dp16),
             horizontalArrangement = Arrangement.spacedBy(dp16),
-
-            ) {
+        ) {
             products.forEach { product ->
-                FeatureCard(
+                ProductCard(
                     text = product.name,
                     icon = product.icon,
                     color = color,
@@ -66,14 +66,14 @@ data class Product(
 )
 
 @Composable
-private fun FeatureCard(
+private fun ProductCard(
     text: String,
     icon: ImageVector,
     color: Color,
 ) {
     Card(
         modifier = Modifier
-            .height(dp72)
+            .width(ProductCardWidth)
             .aspectRatio(2f),
         colors = CardDefaults.cardColors(
             containerColor = AppTheme.colors.surfaceNeutral,
