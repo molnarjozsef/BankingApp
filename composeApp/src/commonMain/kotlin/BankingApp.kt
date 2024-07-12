@@ -34,8 +34,8 @@ fun BankingApp() {
                 NavHost(
                     navController = navController,
                     startDestination = RouteLogin,
-                    enterTransition = { fadeIn(animationSpec = tween(200)) },
-                    exitTransition = { fadeOut(animationSpec = tween(200)) },
+                    enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
+                    exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
                 ) {
                     composable(RouteLogin) {
                         LoginScreen(
@@ -90,3 +90,5 @@ object Routes {
 
     val RouteAtmFinder = "atmfinder"
 }
+
+const val NavigationAnimationDurationMillis = 200

@@ -44,7 +44,7 @@ fun HomeHeader(
     title?.let {
         Header(
             title = title,
-            backgroundColor = AppTheme.colors.backgroundColored,
+            containerColor = AppTheme.colors.backgroundColored,
             startButton = { MenuButton(onClick = showMenu) },
             endButton = { ProfileButton() }
         )
