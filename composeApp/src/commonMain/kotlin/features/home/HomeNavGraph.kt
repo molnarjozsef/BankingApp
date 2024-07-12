@@ -1,9 +1,13 @@
 package features.home
 
+import NavigationAnimationDurationMillis
 import Routes.RouteDashboard
 import Routes.RouteExtras
 import Routes.RouteHome
 import Routes.RouteProducts
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -23,7 +27,9 @@ fun HomeNavGraph(
     NavHost(
         navController = navController,
         route = RouteHome,
-        startDestination = RouteDashboard
+        startDestination = RouteDashboard,
+        enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
+        exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
     ) {
         composable(RouteDashboard) {
             val viewModel = koinViewModel<DashboardViewModel>()

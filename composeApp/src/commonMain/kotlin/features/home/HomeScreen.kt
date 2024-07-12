@@ -4,9 +4,12 @@ package features.home
 
 import Routes
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -30,6 +33,25 @@ fun HomeScreen(
     val homeNavController = rememberNavController()
     var showMenu by remember { mutableStateOf(false) }
 
+    if (showMenu) {
+        ModalBottomSheet(
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            onDismissRequest = { showMenu = false },
+            containerColor = AppTheme.colors.backgroundNeutral,
+            dragHandle = null,
+            shape = RoundedCornerShape(
+                topStart = dp8,
+                topEnd = dp8,
+            ),
+            windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
+        ) {
+            Menu(
+                navigateToAtmFinder = { appNavController.navigate(Routes.RouteAtmFinder) },
+                modifier = Modifier.navigationBarsPadding(),
+            )
+        }
+    }
+
     Scaffold(
         topBar = {
             HomeHeader(
@@ -43,25 +65,6 @@ fun HomeScreen(
     ) { contentPadding ->
 
         Box(Modifier.padding(contentPadding)) {
-
-            if (showMenu) {
-                ModalBottomSheet(
-                    sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-                    onDismissRequest = { showMenu = false },
-                    containerColor = AppTheme.colors.backgroundNeutral,
-                    dragHandle = null,
-                    shape = RoundedCornerShape(
-                        topStart = dp8,
-                        topEnd = dp8,
-                    ),
-                ) {
-                    Menu(
-                        navigateToAtmFinder = { appNavController.navigate(Routes.RouteAtmFinder) },
-                        modifier = Modifier.navigationBarsPadding(),
-                    )
-                }
-            }
-
             HomeNavGraph(
                 appNavController = appNavController,
                 navController = homeNavController,

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -60,6 +61,7 @@ fun AtmFinderScreenContent(
     navigateBack: () -> Unit,
 ) {
     Scaffold(
+        modifier = Modifier.systemBarsPadding(),
         topBar = {
             Header(
                 title = stringResource(Res.string.atm_finder_title),

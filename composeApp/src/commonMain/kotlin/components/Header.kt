@@ -1,18 +1,18 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -23,38 +23,23 @@ import theme.dp56
 @Composable
 fun Header(
     title: String,
-    backgroundColor: Color = AppTheme.colors.backgroundNeutral,
+    containerColor: Color = AppTheme.colors.backgroundNeutral,
     startButton: @Composable (() -> Unit)? = null,
     endButton: @Composable (() -> Unit)? = null,
 ) {
-    Row(
-        modifier = Modifier
-            .background(backgroundColor)
-            .height(dp56),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            modifier = Modifier.size(dp56),
-            contentAlignment = Alignment.Center,
-        ) {
-            startButton?.invoke()
-        }
-
-        Text(
-            text = title,
-            color = AppTheme.colors.textDarker,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f),
-            fontSize = 14.sp,
-        )
-
-        Box(
-            modifier = Modifier.size(dp56),
-            contentAlignment = Alignment.Center,
-        ) {
-            endButton?.invoke()
-        }
-    }
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = title,
+                color = AppTheme.colors.textDarker,
+                textAlign = TextAlign.Center,
+                fontSize = 14.sp,
+            )
+        },
+        navigationIcon = { startButton?.invoke() },
+        actions = { endButton?.invoke() },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors().copy(containerColor = containerColor)
+    )
 }
 
 @Composable
