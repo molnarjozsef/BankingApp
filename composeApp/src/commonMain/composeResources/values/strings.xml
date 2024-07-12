@@ -99,4 +99,6 @@
 
     <string name="atm_finder_title">ATM &amp; branch locator</string>
     <string name="atm_finder_default_atm_name">ATM</string>
+
+    <string name="szep_card_search_prompt">%1$s SZÉP card</string>
 </resources>
