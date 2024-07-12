@@ -1,6 +1,6 @@
 package features.home
 
-import Config
+import BankConfig
 import Routes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,6 +29,7 @@ import theme.dp4
 
 @Composable
 fun HomeHeader(
+    currentBank: BankConfig,
     homeNavController: NavController,
     showMenu: () -> Unit,
 ) {
@@ -37,7 +38,7 @@ fun HomeHeader(
     val title = when (currentDestination?.route) {
         Routes.RouteDashboard -> stringResource(Res.string.dashboard_title)
         Routes.RouteProducts -> stringResource(Res.string.products_title)
-        Routes.RouteExtras -> stringResource(Res.string.extras_title, Config.currentBank.bankName)
+        Routes.RouteExtras -> stringResource(Res.string.extras_title, currentBank.bankName)
         else -> null
     }
 

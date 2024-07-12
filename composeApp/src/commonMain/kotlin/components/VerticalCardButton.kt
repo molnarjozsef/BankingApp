@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.sp
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.dp32
 import theme.dp8
 
@@ -33,7 +34,7 @@ fun VerticalCardButton(
         shape = RoundedCornerShape(dp8),
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(dp8),
-        elevation = ButtonDefaults.elevatedButtonElevation()
+        elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = DefaultCardElevation)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(

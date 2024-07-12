@@ -15,3 +15,4 @@ val dp72 = 72.dp
 
 
 val ProductCardWidth = 144.dp
+val DefaultCardElevation = 2.dp

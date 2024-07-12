@@ -53,8 +53,10 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.navigation.compose)
-            implementation(libs.lifecycle.viewmodel)
+            implementation(libs.androidx.navigation.compose)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            // Only 2.8.0 is CMP-ready, but it needs Compose 1.7.0
+            // implementation(libs.androidx.lifecycle.runtime.compose)
 
             api(libs.koin.core)
             implementation(libs.koin.compose)

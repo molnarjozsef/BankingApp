@@ -1,4 +1,6 @@
+
 import Routes.RouteAtmFinder
+import Routes.RouteBankChanger
 import Routes.RouteHome
 import Routes.RouteLogin
 import Routes.RoutePin
@@ -10,16 +12,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dev.icerock.moko.biometry.compose.rememberBiometryAuthenticatorFactory
 import features.atmfinder.AtmFinderScreen
-import features.atmfinder.AtmFinderViewModel
+import features.bankchanger.BankChangerScreen
 import features.home.HomeScreen
 import features.login.LoginScreen
 import features.pin.PinScreen
-import features.pin.PinViewModel
 import org.koin.compose.KoinContext
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.parametersOf
 import theme.AppTheme
 
 @Composable
@@ -39,33 +37,31 @@ fun BankingApp() {
                 ) {
                     composable(RouteLogin) {
                         LoginScreen(
-                            navigateToPinScreen = { navController.navigate(RoutePin) }
+                            navigateToPinScreen = { navController.navigate(RoutePin) },
+                            navigateToBankChanger = { navController.navigate(RouteBankChanger) },
                         )
                     }
 
                     composable(RoutePin) {
-                        val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
-                        val viewModel = koinViewModel<PinViewModel> {
-                            parametersOf(biometryAuthenticatorFactory.createBiometryAuthenticator())
-                        }
-
                         PinScreen(
                             navController = navController,
-                            viewModel = viewModel
                         )
                     }
 
                     composable(RouteHome) {
-                        HomeScreen(appNavController = navController)
+                        HomeScreen(
+                            appNavController = navController
+                        )
                     }
 
                     composable(RouteAtmFinder) {
-                        val viewModel = koinViewModel<AtmFinderViewModel>()
-
                         AtmFinderScreen(
-                            viewModel = viewModel,
                             navController = navController,
                         )
+                    }
+
+                    composable(RouteBankChanger) {
+                        BankChangerScreen()
                     }
                 }
             }
@@ -89,6 +85,8 @@ object Routes {
     val RouteExtras = "extras"
 
     val RouteAtmFinder = "atmfinder"
+
+    val RouteBankChanger = "bankchanger"
 }
 
 const val NavigationAnimationDurationMillis = 200

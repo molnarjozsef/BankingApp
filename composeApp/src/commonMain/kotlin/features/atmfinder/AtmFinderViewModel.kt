@@ -6,13 +6,13 @@ import kotlinx.coroutines.launch
 import repository.BankingRepository
 
 class AtmFinderViewModel(
-    bankingRepository: BankingRepository,
+    repository: BankingRepository,
 ) : ViewModel() {
-    val atms = bankingRepository.getAtms()
+    val atms = repository.getAtms()
 
     init {
         viewModelScope.launch {
-            bankingRepository.fetchAtmsIfNeeded()
+            repository.fetchAtmsIfNeeded()
         }
     }
 }

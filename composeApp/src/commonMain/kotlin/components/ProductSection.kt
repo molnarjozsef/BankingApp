@@ -23,9 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.ProductCardWidth
 import theme.dp16
-import theme.dp8
+import theme.dp4
 
 @Composable
 fun ProductSection(
@@ -79,7 +80,7 @@ private fun ProductCard(
             containerColor = AppTheme.colors.surfaceNeutral,
             contentColor = AppTheme.colors.textDarker,
         ),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = dp8)
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = DefaultCardElevation)
     ) {
         Row {
             Text(

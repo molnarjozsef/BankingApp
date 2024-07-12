@@ -1,6 +1,6 @@
 package features.dashboard
 
-import Config
+import BankConfig
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,14 +28,17 @@ import bankingapp.composeapp.generated.resources.dashboard_debit_account_name
 import bankingapp.composeapp.generated.resources.dashboard_savings_account_name
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.ProductCardWidth
 import theme.dp16
 import theme.dp4
 import theme.dp8
 
 @Composable
-fun Accounts(money: String) {
-    val bankName = Config.currentBank.bankName
+fun Accounts(
+    currentBank: BankConfig,
+    money: String,
+) {
 
     LazyRow(
         contentPadding = PaddingValues(horizontal = dp16),
@@ -44,21 +47,21 @@ fun Accounts(money: String) {
         item {
             Account(
                 money = money,
-                accountName = stringResource(Res.string.dashboard_debit_account_name, bankName),
+                accountName = stringResource(Res.string.dashboard_debit_account_name, currentBank.bankName),
                 color = AppTheme.colors.main
             )
         }
         item {
             Account(
                 money = money,
-                accountName = stringResource(Res.string.dashboard_credit_account_name, bankName),
+                accountName = stringResource(Res.string.dashboard_credit_account_name, currentBank.bankName),
                 color = AppTheme.colors.productOrange
             )
         }
         item {
             Account(
                 money = money,
-                accountName = stringResource(Res.string.dashboard_savings_account_name, bankName),
+                accountName = stringResource(Res.string.dashboard_savings_account_name, currentBank.bankName),
                 color = AppTheme.colors.productGreen
             )
         }
@@ -75,7 +78,7 @@ private fun Account(
         modifier = Modifier
             .width(ProductCardWidth)
             .aspectRatio(0.8f),
-        elevation = CardDefaults.elevatedCardElevation(),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = DefaultCardElevation),
         colors = CardDefaults.cardColors(
             containerColor = AppTheme.colors.surfaceNeutralOnColored,
         )

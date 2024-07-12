@@ -1,5 +1,6 @@
 package features.dashboard
 
+import BankConfig
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.SyncAlt
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +30,7 @@ import bankingapp.composeapp.generated.resources.dashboard_todos
 import components.HorizontalCardButton
 import components.VerticalCardButton
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -36,16 +40,19 @@ import theme.dp8
 
 
 @Composable
-fun DashboardScreen(
-    viewModel: DashboardViewModel,
-) {
+fun DashboardScreen() {
+    val viewModel = koinViewModel<DashboardViewModel>()
+    val currentBank by viewModel.currentBank.collectAsState()
+
     DashboardScreenContent(
+        currentBank = currentBank,
         money = viewModel.money,
     )
 }
 
 @Composable
 fun DashboardScreenContent(
+    currentBank: BankConfig,
     money: String,
 ) {
     Column(
@@ -60,6 +67,7 @@ fun DashboardScreenContent(
             Spacer(Modifier.height(dp16))
 
             Accounts(
+                currentBank = currentBank,
                 money = money
             )
 

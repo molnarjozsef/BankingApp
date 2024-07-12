@@ -1,6 +1,6 @@
 package features.products
 
-import Config
+import BankConfig
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +26,8 @@ import androidx.compose.material.icons.outlined.RealEstateAgent
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -56,6 +58,7 @@ import components.Product
 import components.ProductSection
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -64,6 +67,16 @@ import kotlin.random.Random
 
 @Composable
 fun ProductsScreen() {
+    val viewModel = koinViewModel<ProductsViewModel>()
+    val currentBank by viewModel.currentBank.collectAsState()
+
+    ProductsScreenContent(currentBank = currentBank)
+}
+
+@Composable
+fun ProductsScreenContent(
+    currentBank: BankConfig,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -94,16 +107,17 @@ fun ProductsScreen() {
 
         Spacer(Modifier.height(dp24))
 
-        Loans()
+        Loans(currentBank = currentBank)
 
         Spacer(Modifier.height(dp24))
 
-        Insurances()
+        Insurances(currentBank = currentBank)
 
         Spacer(Modifier.height(dp24))
 
         Investments()
     }
+
 }
 
 @Composable
@@ -149,12 +163,14 @@ private fun MyProducts() {
 }
 
 @Composable
-private fun Loans() {
+private fun Loans(
+    currentBank: BankConfig,
+) {
     ProductSection(
         title = stringResource(Res.string.products_loans),
         products = listOf(
             Product(
-                name = stringResource(Res.string.products_loans_personal_loan, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_loans_personal_loan, currentBank.bankName),
                 icon = Icons.Outlined.Payments,
             )
         ),
@@ -164,35 +180,37 @@ private fun Loans() {
 
 
 @Composable
-private fun Insurances() {
+private fun Insurances(
+    currentBank: BankConfig,
+) {
     ProductSection(
         title = stringResource(Res.string.products_insurances),
         products = listOf(
             Product(
-                name = stringResource(Res.string.products_insurances_travel, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_travel, currentBank.bankName),
                 icon = Icons.Outlined.Flight,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_home, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_home, currentBank.bankName),
                 icon = Icons.Outlined.Home,
             ),
             Product(
                 name = stringResource(
                     Res.string.products_insurances_motor_third_party_liability,
-                    Config.currentBank.bankName
+                    currentBank.bankName
                 ),
                 icon = Icons.Outlined.CarCrash,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_casco, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_casco, currentBank.bankName),
                 icon = Icons.Outlined.CarRepair,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_life, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_life, currentBank.bankName),
                 icon = Icons.Outlined.FavoriteBorder,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_sme, Config.currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_sme, currentBank.bankName),
                 icon = Icons.Outlined.BusinessCenter,
             ),
         ),
