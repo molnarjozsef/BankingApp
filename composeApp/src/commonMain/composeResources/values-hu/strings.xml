@@ -13,7 +13,9 @@
 
     <string name="dashboard_title">kezdőlap</string>
 
-    <string name="dashboard_account_name">%1$s számlacsomag</string>
+    <string name="dashboard_debit_account_name">%1$s lakossági folyószámla</string>
+    <string name="dashboard_credit_account_name">%1$s hitelszámla</string>
+    <string name="dashboard_savings_account_name">%1$s megtakarítási számla</string>
 
     <string name="dashboard_quick_settings_current_transfer">forintátutalás</string>
     <string name="dashboard_quick_settings_limit_change">limitmódosítás</string>
@@ -39,6 +41,61 @@
     <string name="dashboard_menu_settings">beállítások</string>
     <string name="dashboard_menu_contact">kapcsolat</string>
     <string name="dashboard_menu_whats_new">újdonságok</string>
+
+    <string name="products_title">termékek</string>
+
+    <string name="products_my_products">saját termékeim</string>
+
+    <string name="products_my_products_cards">kártyáim</string>
+    <plurals name="products_my_products_cards_count">
+        <item quantity="one">%1$d kártya</item>
+        <item quantity="other">%1$d kártya</item>
+    </plurals>
+
+    <string name="products_my_products_loans">hiteleim</string>
+    <plurals name="products_my_products_loans_count">
+        <item quantity="one">%1$d termék</item>
+        <item quantity="other">%1$d termék</item>
+    </plurals>
+
+    <string name="products_my_products_insurances">biztosításaim</string>
+    <plurals name="products_my_products_insurances_count">
+        <item quantity="one">%1$d termék</item>
+        <item quantity="other">%1$d termék</item>
+    </plurals>
+
+    <string name="products_available_products">elérhető termékek</string>
+
+    <string name="products_loans">hitelek</string>
+    <string name="products_loans_personal_loan">%1$s személyi kölcsön igénylés</string>
+
+    <string name="products_insurances">biztosítások</string>
+    <string name="products_insurances_travel">%1$s utas-\nbiztosítás</string>
+    <string name="products_insurances_home">%1$s lakás-\nbiztosítás</string>
+    <string name="products_insurances_motor_third_party_liability">%1$s kötelező biztosítás</string>
+    <string name="products_insurances_casco">%1$s casco biztosítás</string>
+    <string name="products_insurances_life">%1$s élet-\nbiztosítás</string>
+    <string name="products_insurances_sme">%1$s vállalkozói biztosítások</string>
+
+    <string name="products_investments">befektetések</string>
+    <string name="products_investments_regular">rendszeres befektetés</string>
+    <string name="products_investments_lump_sum">egyösszegű befektetés</string>
+
+    <string name="extras_title">%1$s+</string>
+    <string name="extras_available_extras">elérhető %1$s+ szolgáltatások</string>
+
+    <string name="extras_offers">ajánlatok</string>
+    <string name="extras_offer_cashback">%1$s+ visszapénz</string>
+
+    <string name="extras_public_transport">tömegközlekedés</string>
+    <string name="extras_public_transport_local">helyi jegyek/bérletek</string>
+    <string name="extras_public_transport_interurban">helyközi jegyek/bérletek</string>
+
+    <string name="extras_top_up_payment">feltöltés, befizetés</string>
+    <string name="extras_top_up">mobil-\nfeltöltés</string>
+    <string name="extras_cheque_payment">csekk-\nbefizetés</string>
+
+    <string name="extras_purchase_history">előző vásárlásaim</string>
 
     <string name="atm_finder_title">ATM és ügyfélpontkereső</string>
     <string name="atm_finder_default_atm_name">ATM</string>

@@ -11,3 +11,7 @@ val dp40 = 40.dp
 val dp48 = 48.dp
 val dp56 = 56.dp
 val dp64 = 64.dp
+val dp72 = 72.dp
+
+
+val ProductCardWidth = 144.dp

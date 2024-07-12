@@ -2,12 +2,10 @@ package com.jozsefmolnar.bankingapp.previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import features.dashboard.DashboardScreenContent
+import features.extras.ExtrasScreen
 
 @Preview
 @Composable
-fun DashboardScreenPreview() {
-    DashboardScreenContent(
-        money = "12 345 Ft",
-    )
+fun ExtrasScreenPreview() {
+    ExtrasScreen()
 }

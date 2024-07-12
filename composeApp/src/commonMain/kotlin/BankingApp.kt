@@ -1,5 +1,5 @@
 import Routes.RouteAtmFinder
-import Routes.RouteDashboard
+import Routes.RouteHome
 import Routes.RouteLogin
 import Routes.RoutePin
 import androidx.compose.animation.core.tween
@@ -13,8 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.icerock.moko.biometry.compose.rememberBiometryAuthenticatorFactory
 import features.atmfinder.AtmFinderScreen
 import features.atmfinder.AtmFinderViewModel
-import features.dashboard.DashboardScreen
-import features.dashboard.DashboardViewModel
+import features.home.HomeScreen
 import features.login.LoginScreen
 import features.pin.PinScreen
 import features.pin.PinViewModel
@@ -43,6 +42,7 @@ fun BankingApp() {
                             navigateToPinScreen = { navController.navigate(RoutePin) }
                         )
                     }
+
                     composable(RoutePin) {
                         val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
                         val viewModel = koinViewModel<PinViewModel> {
@@ -54,14 +54,11 @@ fun BankingApp() {
                             viewModel = viewModel
                         )
                     }
-                    composable(RouteDashboard) {
-                        val viewModel = koinViewModel<DashboardViewModel>()
 
-                        DashboardScreen(
-                            viewModel = viewModel,
-                            navController = navController,
-                        )
+                    composable(RouteHome) {
+                        HomeScreen(appNavController = navController)
                     }
+
                     composable(RouteAtmFinder) {
                         val viewModel = koinViewModel<AtmFinderViewModel>()
 
@@ -85,6 +82,11 @@ expect fun BackGestureHandler(
 object Routes {
     val RouteLogin = "login"
     val RoutePin = "pin"
+
+    val RouteHome = "home"
     val RouteDashboard = "dashboard"
+    val RouteProducts = "products"
+    val RouteExtras = "extras"
+
     val RouteAtmFinder = "atmfinder"
 }

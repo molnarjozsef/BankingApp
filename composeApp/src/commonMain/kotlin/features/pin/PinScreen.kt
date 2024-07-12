@@ -48,9 +48,9 @@ fun PinScreen(
     navController: NavController,
 ) {
     val biometricResult = viewModel.biometricResult.collectAsState().value
-    val navigateToDashboard = {
+    val navigateToHome = {
         navController.navigate(
-            route = Routes.RouteDashboard,
+            route = Routes.RouteHome,
             navOptions = NavOptions.Builder()
                 .setPopUpTo(Routes.RouteLogin, inclusive = false)
                 .build()
@@ -73,12 +73,12 @@ fun PinScreen(
 
     LaunchedEffect(biometricResult) {
         if (biometricResult == BiometricResult.Success) {
-            navigateToDashboard()
+            navigateToHome()
         }
     }
 
     PinScreenContent(
-        navigateToDashboard = navigateToDashboard,
+        navigateToDashboard = navigateToHome,
         navigateBack = navController::navigateUp,
     )
 }
