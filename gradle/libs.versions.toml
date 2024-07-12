@@ -1,7 +1,7 @@
 [versions]
 agp = "8.3.0"
 android-compileSdk = "34"
-android-minSdk = "23"
+android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.0"
 androidx-appcompat = "1.7.0"
@@ -12,6 +12,7 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 biometry = "0.4.0"
 biometryCompose = "0.4.0"
+browserKmp = "1.0.3"
 compose-plugin = "1.6.11"
 fragment = "1.8.1"
 junit = "4.13.2"
@@ -58,6 +59,8 @@ ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref =
 
 biometry-compose = { module = "dev.icerock.moko:biometry-compose", version.ref = "biometryCompose" }
 biometry = { module = "dev.icerock.moko:biometry", version.ref = "biometry" }
+
+browser-kmp = { module = "com.stevdza-san:browser-kmp", version.ref = "browserKmp" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

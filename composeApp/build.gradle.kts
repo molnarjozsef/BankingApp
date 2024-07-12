@@ -67,6 +67,8 @@ kotlin {
 
             api(libs.biometry)
             api(libs.biometry.compose)
+
+            implementation(libs.browser.kmp)
         }
     }
 }

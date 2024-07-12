@@ -37,7 +37,9 @@ import bankingapp.composeapp.generated.resources.dashboard_menu_settings
 import bankingapp.composeapp.generated.resources.dashboard_menu_szep_card
 import bankingapp.composeapp.generated.resources.dashboard_menu_title
 import bankingapp.composeapp.generated.resources.dashboard_menu_whats_new
+import bankingapp.composeapp.generated.resources.szep_card_search_prompt
 import components.Header
+import openWebBrowser
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
@@ -103,10 +105,14 @@ private fun ExtrasSection(
 
     Spacer(Modifier.height(dp16))
 
+    val bankName = Config.currentBank.bankName
+    val searchPrompt = stringResource(Res.string.szep_card_search_prompt, bankName)
     MenuItem(
         title = stringResource(Res.string.dashboard_menu_szep_card, Config.currentBank.bankName),
         icon = Icons.Outlined.BeachAccess,
-        onClick = { },
+        onClick = {
+            openWebBrowser(url = "https://www.google.com/search?q=$searchPrompt")
+        },
     )
     MenuItem(
         title = stringResource(Res.string.dashboard_menu_atm_finder),
