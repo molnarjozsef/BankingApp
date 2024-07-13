@@ -11,5 +11,6 @@ fun BankChangerScreenPreview() {
     BankChangerScreenContent(
         currentBank = BankConfig.Otp,
         setCurrentBank = { },
+        navigateUp = { },
     )
 }

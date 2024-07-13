@@ -27,6 +27,8 @@ data class Colors(
     val arrowsOnMain: Color,
     val bubbleOnColoredBackground: Color,
 
+    val radioButtonUnselected: Color,
+
     val cardSilver: Color,
     val productPurple: Color,
     val productOrange: Color,
@@ -55,6 +57,8 @@ val lightColors = Colors(
     arrowsOnMain = Color(0xFF80D6F7),
     bubbleOnColoredBackground = Color(0xFFE4EDF4),
 
+    radioButtonUnselected = Color(0xFF99AEC1),
+
     cardSilver = Color(0xFFe9e9e9),
     productPurple = Color(0xFF8964A7),
     productOrange = Color(0xFFEE7179),
@@ -78,6 +82,8 @@ val darkColors = lightColors.copy(
     main = Color(0xFF00ADEF),
     surfaceNeutral = Color(0xFF242424),
     surfaceNeutralOnColored = Color(0xFF383838),
+
+    radioButtonUnselected = Color(0xFF6C6C6C),
 
     bubbleOnMain = Color(0xFF00ADEF),
     arrowsOnMain = Color(0xFF2E2E2E),

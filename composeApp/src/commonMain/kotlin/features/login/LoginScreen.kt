@@ -37,8 +37,8 @@ import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.login_arrows
 import bankingapp.composeapp.generated.resources.login_login_button
 import bankingapp.composeapp.generated.resources.login_qr_button
-import components.MainButton
 import components.SecondaryButton
+import components.TertiaryButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -93,7 +93,7 @@ fun LoginScreenContent(
         Column(
             modifier = Modifier.padding(horizontal = dp48)
         ) {
-            SecondaryButton(
+            TertiaryButton(
                 text = stringResource(Res.string.login_qr_button, currentBank.bankName),
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
                 textColor = AppTheme.colors.contentOnMainBackground,
@@ -102,7 +102,7 @@ fun LoginScreenContent(
 
             Spacer(modifier = Modifier.height(dp8))
 
-            MainButton(
+            SecondaryButton(
                 text = stringResource(Res.string.login_login_button, currentBank.bankName),
                 onClick = navigateToPinScreen,
             )

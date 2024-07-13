@@ -15,6 +15,6 @@ fun AtmFinderScreenPreview() {
                 lon = 19.0,
             )
         ),
-        navigateBack = { }
+        navigateUp = { }
     )
 }

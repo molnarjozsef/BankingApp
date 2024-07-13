@@ -87,14 +87,14 @@ fun PinScreen(
 
     PinScreenContent(
         navigateToDashboard = navigateToHome,
-        navigateBack = navController::navigateUp,
+        navigateUp = navController::navigateUp,
     )
 }
 
 @Composable
 fun PinScreenContent(
     navigateToDashboard: () -> Unit,
-    navigateBack: () -> Unit,
+    navigateUp: () -> Unit,
 ) {
     var pinCount by remember { mutableIntStateOf(0) }
 
@@ -109,7 +109,7 @@ fun PinScreenContent(
         topBar = {
             Header(
                 title = stringResource(Res.string.pin_title),
-                startButton = { BackButton(navigateBack = navigateBack) },
+                startButton = { BackButton(onClick = navigateUp) },
             )
         }
     ) { contentPadding ->

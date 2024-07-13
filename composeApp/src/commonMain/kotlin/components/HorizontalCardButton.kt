@@ -25,6 +25,7 @@ fun HorizontalCardButton(
     text: String,
     icon: Painter,
     onClick: () -> Unit,
+    endContent: @Composable (() -> Unit)? = null,
 ) {
     Button(
         onClick = onClick,
@@ -52,5 +53,11 @@ fun HorizontalCardButton(
             modifier = Modifier.weight(1f),
             letterSpacing = 0.sp,
         )
+
+        endContent?.let {
+            Spacer(Modifier.width(dp16))
+
+            endContent.invoke()
+        }
     }
 }

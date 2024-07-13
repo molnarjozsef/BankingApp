@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import theme.dp8
 
 @Composable
-fun SecondaryButton(
+fun TertiaryButton(
     text: String,
     icon: Painter? = null,
     textColor: Color,

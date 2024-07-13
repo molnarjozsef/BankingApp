@@ -53,21 +53,21 @@ fun AtmFinderScreen(
 
     AtmFinderScreenContent(
         atms = viewModel.atms.collectAsState().value,
-        navigateBack = navController::navigateUp,
+        navigateUp = navController::navigateUp,
     )
 }
 
 @Composable
 fun AtmFinderScreenContent(
     atms: List<Atm>?,
-    navigateBack: () -> Unit,
+    navigateUp: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
         topBar = {
             Header(
                 title = stringResource(Res.string.atm_finder_title),
-                startButton = { BackButton(navigateBack = navigateBack) },
+                startButton = { BackButton(onClick = navigateUp) },
             )
         }
     ) { contentPadding ->

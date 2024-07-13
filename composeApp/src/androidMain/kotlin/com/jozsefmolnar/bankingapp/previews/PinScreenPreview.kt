@@ -9,6 +9,6 @@ import features.pin.PinScreenContent
 fun PinScreenPreview() {
     PinScreenContent(
         navigateToDashboard = {},
-        navigateBack = {},
+        navigateUp = {},
     )
 }

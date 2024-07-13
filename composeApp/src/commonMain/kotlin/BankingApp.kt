@@ -61,7 +61,9 @@ fun BankingApp() {
                     }
 
                     composable(RouteBankChanger) {
-                        BankChangerScreen()
+                        BankChangerScreen(
+                            navController = navController
+                        )
                     }
                 }
             }

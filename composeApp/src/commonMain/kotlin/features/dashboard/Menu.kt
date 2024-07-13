@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -38,6 +39,7 @@ import bankingapp.composeapp.generated.resources.dashboard_menu_szep_card
 import bankingapp.composeapp.generated.resources.dashboard_menu_title
 import bankingapp.composeapp.generated.resources.dashboard_menu_whats_new
 import bankingapp.composeapp.generated.resources.szep_card_search_prompt
+import components.CloseButton
 import components.Header
 import openWebBrowser
 import org.jetbrains.compose.resources.stringResource
@@ -50,10 +52,15 @@ import theme.dp32
 fun Menu(
     currentBank: BankConfig,
     navigateToAtmFinder: () -> Unit,
+    closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        Header(title = stringResource(Res.string.dashboard_menu_title))
+        Header(
+            title = stringResource(Res.string.dashboard_menu_title),
+            endButton = { CloseButton(onClick = closeMenu) },
+            windowInsets = WindowInsets(0, 0, 0, 0),
+        )
 
         Spacer(Modifier.height(dp16))
 
