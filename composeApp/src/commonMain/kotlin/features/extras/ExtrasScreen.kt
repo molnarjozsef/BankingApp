@@ -1,6 +1,6 @@
 package features.extras
 
-import Config
+import BankConfig
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +16,8 @@ import androidx.compose.material.icons.outlined.Loyalty
 import androidx.compose.material.icons.outlined.Tram
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -32,6 +34,7 @@ import bankingapp.composeapp.generated.resources.extras_top_up_payment
 import components.Product
 import components.ProductSection
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -39,6 +42,18 @@ import theme.dp40
 
 @Composable
 fun ExtrasScreen() {
+    val viewModel = koinViewModel<ExtrasViewModel>()
+    val currentBank by viewModel.currentBank.collectAsState()
+
+    ExtrasScreenContent(
+        currentBank = currentBank
+    )
+}
+
+@Composable
+fun ExtrasScreenContent(
+    currentBank: BankConfig,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,7 +62,7 @@ fun ExtrasScreen() {
     ) {
         Text(
             modifier = Modifier.padding(horizontal = dp16),
-            text = stringResource(Res.string.extras_available_extras, Config.currentBank.bankName),
+            text = stringResource(Res.string.extras_available_extras, currentBank.bankName),
             color = AppTheme.colors.textDarker,
             fontWeight = FontWeight.Bold,
             fontSize = 19.sp
@@ -55,7 +70,7 @@ fun ExtrasScreen() {
 
         Spacer(Modifier.height(dp24))
 
-        Offers()
+        Offers(currentBank = currentBank)
 
         Spacer(Modifier.height(dp24))
 
@@ -65,15 +80,19 @@ fun ExtrasScreen() {
 
         TopUpPayment()
     }
+
 }
 
+
 @Composable
-private fun Offers() {
+private fun Offers(
+    currentBank: BankConfig,
+) {
     ProductSection(
         title = stringResource(Res.string.extras_offers),
         products = listOf(
             Product(
-                name = stringResource(Res.string.extras_offer_cashback, Config.currentBank.bankName),
+                name = stringResource(Res.string.extras_offer_cashback, currentBank.bankName),
                 icon = Icons.Outlined.Loyalty,
             )
         ),

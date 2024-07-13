@@ -29,6 +29,7 @@ import bankingapp.composeapp.generated.resources.dashboard_quick_settings_curren
 import bankingapp.composeapp.generated.resources.dashboard_quick_settings_limit_change
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.dp16
 import theme.dp32
 import theme.dp8
@@ -68,7 +69,7 @@ private fun RowScope.QuickFeatureButton(
         ),
         contentPadding = PaddingValues(dp8),
         shape = RoundedCornerShape(dp8),
-        elevation = ButtonDefaults.elevatedButtonElevation(),
+        elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = DefaultCardElevation),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

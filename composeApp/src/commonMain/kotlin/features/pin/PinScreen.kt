@@ -38,16 +38,23 @@ import bankingapp.composeapp.generated.resources.pin_title
 import components.BackButton
 import components.Header
 import dev.icerock.moko.biometry.compose.BindBiometryAuthenticatorEffect
+import dev.icerock.moko.biometry.compose.rememberBiometryAuthenticatorFactory
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import theme.AppTheme
 import theme.dp24
 
 
 @Composable
 fun PinScreen(
-    viewModel: PinViewModel,
     navController: NavController,
 ) {
+    val biometryAuthenticatorFactory = rememberBiometryAuthenticatorFactory()
+    val viewModel = koinViewModel<PinViewModel> {
+        parametersOf(biometryAuthenticatorFactory.createBiometryAuthenticator())
+    }
+
     val biometricResult = viewModel.biometricResult.collectAsState().value
     val navigateToHome = {
         navController.navigate(
@@ -80,14 +87,14 @@ fun PinScreen(
 
     PinScreenContent(
         navigateToDashboard = navigateToHome,
-        navigateBack = navController::navigateUp,
+        navigateUp = navController::navigateUp,
     )
 }
 
 @Composable
 fun PinScreenContent(
     navigateToDashboard: () -> Unit,
-    navigateBack: () -> Unit,
+    navigateUp: () -> Unit,
 ) {
     var pinCount by remember { mutableIntStateOf(0) }
 
@@ -102,7 +109,7 @@ fun PinScreenContent(
         topBar = {
             Header(
                 title = stringResource(Res.string.pin_title),
-                startButton = { BackButton(navigateBack = navigateBack) },
+                startButton = { BackButton(onClick = navigateUp) },
             )
         }
     ) { contentPadding ->

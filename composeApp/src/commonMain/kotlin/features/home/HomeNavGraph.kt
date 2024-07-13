@@ -32,9 +32,7 @@ fun HomeNavGraph(
         exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
     ) {
         composable(RouteDashboard) {
-            val viewModel = koinViewModel<DashboardViewModel>()
-
-            DashboardScreen(viewModel = viewModel)
+            DashboardScreen()
         }
         composable(RouteProducts) {
             ProductsScreen()

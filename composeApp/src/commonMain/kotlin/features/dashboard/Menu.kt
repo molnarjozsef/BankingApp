@@ -1,11 +1,12 @@
 package features.dashboard
 
-import Config
+import BankConfig
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -38,6 +39,7 @@ import bankingapp.composeapp.generated.resources.dashboard_menu_szep_card
 import bankingapp.composeapp.generated.resources.dashboard_menu_title
 import bankingapp.composeapp.generated.resources.dashboard_menu_whats_new
 import bankingapp.composeapp.generated.resources.szep_card_search_prompt
+import components.CloseButton
 import components.Header
 import openWebBrowser
 import org.jetbrains.compose.resources.stringResource
@@ -48,24 +50,35 @@ import theme.dp32
 
 @Composable
 fun Menu(
+    currentBank: BankConfig,
     navigateToAtmFinder: () -> Unit,
+    closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        Header(title = stringResource(Res.string.dashboard_menu_title))
+        Header(
+            title = stringResource(Res.string.dashboard_menu_title),
+            endButton = { CloseButton(onClick = closeMenu) },
+            windowInsets = WindowInsets(0, 0, 0, 0),
+        )
 
         Spacer(Modifier.height(dp16))
 
-        NavigationSection()
+        NavigationSection(currentBank = currentBank)
 
         Spacer(Modifier.height(dp32))
 
-        ExtrasSection(navigateToAtmFinder = navigateToAtmFinder)
+        ExtrasSection(
+            currentBank = currentBank,
+            navigateToAtmFinder = navigateToAtmFinder,
+        )
     }
 }
 
 @Composable
-private fun NavigationSection() {
+private fun NavigationSection(
+    currentBank: BankConfig,
+) {
     Text(
         modifier = Modifier.padding(horizontal = dp24),
         text = stringResource(Res.string.dashboard_menu_navigation),
@@ -86,7 +99,7 @@ private fun NavigationSection() {
         onClick = { },
     )
     MenuItem(
-        title = stringResource(Res.string.dashboard_bottom_navigation_extras, Config.currentBank.bankName),
+        title = stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank.bankName),
         icon = Icons.Outlined.ConfirmationNumber,
         onClick = { },
     )
@@ -94,6 +107,7 @@ private fun NavigationSection() {
 
 @Composable
 private fun ExtrasSection(
+    currentBank: BankConfig,
     navigateToAtmFinder: () -> Unit,
 ) {
     Text(
@@ -105,10 +119,9 @@ private fun ExtrasSection(
 
     Spacer(Modifier.height(dp16))
 
-    val bankName = Config.currentBank.bankName
-    val searchPrompt = stringResource(Res.string.szep_card_search_prompt, bankName)
+    val searchPrompt = stringResource(Res.string.szep_card_search_prompt, currentBank.bankName)
     MenuItem(
-        title = stringResource(Res.string.dashboard_menu_szep_card, Config.currentBank.bankName),
+        title = stringResource(Res.string.dashboard_menu_szep_card, currentBank.bankName),
         icon = Icons.Outlined.BeachAccess,
         onClick = {
             openWebBrowser(url = "https://www.google.com/search?q=$searchPrompt")

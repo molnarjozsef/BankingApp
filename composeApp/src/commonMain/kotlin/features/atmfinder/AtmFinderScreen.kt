@@ -38,6 +38,7 @@ import components.BackButton
 import components.Header
 import model.domain.Atm
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -46,26 +47,27 @@ import theme.dp8
 
 @Composable
 fun AtmFinderScreen(
-    viewModel: AtmFinderViewModel,
     navController: NavHostController,
 ) {
+    val viewModel = koinViewModel<AtmFinderViewModel>()
+
     AtmFinderScreenContent(
         atms = viewModel.atms.collectAsState().value,
-        navigateBack = navController::navigateUp,
+        navigateUp = navController::navigateUp,
     )
 }
 
 @Composable
 fun AtmFinderScreenContent(
     atms: List<Atm>?,
-    navigateBack: () -> Unit,
+    navigateUp: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
         topBar = {
             Header(
                 title = stringResource(Res.string.atm_finder_title),
-                startButton = { BackButton(navigateBack = navigateBack) },
+                startButton = { BackButton(onClick = navigateUp) },
             )
         }
     ) { contentPadding ->

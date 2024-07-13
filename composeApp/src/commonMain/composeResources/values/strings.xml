@@ -101,4 +101,7 @@
     <string name="atm_finder_default_atm_name">ATM</string>
 
     <string name="szep_card_search_prompt">%1$s SZÉP card</string>
+
+    <string name="bank_changer_title">bank changer</string>
+    <string name="bank_changer_back_button">back</string>
 </resources>

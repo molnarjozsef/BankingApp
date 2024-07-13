@@ -1,6 +1,6 @@
 package features.home
 
-import Config
+import BankConfig
 import Routes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -37,12 +37,13 @@ import theme.AppTheme
 
 @Composable
 fun HomeBottomNavigation(
+    currentBank: BankConfig,
     homeNavController: NavController,
 ) {
     val items = mutableListOf(
         BottomNavigationRoute.Dashboard,
         BottomNavigationRoute.Products,
-        BottomNavigationRoute.Extras,
+        BottomNavigationRoute.Extras(currentBank),
     )
 
     NavigationBar(
@@ -114,28 +115,30 @@ private fun RowScope.NavigationBarItem(
 
 }
 
-enum class BottomNavigationRoute(
+sealed class BottomNavigationRoute(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
     val route: String,
     val label: @Composable () -> String,
 ) {
-    Dashboard(
+    data object Dashboard : BottomNavigationRoute(
         selectedIcon = Icons.Filled.House,
         unselectedIcon = Icons.Outlined.House,
         route = Routes.RouteDashboard,
         label = { stringResource(Res.string.dashboard_bottom_navigation_home) },
-    ),
-    Products(
+    )
+
+    data object Products : BottomNavigationRoute(
         selectedIcon = Icons.Filled.Store,
         unselectedIcon = Icons.Outlined.Store,
         route = Routes.RouteProducts,
         label = { stringResource(Res.string.dashboard_bottom_navigation_products) },
-    ),
-    Extras(
+    )
+
+    data class Extras(val currentBank: BankConfig) : BottomNavigationRoute(
         selectedIcon = Icons.Filled.ConfirmationNumber,
         unselectedIcon = Icons.Outlined.ConfirmationNumber,
         route = Routes.RouteExtras,
-        label = { stringResource(Res.string.dashboard_bottom_navigation_extras, Config.currentBank.bankName) },
+        label = { stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank.bankName) },
     )
 }

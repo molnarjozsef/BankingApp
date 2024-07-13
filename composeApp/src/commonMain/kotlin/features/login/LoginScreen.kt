@@ -1,9 +1,10 @@
 package features.login
 
-import Config
+import BankConfig
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.outlined.QrCodeScanner
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,10 +37,11 @@ import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.login_arrows
 import bankingapp.composeapp.generated.resources.login_login_button
 import bankingapp.composeapp.generated.resources.login_qr_button
-import components.MainButton
 import components.SecondaryButton
+import components.TertiaryButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
@@ -51,6 +54,23 @@ import theme.dp8
 @Composable
 fun LoginScreen(
     navigateToPinScreen: () -> Unit,
+    navigateToBankChanger: () -> Unit,
+) {
+    val viewModel = koinViewModel<LoginViewModel>()
+    val currentBank by viewModel.currentBank.collectAsState()
+
+    LoginScreenContent(
+        currentBank = currentBank,
+        navigateToPinScreen = navigateToPinScreen,
+        navigateToBankChanger = navigateToBankChanger,
+    )
+}
+
+@Composable
+fun LoginScreenContent(
+    currentBank: BankConfig,
+    navigateToPinScreen: () -> Unit,
+    navigateToBankChanger: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,15 +83,18 @@ fun LoginScreen(
                 bottom = dp64,
             )
     ) {
-        AnimatedBubbles()
+        AnimatedBubbles(
+            currentBank = currentBank,
+            navigateToBankChanger = navigateToBankChanger
+        )
 
         Spacer(modifier = Modifier.height(dp24))
 
         Column(
             modifier = Modifier.padding(horizontal = dp48)
         ) {
-            SecondaryButton(
-                text = stringResource(Res.string.login_qr_button, Config.currentBank.bankName),
+            TertiaryButton(
+                text = stringResource(Res.string.login_qr_button, currentBank.bankName),
                 icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
                 textColor = AppTheme.colors.contentOnMainBackground,
                 onClick = {}
@@ -79,16 +102,20 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(dp8))
 
-            MainButton(
-                text = stringResource(Res.string.login_login_button, Config.currentBank.bankName),
+            SecondaryButton(
+                text = stringResource(Res.string.login_login_button, currentBank.bankName),
                 onClick = navigateToPinScreen,
             )
         }
     }
+
 }
 
 @Composable
-fun ColumnScope.AnimatedBubbles() {
+fun ColumnScope.AnimatedBubbles(
+    currentBank: BankConfig,
+    navigateToBankChanger: () -> Unit,
+) {
     var isShown by remember { mutableStateOf(false) }
     val density = LocalDensity.current
     val iconXOffset by animateIntOffsetAsState(
@@ -122,14 +149,15 @@ fun ColumnScope.AnimatedBubbles() {
             .align(Alignment.End)
             .size(IconBubbleSize)
             .clip(CircleShape)
-            .background(AppTheme.colors.bubbleOnMain),
+            .background(AppTheme.colors.bubbleOnMain)
+            .clickable { navigateToBankChanger() },
         contentAlignment = Alignment.Center
     ) {
         Icon(
             modifier = Modifier.size(80.dp),
-            painter = painterResource(Config.currentBank.iconRes),
+            painter = painterResource(currentBank.iconRes),
             contentDescription = null,
-            tint = AppTheme.colors.contentOnMainSurface
+            tint = AppTheme.colors.contentOnMainSurface,
         )
     }
 

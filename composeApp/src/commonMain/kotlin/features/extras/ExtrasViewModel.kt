@@ -1,12 +1,10 @@
-package features.dashboard
+package features.extras
 
 import androidx.lifecycle.ViewModel
 import repository.BankingRepository
 
-class DashboardViewModel(
+class ExtrasViewModel(
     repository: BankingRepository,
 ) : ViewModel() {
-    val money = "48 000 Ft"
-
     val currentBank = repository.getCurrentBank()
 }

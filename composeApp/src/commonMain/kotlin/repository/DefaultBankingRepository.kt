@@ -1,5 +1,6 @@
 package repository
 
+import BankConfig
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import model.domain.Atm
@@ -9,8 +10,11 @@ class DefaultBankingRepository(
     private val bankingService: BankingService,
 ) : BankingRepository {
     private val atms = MutableStateFlow<List<Atm>?>(null)
+    private val currentBank = MutableStateFlow(BankConfig.Otp)
 
     override fun getAtms() = atms.asStateFlow()
+
+    override fun getCurrentBank() = currentBank.asStateFlow()
 
     override suspend fun fetchAtmsIfNeeded() {
         if (atms.value == null) {
@@ -33,6 +37,10 @@ class DefaultBankingRepository(
 
             atms.value = fetchedAtms
         }
+    }
+
+    override suspend fun setCurrentBank(bank: BankConfig){
+        currentBank.value = bank
     }
 
     private fun mapOsmToBoolean(osmBoolean: String?) = when (osmBoolean) {

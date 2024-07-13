@@ -3,12 +3,14 @@ package com.jozsefmolnar.bankingapp.previews
 import BankConfig
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import features.extras.ExtrasScreenContent
+import features.bankchanger.BankChangerScreenContent
 
 @Preview
 @Composable
-fun ExtrasScreenPreview() {
-    ExtrasScreenContent(
+fun BankChangerScreenPreview() {
+    BankChangerScreenContent(
         currentBank = BankConfig.Otp,
+        setCurrentBank = { },
+        navigateUp = { },
     )
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.ProductCardWidth
 import theme.dp16
 import theme.dp48
@@ -38,7 +39,7 @@ fun MyProductCard(
             containerColor = AppTheme.colors.surfaceNeutral,
             contentColor = AppTheme.colors.textDarker,
         ),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = dp8)
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = DefaultCardElevation)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
