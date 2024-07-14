@@ -47,15 +47,30 @@ fun HomeScreen(
             onDismissRequest = { showMenu = false },
             containerColor = AppTheme.colors.backgroundNeutral,
             dragHandle = null,
-            shape = RoundedCornerShape(
-                topStart = dp8,
-                topEnd = dp8,
-            ),
+            shape = RoundedCornerShape(topStart = dp8, topEnd = dp8),
             windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
         ) {
             Menu(
                 currentBank = currentBank,
                 navigateToAtmFinder = { appNavController.navigate(Routes.RouteAtmFinder) },
+                navigateToHome = {
+                    navigateToHomeRoute(
+                        homeNavController = homeNavController,
+                        route = Routes.RouteHome,
+                    )
+                },
+                navigateToProducts = {
+                    navigateToHomeRoute(
+                        homeNavController = homeNavController,
+                        route = Routes.RouteProducts,
+                    )
+                },
+                navigateToExtras = {
+                    navigateToHomeRoute(
+                        homeNavController = homeNavController,
+                        route = Routes.RouteExtras,
+                    )
+                },
                 closeMenu = {
                     scope.launch { sheetState.hide() }
                         .invokeOnCompletion {
@@ -64,7 +79,6 @@ fun HomeScreen(
                             }
                         }
                 }
-
             )
         }
     }
