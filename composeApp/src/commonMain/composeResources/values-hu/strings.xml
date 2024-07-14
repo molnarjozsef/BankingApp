@@ -97,6 +97,27 @@
 
     <string name="extras_purchase_history">előző vásárlásaim</string>
 
+    <string name="new_beneficiary_title">új kedvezményezett</string>
+
+    <string name="new_beneficiary_account_number_tab">számlaszám</string>
+    <string name="new_beneficiary_email_address_tab">e-mail cím</string>
+    <string name="new_beneficiary_phone_number_tab">telefonszám</string>
+    <string name="new_beneficiary_tax_number_tab">adószám</string>
+
+    <string name="new_beneficiary_beneficiary_name">kedvezményezett neve</string>
+    <string name="new_beneficiary_beneficiary_name_hint">pl.: Demo Dénes</string>
+    <string name="new_beneficiary_beneficiary_account_number">kedvezményezett számlaszáma</string>
+    <string name="new_beneficiary_beneficiary_account_number_hint">IBAN vagy GIRO számlaszám</string>
+
+    <string name="new_beneficiary_beneficiary_email_address">kedvezményezett e-mail címe</string>
+    <string name="new_beneficiary_beneficiary_email_address_hint">pl: demodenes@demo.hu</string>
+
+    <string name="new_beneficiary_beneficiary_phone_number">kedvezményezett telefonszáma</string>
+
+    <string name="new_beneficiary_beneficiary_tax_number">kedvezményezett adószáma/adóazonosító jele</string>
+
+    <string name="new_beneficiary_next_button">tovább</string>
+
     <string name="atm_finder_title">ATM és ügyfélpontkereső</string>
     <string name="atm_finder_default_atm_name">ATM</string>
 

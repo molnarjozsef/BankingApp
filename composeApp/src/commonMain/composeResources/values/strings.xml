@@ -97,6 +97,27 @@
 
     <string name="extras_purchase_history">purchase history</string>
 
+    <string name="new_beneficiary_title">new beneficiary</string>
+
+    <string name="new_beneficiary_account_number_tab">account number</string>
+    <string name="new_beneficiary_email_address_tab">e-mail address</string>
+    <string name="new_beneficiary_phone_number_tab">phone number</string>
+    <string name="new_beneficiary_tax_number_tab">tax number</string>
+
+    <string name="new_beneficiary_beneficiary_name">beneficiary name</string>
+    <string name="new_beneficiary_beneficiary_name_hint">e.g. Demo Dénes</string>
+    <string name="new_beneficiary_beneficiary_account_number">beneficiary account number</string>
+    <string name="new_beneficiary_beneficiary_account_number_hint">IBAN or GIRO account number</string>
+
+    <string name="new_beneficiary_beneficiary_email_address">beneficiary e-mail address</string>
+    <string name="new_beneficiary_beneficiary_email_address_hint">e.g. demodenes@demo.hu</string>
+
+    <string name="new_beneficiary_beneficiary_phone_number">beneficiary phone number</string>
+
+    <string name="new_beneficiary_beneficiary_tax_number">beneficiary tax number / ID</string>
+
+    <string name="new_beneficiary_next_button">continue</string>
+
     <string name="atm_finder_title">ATM &amp; branch locator</string>
     <string name="atm_finder_default_atm_name">ATM</string>
 

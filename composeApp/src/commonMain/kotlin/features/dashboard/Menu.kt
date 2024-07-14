@@ -51,6 +51,9 @@ import theme.dp32
 @Composable
 fun Menu(
     currentBank: BankConfig,
+    navigateToHome: () -> Unit,
+    navigateToProducts: () -> Unit,
+    navigateToExtras: () -> Unit,
     navigateToAtmFinder: () -> Unit,
     closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
@@ -64,7 +67,21 @@ fun Menu(
 
         Spacer(Modifier.height(dp16))
 
-        NavigationSection(currentBank = currentBank)
+        NavigationSection(
+            currentBank = currentBank,
+            onHomeClick = {
+                closeMenu()
+                navigateToHome()
+            },
+            onProductsClick = {
+                closeMenu()
+                navigateToProducts()
+            },
+            onExtrasClick = {
+                closeMenu()
+                navigateToExtras()
+            },
+        )
 
         Spacer(Modifier.height(dp32))
 
@@ -78,6 +95,9 @@ fun Menu(
 @Composable
 private fun NavigationSection(
     currentBank: BankConfig,
+    onHomeClick: () -> Unit,
+    onProductsClick: () -> Unit,
+    onExtrasClick: () -> Unit,
 ) {
     Text(
         modifier = Modifier.padding(horizontal = dp24),
@@ -91,17 +111,17 @@ private fun NavigationSection(
     MenuItem(
         title = stringResource(Res.string.dashboard_bottom_navigation_home),
         icon = Icons.Outlined.House,
-        onClick = { },
+        onClick = onHomeClick,
     )
     MenuItem(
         title = stringResource(Res.string.dashboard_bottom_navigation_products),
         icon = Icons.Outlined.Store,
-        onClick = { },
+        onClick = onProductsClick,
     )
     MenuItem(
         title = stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank.bankName),
         icon = Icons.Outlined.ConfirmationNumber,
-        onClick = { },
+        onClick = onExtrasClick,
     )
 }
 

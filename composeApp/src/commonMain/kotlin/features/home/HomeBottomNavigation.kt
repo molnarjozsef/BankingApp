@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.dashboard_bottom_navigation_extras
@@ -77,19 +76,10 @@ private fun RowScope.NavigationBarItem(
     NavigationBarItem(
         selected = selected,
         onClick = {
-            homeNavController.navigate(item.route) {
-                // Pop up to the start destination of the graph to
-                // avoid building up a large stack of destinations
-                // on the back stack as users select items
-                popUpTo(homeNavController.graph.findStartDestination().route!!) {
-                    saveState = true
-                }
-                // Avoid multiple copies of the same destination when
-                // reselecting the same item
-                launchSingleTop = true
-                // Restore state when reselecting a previously selected item
-                restoreState = true
-            }
+            navigateToHomeRoute(
+                homeNavController = homeNavController,
+                route = item.route,
+            )
         },
         icon = {
             Icon(

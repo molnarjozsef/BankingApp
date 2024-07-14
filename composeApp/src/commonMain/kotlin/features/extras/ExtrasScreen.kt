@@ -34,6 +34,7 @@ import bankingapp.composeapp.generated.resources.extras_top_up_payment
 import components.Product
 import components.ProductSection
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
@@ -134,5 +135,13 @@ private fun TopUpPayment() {
             ),
         ),
         color = AppTheme.colors.productOrange,
+    )
+}
+
+@Preview
+@Composable
+fun ExtrasScreenPreview() {
+    ExtrasScreenContent(
+        currentBank = BankConfig.Otp,
     )
 }

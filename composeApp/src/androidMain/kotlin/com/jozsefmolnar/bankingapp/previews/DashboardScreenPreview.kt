@@ -11,5 +11,6 @@ fun DashboardScreenPreview() {
     DashboardScreenContent(
         currentBank = BankConfig.Otp,
         money = "12 345 Ft",
+        showNewTransferSheet = { },
     )
 }

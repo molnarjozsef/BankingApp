@@ -58,7 +58,7 @@ kotlin {
             // Only 2.8.0 is CMP-ready, but it needs Compose 1.7.0
             // implementation(libs.androidx.lifecycle.runtime.compose)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
@@ -67,8 +67,8 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktorfit.lib)
 
-            api(libs.biometry)
-            api(libs.biometry.compose)
+            implementation(libs.biometry)
+            implementation(libs.biometry.compose)
 
             implementation(libs.browser.kmp)
         }
