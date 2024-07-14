@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+
 package features.dashboard
 
 import BankConfig
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,15 +12,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.SyncAlt
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
@@ -44,9 +55,31 @@ fun DashboardScreen() {
     val viewModel = koinViewModel<DashboardViewModel>()
     val currentBank by viewModel.currentBank.collectAsState()
 
+    val scope = rememberCoroutineScope()
+    var showMenu by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
+    if (showMenu) {
+        ModalBottomSheet(
+            sheetState = sheetState,
+            onDismissRequest = { showMenu = false },
+            containerColor = AppTheme.colors.backgroundNeutral,
+            dragHandle = null,
+            shape = RoundedCornerShape(
+                topStart = dp8,
+                topEnd = dp8,
+            ),
+          //  windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
+        ) {
+            NewTransferBottomSheetContent()
+        }
+    }
+
+
     DashboardScreenContent(
         currentBank = currentBank,
         money = viewModel.money,
+        showNewTransferSheet = { showMenu = true },
     )
 }
 
@@ -54,6 +87,7 @@ fun DashboardScreen() {
 fun DashboardScreenContent(
     currentBank: BankConfig,
     money: String,
+    showNewTransferSheet: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -83,7 +117,9 @@ fun DashboardScreenContent(
         ) {
             Spacer(Modifier.height(dp24))
 
-            QuickFeatures()
+            QuickFeatures(
+                showNewTransferSheet = showNewTransferSheet,
+            )
 
             Spacer(Modifier.height(dp24))
 

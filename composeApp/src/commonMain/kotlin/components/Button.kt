@@ -21,7 +21,7 @@ fun MainButton(
     text: String,
     onClick: () -> Unit,
 ) {
-    BankButton(
+    Button(
         text = text,
         onClick = onClick,
         containerColor = AppTheme.colors.main,
@@ -34,7 +34,7 @@ fun SecondaryButton(
     text: String,
     onClick: () -> Unit,
 ) {
-    BankButton(
+    Button(
         text = text,
         onClick = onClick,
         containerColor = AppTheme.colors.contentOnMainBackground,
@@ -44,7 +44,7 @@ fun SecondaryButton(
 
 
 @Composable
-private fun BankButton(
+private fun Button(
     text: String,
     onClick: () -> Unit,
     containerColor: Color,

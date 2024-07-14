@@ -35,13 +35,16 @@ import theme.dp32
 import theme.dp8
 
 @Composable
-fun QuickFeatures() {
+fun QuickFeatures(
+    showNewTransferSheet: () -> Unit,
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dp16)
     ) {
         QuickFeatureButton(
             title = stringResource(Res.string.dashboard_quick_settings_current_transfer),
-            icon = rememberVectorPainter(Icons.Outlined.Payments)
+            icon = rememberVectorPainter(Icons.Outlined.Payments),
+            onClick = showNewTransferSheet
         )
         QuickFeatureButton(
             title = stringResource(Res.string.dashboard_quick_settings_limit_change),
