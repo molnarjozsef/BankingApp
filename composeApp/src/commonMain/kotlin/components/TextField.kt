@@ -15,17 +15,15 @@ import theme.dp8
 fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String,
+    placeholder: String? = null,
 ) {
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
-        placeholder = { Text(label) },
+        placeholder = placeholder?.let { { Text(placeholder) } },
         shape = RoundedCornerShape(dp8),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedLabelColor = AppTheme.colors.textDark,
-            focusedLabelColor = AppTheme.colors.textDarker,
             unfocusedTextColor = AppTheme.colors.textDarker,
             focusedTextColor = AppTheme.colors.textDarker,
             cursorColor = AppTheme.colors.main,
@@ -33,6 +31,8 @@ fun TextField(
             unfocusedContainerColor = Color.Transparent,
             unfocusedBorderColor = AppTheme.colors.textLight,
             focusedBorderColor = AppTheme.colors.textLight,
+            unfocusedPlaceholderColor = AppTheme.colors.textDark,
+            focusedPlaceholderColor = AppTheme.colors.textDarker,
         ),
         singleLine = true,
     )

@@ -7,9 +7,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.SyncAlt
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -40,6 +43,7 @@ import bankingapp.composeapp.generated.resources.dashboard_more_transactions
 import bankingapp.composeapp.generated.resources.dashboard_todos
 import components.HorizontalCardButton
 import components.VerticalCardButton
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
@@ -69,9 +73,18 @@ fun DashboardScreen() {
                 topStart = dp8,
                 topEnd = dp8,
             ),
-          //  windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
+            windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
         ) {
-            NewTransferBottomSheetContent()
+            NewTransferBottomSheetContent(
+                closeSheet = {
+                    scope.launch { sheetState.hide() }
+                        .invokeOnCompletion {
+                            if (!sheetState.isVisible) {
+                                showMenu = false
+                            }
+                        }
+                }
+            )
         }
     }
 
