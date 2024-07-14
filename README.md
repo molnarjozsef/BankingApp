@@ -12,3 +12,6 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+Add a Google Maps API key to the local.properties in the following format:
+MAPS_API_KEY=YOUR_API_KEY
