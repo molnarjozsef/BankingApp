@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1"
 }
 
 kotlin {
@@ -38,6 +39,10 @@ kotlin {
             implementation(libs.androidx.fragment)
 
             implementation(libs.ktor.client.okhttp)
+
+            implementation("com.google.android.gms:play-services-maps:18.2.0")
+            implementation("com.google.android.gms:play-services-location:21.1.0")
+            implementation("com.google.maps.android:maps-compose:2.11.2")
         }
 
         iosMain.dependencies {
@@ -111,4 +116,3 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-
