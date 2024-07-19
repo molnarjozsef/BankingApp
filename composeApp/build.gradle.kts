@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.secrets)
 }
 
 kotlin {
@@ -38,6 +39,10 @@ kotlin {
             implementation(libs.androidx.fragment)
 
             implementation(libs.ktor.client.okhttp)
+
+            implementation(libs.play.services.maps)
+            implementation(libs.play.services.location)
+            implementation(libs.maps.compose)
         }
 
         iosMain.dependencies {
@@ -111,4 +116,3 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-
