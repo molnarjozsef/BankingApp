@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,42 +27,54 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.atm_finder_default_atm_name
+import bankingapp.composeapp.generated.resources.atm_finder_distance_meters
 import bankingapp.composeapp.generated.resources.atm_finder_title
 import components.BackButton
+import components.DefaultPosition
 import components.GpsPosition
 import components.Header
 import components.LocationVisualizer
 import components.Marker
+import dev.icerock.moko.permissions.PermissionsController
 import model.domain.Atm
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
 import theme.dp8
+import kotlin.math.roundToInt
 
 
 @Composable
 fun AtmFinderScreen(
     navController: NavHostController,
 ) {
-    val viewModel = koinViewModel<AtmFinderViewModel>()
+    val viewModel = koinViewModel<AtmFinderViewModel> {
+        parametersOf(getPermissionsController())
+    }
+
+    val location = viewModel.location.collectAsState(null).value
+    LaunchedEffect(location) {
+        println("`````loc: $location")
+    }
+
+    bindPermissionsController(viewModel.permissionsController)
+    bindLocationTracker(viewModel.locationTracker)
 
     AtmFinderScreenContent(
+        location = location,
         atms = viewModel.atms.collectAsState().value,
         navigateUp = navController::navigateUp,
     )
@@ -71,11 +82,11 @@ fun AtmFinderScreen(
 
 @Composable
 fun AtmFinderScreenContent(
+    location: GpsPosition?,
     atms: List<Atm>?,
     navigateUp: () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.systemBarsPadding(),
         topBar = {
             Header(
                 title = stringResource(Res.string.atm_finder_title),
@@ -92,28 +103,25 @@ fun AtmFinderScreenContent(
                     CircularProgressIndicator(color = AppTheme.colors.main)
                 }
             } else {
-                val density = LocalDensity.current
-                var topPadding by remember { mutableIntStateOf(0) }
-                LocationVisualizer(
-                    modifier = Modifier.fillMaxWidth().aspectRatio(2f)
-                        .onGloballyPositioned {
-                            topPadding = it.size.height
-                        },
-                    markers = atms.take(10).map { atm ->
-                        Marker(
-                            position = GpsPosition(atm.lat, atm.lon),
-                            name = atm.name ?: ""
-                        )
-                    },
-                    title = "Budapest",
-                    parentScrollEnableState = remember { mutableStateOf(false) },
-                )
+
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        vertical = dp24 + with(density) { topPadding.toDp() },
-                    )
+                    contentPadding = PaddingValues(vertical = dp24)
                 ) {
+                    item {
+                        LocationVisualizer(
+                            position = location ?: DefaultPosition,
+                            modifier = Modifier.fillMaxWidth().aspectRatio(2f),
+                            markers = atms.take(10).map { atm ->
+                                Marker(
+                                    position = GpsPosition(atm.lat, atm.lon),
+                                    name = atm.name ?: ""
+                                )
+                            },
+                            title = "Budapest",
+                            parentScrollEnableState = remember { mutableStateOf(false) },
+                        )
+                    }
                     atms.forEachIndexed { index, atm ->
                         item {
                             Box(
@@ -127,7 +135,8 @@ fun AtmFinderScreenContent(
                             ) {
                                 Atm(
                                     atm = atm,
-                                    index = index
+                                    index = index,
+                                    distanceInMeters = location?.distanceToInMeters(atm.getLocation()),
                                 )
                             }
                         }
@@ -142,6 +151,7 @@ fun AtmFinderScreenContent(
 private fun Atm(
     atm: Atm,
     index: Int,
+    distanceInMeters: Double?,
 ) {
     Surface(
         shadowElevation = dp8,
@@ -166,11 +176,13 @@ private fun Atm(
                         color = AppTheme.colors.textDarker,
                     )
                 }
-                Text(
-                    text = "${atm.lat}, ${atm.lon}",
-                    fontSize = 10.sp,
-                    color = AppTheme.colors.textDarker,
-                )
+                distanceInMeters?.let {
+                    Text(
+                        text = stringResource(Res.string.atm_finder_distance_meters, distanceInMeters.roundToInt()),
+                        fontSize = 10.sp,
+                        color = AppTheme.colors.textDarker,
+                    )
+                }
                 AtmFeatures(atm = atm)
             }
         }
@@ -253,3 +265,5 @@ private fun Atm.getFullAddress(): String? =
     } else {
         listOfNotNull(postcode, city, street, houseNumber).joinToString(" ")
     }
+
+expect fun getPermissionsController(): PermissionsController

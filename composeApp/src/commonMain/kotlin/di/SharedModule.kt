@@ -2,6 +2,7 @@ package di
 
 import de.jensklingenberg.ktorfit.Ktorfit
 import dev.icerock.moko.biometry.BiometryAuthenticator
+import dev.icerock.moko.permissions.PermissionsController
 import features.atmfinder.AtmFinderViewModel
 import features.bankchanger.BankChangerViewModel
 import features.dashboard.DashboardViewModel
@@ -15,6 +16,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.compose.viewmodel.dsl.viewModel
+import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import repository.BankingRepository
 import repository.DefaultBankingRepository
@@ -59,9 +61,7 @@ val viewModelModule = module {
             biometryAuthenticator = biometryAuthenticator
         )
     }
-    viewModel {
-        HomeViewModel(repository = get())
-    }
+    viewModelOf(::HomeViewModel)
     viewModel {
         DashboardViewModel(repository = get())
     }
@@ -71,8 +71,9 @@ val viewModelModule = module {
     viewModel {
         ExtrasViewModel(repository = get())
     }
-    viewModel {
+    viewModel { (permissionsController: PermissionsController) ->
         AtmFinderViewModel(
+            permissionsController = permissionsController,
             repository = get()
         )
     }

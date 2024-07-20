@@ -13,10 +13,11 @@ import platform.MapKit.MKPointAnnotation
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun LocationVisualizer(
-    modifier: Modifier,
+    position: GpsPosition,
     markers: List<Marker>,
     title: String,
     parentScrollEnableState: MutableState<Boolean>,
+    modifier: Modifier,
 ) {
     val defaultLocation = CLLocationCoordinate2DMake(DefaultPosition.latitude, DefaultPosition.longitude)
 
