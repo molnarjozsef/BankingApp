@@ -7,11 +7,9 @@ import components.GpsPosition
 import dev.icerock.moko.geo.LocationTracker
 import dev.icerock.moko.permissions.Permission
 import dev.icerock.moko.permissions.PermissionsController
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import repository.BankingRepository
 
@@ -20,30 +18,50 @@ class AtmFinderViewModel(
     repository: BankingRepository,
 ) : ViewModel() {
 
+    private val _loadingState = MutableStateFlow(LoadingState.Initial)
+    val loadingState = _loadingState.asStateFlow()
+
     val locationTracker = getLocationTracker(permissionsController)
-    val location = locationTracker.getLocationsFlow()
-        .map {
-            GpsPosition(
-                latitude = it.latitude,
-                longitude = it.longitude
-            )
-        }
-        .onEach {
-            println("`````` locvm: $it")
-            locationTracker.stopTracking()
-        }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+    private val _location = MutableStateFlow<GpsPosition?>(null)
+    val location = _location.asStateFlow()
 
     val atms = repository.getAtms()
 
     init {
         viewModelScope.launch {
-            permissionsController.providePermission(Permission.LOCATION)
-            locationTracker.startTracking()
-            val location = locationTracker.getLocationsFlow().first()
-            repository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
+            try {
+                _loadingState.value = LoadingState.WaitingForPermission
+                permissionsController.getPermissionState(Permission.LOCATION).also { print("````` s1: $it") }
+                permissionsController.providePermission(Permission.LOCATION)
+                permissionsController.getPermissionState(Permission.LOCATION).also { print("````` s2: $it") }
+
+                _loadingState.value = LoadingState.WaitingForLocation
+                locationTracker.startTracking()
+                val location = locationTracker.getLocationsFlow().first()
+                _location.value = GpsPosition(
+                    latitude = location.latitude,
+                    longitude = location.longitude
+                )
+
+                _loadingState.value = LoadingState.LoadingAtms
+                repository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
+
+                _loadingState.value = LoadingState.Success
+            } catch (e: Exception) {
+                println("`````e: $e")
+            }
         }
     }
+}
+
+enum class LoadingState {
+    Initial,
+    WaitingForPermission,
+    WaitingForLocation,
+    LoadingAtms,
+    Success,
+    ErrorNoLocation,
+    ErrorNoInternet,
 }
 
 

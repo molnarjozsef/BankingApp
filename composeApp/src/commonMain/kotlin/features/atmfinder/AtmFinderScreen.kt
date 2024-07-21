@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -64,20 +65,51 @@ fun AtmFinderScreen(
     val viewModel = koinViewModel<AtmFinderViewModel> {
         parametersOf(getPermissionsController())
     }
-
     val location = viewModel.location.collectAsState(null).value
-    LaunchedEffect(location) {
-        println("`````loc: $location")
+    val loadingState by viewModel.loadingState.collectAsState()
+    LaunchedEffect(loadingState) {
+        println("`````ls: $loadingState")
     }
 
     bindPermissionsController(viewModel.permissionsController)
     bindLocationTracker(viewModel.locationTracker)
 
-    AtmFinderScreenContent(
-        location = location,
-        atms = viewModel.atms.collectAsState().value,
-        navigateUp = navController::navigateUp,
-    )
+    when (loadingState) {
+        LoadingState.Initial -> FullScreenLoading()
+        LoadingState.WaitingForPermission -> FullScreenLoading("waiting for permission")
+        LoadingState.WaitingForLocation -> FullScreenLoading("waiting for location")
+        LoadingState.LoadingAtms -> FullScreenLoading("loading atms")
+        LoadingState.Success ->
+            AtmFinderScreenContent(
+                location = location,
+                atms = viewModel.atms.collectAsState().value,
+                navigateUp = navController::navigateUp,
+            )
+
+        LoadingState.ErrorNoLocation -> TODO()
+        LoadingState.ErrorNoInternet -> TODO()
+    }
+}
+
+@Composable
+fun FullScreenLoading(
+    text: String? = null,
+) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(AppTheme.colors.backgroundNeutral),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        CircularProgressIndicator(color = AppTheme.colors.main)
+        text?.let {
+            Text(
+                text = text,
+                fontSize = 16.sp,
+                color = AppTheme.colors.textDarker,
+            )
+        }
+    }
 }
 
 @Composable
