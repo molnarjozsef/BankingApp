@@ -15,9 +15,11 @@ biometryCompose = "0.4.0"
 browserKmp = "1.0.3"
 compose-plugin = "1.6.11"
 fragment = "1.8.1"
+geo = "0.6.0"
 junit = "4.13.2"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.21"
+permissions = "0.17.0"
 secrets-plugin = "2.0.1"
 
 navigationCompose = "2.7.0-alpha07"
@@ -70,6 +72,12 @@ browser-kmp = { module = "com.stevdza-san:browser-kmp", version.ref = "browserKm
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+
+permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "permissions" }
+permissions = { module = "dev.icerock.moko:permissions", version.ref = "permissions" }
+
+geo = { module = "dev.icerock.moko:geo", version.ref = "geo" }
+geo-compose = { module = "dev.icerock.moko:geo-compose", version.ref = "geo" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

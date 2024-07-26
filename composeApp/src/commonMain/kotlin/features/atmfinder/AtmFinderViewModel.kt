@@ -29,27 +29,21 @@ class AtmFinderViewModel(
 
     init {
         viewModelScope.launch {
-            try {
-                _loadingState.value = LoadingState.WaitingForPermission
-                permissionsController.getPermissionState(Permission.LOCATION).also { print("````` s1: $it") }
-                permissionsController.providePermission(Permission.LOCATION)
-                permissionsController.getPermissionState(Permission.LOCATION).also { print("````` s2: $it") }
+            _loadingState.value = LoadingState.WaitingForPermission
+            permissionsController.providePermission(Permission.LOCATION)
 
-                _loadingState.value = LoadingState.WaitingForLocation
-                locationTracker.startTracking()
-                val location = locationTracker.getLocationsFlow().first()
-                _location.value = GpsPosition(
-                    latitude = location.latitude,
-                    longitude = location.longitude
-                )
+            _loadingState.value = LoadingState.WaitingForLocation
+            locationTracker.startTracking()
+            val location = locationTracker.getLocationsFlow().first()
+            _location.value = GpsPosition(
+                latitude = location.latitude,
+                longitude = location.longitude
+            )
 
-                _loadingState.value = LoadingState.LoadingAtms
-                repository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
+            _loadingState.value = LoadingState.LoadingAtms
+            repository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
 
-                _loadingState.value = LoadingState.Success
-            } catch (e: Exception) {
-                println("`````e: $e")
-            }
+            _loadingState.value = LoadingState.Success
         }
     }
 }

@@ -39,7 +39,7 @@
     <string name="dashboard_menu_szep_card">%1$s SZÉP Card</string>
     <string name="dashboard_menu_atm_finder">ATM &amp; branch locator</string>
     <string name="dashboard_menu_settings">settings</string>
-    <string name="dashboard_menu_contact">kapcsolat</string>
+    <string name="dashboard_menu_contact">contact &amp; appointment booking</string>
     <string name="dashboard_menu_whats_new">news</string>
 
     <string name="products_title">products</string>
@@ -121,6 +121,10 @@
     <string name="atm_finder_title">ATM &amp; branch locator</string>
     <string name="atm_finder_default_atm_name">ATM</string>
     <string name="atm_finder_distance_meters">%1$d meters away</string>
+
+    <string name="atm_finder_loading_waiting_for_permission">waiting for permission</string>
+    <string name="atm_finder_loading_waiting_for_location">waiting for location</string>
+    <string name="atm_finder_loading_loading_atms">loading ATMs</string>
 
     <string name="szep_card_search_prompt">%1$s SZÉP card</string>
 

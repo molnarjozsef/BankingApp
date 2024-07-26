@@ -122,6 +122,10 @@
     <string name="atm_finder_default_atm_name">ATM</string>
     <string name="atm_finder_distance_meters">%1$d méterre</string>
 
+    <string name="atm_finder_loading_waiting_for_permission">várakozás az engedélyezésre</string>
+    <string name="atm_finder_loading_waiting_for_location">várakozás a lokációra</string>
+    <string name="atm_finder_loading_loading_atms">ATM-ek betöltése</string>
+
     <string name="szep_card_search_prompt">%1$s SZÉP kártya</string>
 
     <string name="bank_changer_title">bankválasztó</string>

@@ -77,10 +77,10 @@ kotlin {
 
             implementation(libs.browser.kmp)
 
-            implementation("dev.icerock.moko:permissions:0.17.0")
-            implementation("dev.icerock.moko:permissions-compose:0.17.0")
-            implementation("dev.icerock.moko:geo:0.6.0")
-            implementation("dev.icerock.moko:geo-compose:0.6.0")
+            implementation(libs.permissions)
+            implementation(libs.permissions.compose)
+            implementation(libs.geo)
+            implementation(libs.geo.compose)
         }
     }
 }

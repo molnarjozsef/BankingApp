@@ -14,7 +14,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import org.jetbrains.compose.resources.imageResource
@@ -31,7 +33,7 @@ actual fun LocationVisualizer(
     val defaultPosition = LatLng(position.latitude, position.longitude)
     val cameraPositionState = rememberCameraPositionState()
     LaunchedEffect(position) {
-        cameraPositionState.position = CameraPosition.fromLatLngZoom(defaultPosition, 14f)
+        cameraPositionState.position = CameraPosition.fromLatLngZoom(defaultPosition, 13.5f)
     }
     LaunchedEffect(cameraPositionState.isMoving) {
         // This code helps to use Compose GoogleMap inside scrollable container.
@@ -54,10 +56,22 @@ actual fun LocationVisualizer(
             }
         ),
         cameraPositionState = cameraPositionState,
+        uiSettings = MapUiSettings(
+            zoomControlsEnabled = false,
+            compassEnabled = false,
+            myLocationButtonEnabled = false,
+            mapToolbarEnabled = false,
+            zoomGesturesEnabled = false,
+            scrollGesturesEnabled = false,
+        ),
+        properties = MapProperties(
+            isMyLocationEnabled = true
+        )
     ) {
         markers.forEach { marker ->
             MapMarker(
                 position = LatLng(marker.position.latitude, marker.position.longitude),
+                title = marker.name,
             )
         }
     }
@@ -66,13 +80,17 @@ actual fun LocationVisualizer(
 @Composable
 fun MapMarker(
     position: LatLng,
+    title: String,
 ) {
-    Marker(
-        state = rememberMarkerState(
-            key = position.toString(),
-            position = position
-        ),
+    val markerState = rememberMarkerState(
+        key = position.toString(),
+        position = position
+    )
+    MarkerInfoWindow(
+        state = markerState,
         icon = BitmapDescriptorFactory.fromBitmap(imageResource(Res.drawable.map_marker).asAndroidBitmap()),
+        title = title,
+        onClick = { markerState.showInfoWindow(); true }
     )
 }
 
