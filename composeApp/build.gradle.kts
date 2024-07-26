@@ -76,6 +76,11 @@ kotlin {
             implementation(libs.biometry.compose)
 
             implementation(libs.browser.kmp)
+
+            implementation(libs.permissions)
+            implementation(libs.permissions.compose)
+            implementation(libs.geo)
+            implementation(libs.geo.compose)
         }
     }
 }

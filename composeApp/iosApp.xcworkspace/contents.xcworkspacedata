@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "shared">
+      <FileRef
+         location = "group:build.gradle.kts">
+      </FileRef>
+      <Group
+         location = "group:src"
+         name = "src">
+         <Group
+            location = "group:iosMain"
+            name = "iosMain">
+            <Group
+               location = "group:kotlin"
+               name = "kotlin">
+               <FileRef
+                  location = "group:MainViewController.kt">
+               </FileRef>
+               <Group
+                  location = "group:features"
+                  name = "features">
+                  <Group
+                     location = "group:atmfinder"
+                     name = "atmfinder">
+                     <FileRef
+                        location = "group:AtmFinderViewModel.ios.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:AtmFinderScreen.ios.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+               <Group
+                  location = "group:components"
+                  name = "components">
+                  <FileRef
+                     location = "group:LocationVisualizer.ios.kt">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:BankingApp.ios.kt">
+               </FileRef>
+               <FileRef
+                  location = "group:Platform.ios.kt">
+               </FileRef>
+            </Group>
+         </Group>
+         <Group
+            location = "group:commonMain"
+            name = "commonMain">
+            <Group
+               location = "group:composeResources"
+               name = "composeResources">
+               <Group
+                  location = "group:drawable"
+                  name = "drawable">
+                  <FileRef
+                     location = "group:map_marker.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_granit.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:compose-multiplatform.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_erste.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_otp.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_kh.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:login_arrows.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_revolut.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:logo_raiffeisen.xml">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:values"
+                  name = "values">
+                  <FileRef
+                     location = "group:strings.xml">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:values-hu"
+                  name = "values-hu">
+                  <FileRef
+                     location = "group:strings.xml">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:font"
+                  name = "font">
+                  <FileRef
+                     location = "group:Museo_Sans_900.otf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Museo_Sans_500.otf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Museo_Sans_700.otf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Museo_Sans_300.otf">
+                  </FileRef>
+               </Group>
+            </Group>
+            <Group
+               location = "group:kotlin"
+               name = "kotlin">
+               <Group
+                  location = "group:repository"
+                  name = "repository">
+                  <FileRef
+                     location = "group:DefaultBankingRepository.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:BankingRepository.kt">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:di"
+                  name = "di">
+                  <FileRef
+                     location = "group:SharedModule.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:initKoin.kt">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Platform.kt">
+               </FileRef>
+               <Group
+                  location = "group:features"
+                  name = "features">
+                  <Group
+                     location = "group:home"
+                     name = "home">
+                     <FileRef
+                        location = "group:HomeViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:HomeBottomNavigation.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:HomeNavGraph.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:navigateToHomeRoute.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:HomeScreen.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:HomeHeader.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:pin"
+                     name = "pin">
+                     <FileRef
+                        location = "group:PinViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:PinPad.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:PinScreen.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:products"
+                     name = "products">
+                     <FileRef
+                        location = "group:ProductsScreen.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:ProductsViewModel.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:bankchanger"
+                     name = "bankchanger">
+                     <FileRef
+                        location = "group:BankChangerViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:BankChangerScreen.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:atmfinder"
+                     name = "atmfinder">
+                     <FileRef
+                        location = "group:AtmFinderViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:AtmFinderScreen.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:dashboard"
+                     name = "dashboard">
+                     <FileRef
+                        location = "group:Menu.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:QuickFeatures.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:Accounts.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:DashboardScreen.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:NewTransferBottomSheetContent.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:Transactions.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:DashboardViewModel.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:login"
+                     name = "login">
+                     <FileRef
+                        location = "group:LoginViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:LoginScreen.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:extras"
+                     name = "extras">
+                     <FileRef
+                        location = "group:ExtrasViewModel.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:ExtrasScreen.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+               <FileRef
+                  location = "group:Config.kt">
+               </FileRef>
+               <FileRef
+                  location = "group:BankingApp.kt">
+               </FileRef>
+               <Group
+                  location = "group:components"
+                  name = "components">
+                  <FileRef
+                     location = "group:Button.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:VerticalCardButton.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:TextField.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ProductSection.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:LocationVisualizer.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Header.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:HeaderButton.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:TertiaryButton.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:HorizontalCardButton.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:MyProductCard.kt">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:theme"
+                  name = "theme">
+                  <FileRef
+                     location = "group:AppTheme.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Colors.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Typography.kt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Sizes.kt">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:model"
+                  name = "model">
+                  <Group
+                     location = "group:api"
+                     name = "api">
+                     <FileRef
+                        location = "group:AtmsResponse.kt">
+                     </FileRef>
+                  </Group>
+                  <Group
+                     location = "group:domain"
+                     name = "domain">
+                     <FileRef
+                        location = "group:Atm.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+               <Group
+                  location = "group:service"
+                  name = "service">
+                  <FileRef
+                     location = "group:BankingService.kt">
+                  </FileRef>
+               </Group>
+            </Group>
+         </Group>
+         <Group
+            location = "group:androidMain"
+            name = "androidMain">
+            <Group
+               location = "group:res"
+               name = "res">
+               <Group
+                  location = "group:mipmap-mdpi"
+                  name = "mipmap-mdpi">
+                  <FileRef
+                     location = "group:ic_launcher_monochrome.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_foreground.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_background.png">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:mipmap-hdpi"
+                  name = "mipmap-hdpi">
+                  <FileRef
+                     location = "group:ic_launcher_monochrome.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_foreground.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_background.png">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:mipmap-xxxhdpi"
+                  name = "mipmap-xxxhdpi">
+                  <FileRef
+                     location = "group:ic_launcher_monochrome.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_foreground.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_background.png">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:mipmap-xxhdpi"
+                  name = "mipmap-xxhdpi">
+                  <FileRef
+                     location = "group:ic_launcher_monochrome.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_foreground.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_background.png">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:values"
+                  name = "values">
+                  <FileRef
+                     location = "group:strings.xml">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:mipmap-xhdpi"
+                  name = "mipmap-xhdpi">
+                  <FileRef
+                     location = "group:ic_launcher_monochrome.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_foreground.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher.png">
+                  </FileRef>
+                  <FileRef
+                     location = "group:ic_launcher_background.png">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:mipmap-anydpi-v26"
+                  name = "mipmap-anydpi-v26">
+                  <FileRef
+                     location = "group:ic_launcher.xml">
+                  </FileRef>
+               </Group>
+            </Group>
+            <FileRef
+               location = "group:AndroidManifest.xml">
+            </FileRef>
+            <Group
+               location = "group:kotlin"
+               name = "kotlin">
+               <Group
+                  location = "group:features"
+                  name = "features">
+                  <Group
+                     location = "group:atmfinder"
+                     name = "atmfinder">
+                     <FileRef
+                        location = "group:AtmFinderViewModel.android.kt">
+                     </FileRef>
+                     <FileRef
+                        location = "group:AtmFinderScreen.android.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+               <FileRef
+                  location = "group:BankingApp.android.kt">
+               </FileRef>
+               <Group
+                  location = "group:components"
+                  name = "components">
+                  <FileRef
+                     location = "group:LocationVisualizer.android.kt">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Platform.android.kt">
+               </FileRef>
+               <Group
+                  location = "group:com"
+                  name = "com">
+                  <Group
+                     location = "group:jozsefmolnar"
+                     name = "jozsefmolnar">
+                     <Group
+                        location = "group:bankingapp"
+                        name = "bankingapp">
+                        <FileRef
+                           location = "group:MainActivity.kt">
+                        </FileRef>
+                        <Group
+                           location = "group:previews"
+                           name = "previews">
+                           <FileRef
+                              location = "group:DashboardScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:ProductsScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:AtmFinderScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:PinScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:LoginScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:ExtrasScreenPreview.kt">
+                           </FileRef>
+                           <FileRef
+                              location = "group:BankChangerScreenPreview.kt">
+                           </FileRef>
+                        </Group>
+                        <FileRef
+                           location = "group:BankingApplication.kt">
+                        </FileRef>
+                     </Group>
+                  </Group>
+               </Group>
+            </Group>
+         </Group>
+      </Group>
+   </Group>
+   <FileRef
+      location = "group:../iosApp/iosApp.xcodeproj">
+   </FileRef>
+</Workspace>

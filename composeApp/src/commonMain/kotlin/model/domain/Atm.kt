@@ -1,5 +1,7 @@
 package model.domain
 
+import components.GpsPosition
+
 data class Atm(
     val lat: Double,
     val lon: Double,
@@ -11,4 +13,6 @@ data class Atm(
     val wheelchair: Boolean? = null,
     val indoor: Boolean? = null,
     val cashIn: Boolean? = null,
-)
+) {
+    fun getLocation() = GpsPosition(latitude = lat, longitude = lon)
+}

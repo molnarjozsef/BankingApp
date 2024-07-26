@@ -1,10 +1,13 @@
 package repository
 
 import BankConfig
+import components.GpsPosition
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import model.domain.Atm
 import service.BankingService
+import kotlin.math.PI
+import kotlin.math.cos
 
 class DefaultBankingRepository(
     private val bankingService: BankingService,
@@ -16,9 +19,10 @@ class DefaultBankingRepository(
 
     override fun getCurrentBank() = currentBank.asStateFlow()
 
-    override suspend fun fetchAtmsIfNeeded() {
+    override suspend fun fetchAtmsIfNeeded(location: GpsPosition) {
         if (atms.value == null) {
-            val response = bankingService.getPosts()
+            val boundingBox = getBoundingBox(location, 1000.0)
+            val response = bankingService.getAtms(data = "[out:json];node[amenity=atm](${boundingBox.south},${boundingBox.west},${boundingBox.north},${boundingBox.east});out%20meta;")
 
             val fetchedAtms = response.elements.map { element ->
                 Atm(
@@ -39,7 +43,7 @@ class DefaultBankingRepository(
         }
     }
 
-    override suspend fun setCurrentBank(bank: BankConfig){
+    override suspend fun setCurrentBank(bank: BankConfig) {
         currentBank.value = bank
     }
 
@@ -47,5 +51,29 @@ class DefaultBankingRepository(
         "yes" -> true
         "no" -> false
         else -> null
+    }
+
+    data class BoundingBox(
+        val north: Double,
+        val east: Double,
+        val south: Double,
+        val west: Double,
+    )
+
+    fun getBoundingBox(
+        coordinate: GpsPosition,
+        radiusMeters: Double,
+    ): BoundingBox {
+        val earthRadius = 6378137.0 // Earth's radius in meters
+
+        val deltaLatitude = radiusMeters / earthRadius
+        val deltaLongitude = radiusMeters / (earthRadius * cos(coordinate.latitude * PI / 180))
+
+        val north = coordinate.latitude + deltaLatitude * 180 / PI
+        val south = coordinate.latitude - deltaLatitude * 180 / PI
+        val east = coordinate.longitude + deltaLongitude * 180 / PI
+        val west = coordinate.longitude - deltaLongitude * 180 / PI
+
+        return BoundingBox(north, east, south, west)
     }
 }

@@ -48,5 +48,9 @@
 	</array>
 	<key>NSFaceIDUsageDescription</key>
     <string>$(PRODUCT_NAME) Authentication with TouchId or FaceID</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>$(PRODUCT_NAME) Shows content around your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>$(PRODUCT_NAME) Shows content around your location</string>
 </dict>
 </plist>

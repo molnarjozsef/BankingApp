@@ -13,23 +13,29 @@ import platform.MapKit.MKPointAnnotation
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun LocationVisualizer(
-    modifier: Modifier,
+    position: GpsPosition,
     markers: List<Marker>,
     title: String,
     parentScrollEnableState: MutableState<Boolean>,
+    modifier: Modifier,
 ) {
-    val defaultLocation = CLLocationCoordinate2DMake(DefaultPosition.latitude, DefaultPosition.longitude)
+    val defaultLocation = CLLocationCoordinate2DMake(position.latitude, position.longitude)
 
     UIKitView(
         modifier = modifier,
         factory = {
-            MKMapView()
+            MKMapView().apply {
+                scrollEnabled = false
+                zoomEnabled = false
+                showsUserLocation = true
+            }
         },
         update = { mkMapView ->
             mkMapView.setRegion(
-                MKCoordinateRegionMakeWithDistance(
+                region = MKCoordinateRegionMakeWithDistance(
                     centerCoordinate = defaultLocation,
-                    10_000.0, 10_000.0
+                    latitudinalMeters = 1_500.0,
+                    longitudinalMeters = 1_500.0,
                 ),
                 animated = false
             )
@@ -42,7 +48,7 @@ actual fun LocationVisualizer(
 
                 val annotation = MKPointAnnotation(
                     coordinate = location,
-                    title = null,
+                    title = marker.name,
                     subtitle = null
                 )
                 mkMapView.addAnnotation(annotation)
