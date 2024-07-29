@@ -17,7 +17,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SecondaryScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -72,14 +71,12 @@ fun NewTransferBottomSheetContent(
             selectedTabIndex = pagerState.currentPage,
             containerColor = Color.Transparent,
             contentColor = AppTheme.colors.main,
-            indicator = { tabPositions ->
-                if (pagerState.currentPage < tabPositions.size) {
-                    TabRowDefaults.SecondaryIndicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                        height = dp2,
-                        color = AppTheme.colors.main
-                    )
-                }
+            indicator = {
+                TabRowDefaults.SecondaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(pagerState.currentPage),
+                    height = dp2,
+                    color = AppTheme.colors.main
+                )
             },
             edgePadding = 0.dp,
         ) {
