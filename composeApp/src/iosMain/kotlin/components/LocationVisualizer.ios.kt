@@ -1,7 +1,6 @@
 package components
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -15,8 +14,6 @@ import platform.MapKit.MKPointAnnotation
 actual fun LocationVisualizer(
     position: GpsPosition,
     markers: List<Marker>,
-    title: String,
-    parentScrollEnableState: MutableState<Boolean>,
     modifier: Modifier,
 ) {
     val defaultLocation = CLLocationCoordinate2DMake(position.latitude, position.longitude)

@@ -13,6 +13,7 @@ class DefaultBankingRepository(
     private val bankingService: BankingService,
 ) : BankingRepository {
     private val atms = MutableStateFlow<List<Atm>?>(null)
+    private val lastLocation = MutableStateFlow<GpsPosition?>(null)
     private val currentBank = MutableStateFlow(BankConfig.Otp)
 
     override fun getAtms() = atms.asStateFlow()
@@ -20,9 +21,13 @@ class DefaultBankingRepository(
     override fun getCurrentBank() = currentBank.asStateFlow()
 
     override suspend fun fetchAtmsIfNeeded(location: GpsPosition) {
-        if (atms.value == null) {
+        val shouldFetchForNewLocation = lastLocation.value?.let {
+            it.distanceToInMeters(location) > DistanceThresholdMeters
+        } ?: true
+
+        if (atms.value == null || shouldFetchForNewLocation) {
             val boundingBox = getBoundingBox(location, 1000.0)
-            val response = bankingService.getAtms(data = "[out:json];node[amenity=atm](${boundingBox.south},${boundingBox.west},${boundingBox.north},${boundingBox.east});out%20meta;")
+            val response = bankingService.getAtms(data = getAtmQueryData(boundingBox))
 
             val fetchedAtms = response.elements.map { element ->
                 Atm(
@@ -39,6 +44,7 @@ class DefaultBankingRepository(
                 )
             }
 
+            lastLocation.value = location
             atms.value = fetchedAtms
         }
     }
@@ -46,6 +52,10 @@ class DefaultBankingRepository(
     override suspend fun setCurrentBank(bank: BankConfig) {
         currentBank.value = bank
     }
+
+    private fun getAtmQueryData(boundingBox: BoundingBox) =
+        "[out:json];node[amenity=atm](${boundingBox.south},${boundingBox.west}," +
+                "${boundingBox.north},${boundingBox.east});out%20meta;"
 
     private fun mapOsmToBoolean(osmBoolean: String?) = when (osmBoolean) {
         "yes" -> true
@@ -60,7 +70,7 @@ class DefaultBankingRepository(
         val west: Double,
     )
 
-    fun getBoundingBox(
+    private fun getBoundingBox(
         coordinate: GpsPosition,
         radiusMeters: Double,
     ): BoundingBox {
@@ -77,3 +87,5 @@ class DefaultBankingRepository(
         return BoundingBox(north, east, south, west)
     }
 }
+
+private const val DistanceThresholdMeters = 100

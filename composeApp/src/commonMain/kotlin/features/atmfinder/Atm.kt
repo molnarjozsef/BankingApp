@@ -29,6 +29,7 @@ import bankingapp.composeapp.generated.resources.atm_finder_distance_meters
 import model.domain.Atm
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
+import theme.DefaultCardElevation
 import theme.dp16
 import theme.dp8
 import kotlin.math.roundToInt
@@ -38,9 +39,11 @@ internal fun Atm(
     atm: Atm,
     index: Int,
     distanceInMeters: Double?,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
-        shadowElevation = dp8,
+        modifier = modifier,
+        shadowElevation = DefaultCardElevation,
         color = AppTheme.colors.surfaceNeutral,
         shape = RoundedCornerShape(dp8),
     ) {

@@ -53,35 +53,23 @@ val dataModule = module {
 }
 
 val viewModelModule = module {
-    viewModel {
-        LoginViewModel(repository = get())
-    }
+    viewModelOf(::LoginViewModel)
     viewModel { (biometryAuthenticator: BiometryAuthenticator) ->
         PinViewModel(
             biometryAuthenticator = biometryAuthenticator
         )
     }
     viewModelOf(::HomeViewModel)
-    viewModel {
-        DashboardViewModel(repository = get())
-    }
-    viewModel {
-        ProductsViewModel(repository = get())
-    }
-    viewModel {
-        ExtrasViewModel(repository = get())
-    }
+    viewModelOf(::DashboardViewModel)
+    viewModelOf(::ProductsViewModel)
+    viewModelOf(::ExtrasViewModel)
     viewModel { (permissionsController: PermissionsController) ->
         AtmFinderViewModel(
             permissionsController = permissionsController,
             repository = get()
         )
     }
-    viewModel {
-        BankChangerViewModel(
-            repository = get()
-        )
-    }
+    viewModelOf(::BankChangerViewModel)
 }
 
 val sharedModule = module {
