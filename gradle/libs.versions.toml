@@ -21,6 +21,8 @@ kotlin = "2.0.0"
 ksp = "2.0.0-1.0.21"
 permissions = "0.17.0"
 secrets-plugin = "2.0.1"
+firebase = "1.13.0"
+google-services-plugin = "4.4.2"
 
 navigationCompose = "2.7.0-alpha07"
 lifecycleViewmodel = "2.8.3"
@@ -79,6 +81,8 @@ permissions = { module = "dev.icerock.moko:permissions", version.ref = "permissi
 geo = { module = "dev.icerock.moko:geo", version.ref = "geo" }
 geo-compose = { module = "dev.icerock.moko:geo-compose", version.ref = "geo" }
 
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -89,3 +93,4 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets-plugin" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "google-services-plugin" }

@@ -1,6 +1,9 @@
 package di
 
 import de.jensklingenberg.ktorfit.Ktorfit
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseAuth
+import dev.gitlive.firebase.auth.auth
 import dev.icerock.moko.biometry.BiometryAuthenticator
 import dev.icerock.moko.permissions.PermissionsController
 import features.atmfinder.AtmFinderViewModel
@@ -42,6 +45,9 @@ val networkModule = module {
             .build()
     }
     single<BankingService> { get<Ktorfit>().createBankingService() }
+    single<FirebaseAuth> {
+        Firebase.auth
+    }
 }
 
 val dataModule = module {
