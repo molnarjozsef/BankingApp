@@ -59,7 +59,7 @@ fun PinScreen(
         navController.navigate(
             route = Routes.RouteHome,
             navOptions = NavOptions.Builder()
-                .setPopUpTo(Routes.RouteLogin, inclusive = false)
+                .setPopUpTo(Routes.RouteWelcome, inclusive = false)
                 .build()
         )
     }
@@ -113,8 +113,8 @@ fun PinScreenContent(
     ) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(contentPadding)
+                .verticalScroll(rememberScrollState())
                 .padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

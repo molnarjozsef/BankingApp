@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_qr_button">%1$s e-bank code reading</string>
-    <string name="login_login_button">%1$s mobilbank login</string>
+    <string name="welcome_qr_button">%1$s e-bank code reading</string>
+    <string name="welcome_login_button">%1$s mobilbank login</string>
 
     <string name="pin_title">authentication</string>
     <string name="pin_heading">enter your mPIN</string>

@@ -37,7 +37,7 @@ import theme.dp8
 @Composable
 fun Accounts(
     currentBank: BankConfig,
-    money: String,
+    money: String?,
 ) {
 
     LazyRow(
@@ -71,7 +71,7 @@ fun Accounts(
 @Composable
 private fun Account(
     accountName: String,
-    money: String,
+    money: String?,
     color: Color,
 ) {
     Card(
@@ -107,7 +107,7 @@ private fun Account(
                 Spacer(Modifier.height(dp4))
 
                 Text(
-                    text = money,
+                    text = money ?: "...",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = AppTheme.colors.textDarker,

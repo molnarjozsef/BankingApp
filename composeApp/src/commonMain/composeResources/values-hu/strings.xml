@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_qr_button">%1$s e-bank kódbeolvasás</string>
-    <string name="login_login_button">%1$s mobilbank belépés</string>
+    <string name="welcome_qr_button">%1$s e-bank kódbeolvasás</string>
+    <string name="welcome_login_button">%1$s mobilbank belépés</string>
 
     <string name="pin_title">azonosítás</string>
     <string name="pin_heading">add meg az mPIN kódodat</string>

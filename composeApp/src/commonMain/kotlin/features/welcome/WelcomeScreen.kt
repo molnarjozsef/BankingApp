@@ -1,11 +1,16 @@
-package features.login
+package features.welcome
 
 import BankConfig
+import Config.currentBank
 import DefaultBank
+import Routes.RouteAccountOpening
+import Routes.RouteBankChanger
+import Routes.RoutePin
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -34,10 +39,11 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.login_arrows
-import bankingapp.composeapp.generated.resources.login_login_button
-import bankingapp.composeapp.generated.resources.login_qr_button
+import bankingapp.composeapp.generated.resources.welcome_login_button
+import bankingapp.composeapp.generated.resources.welcome_qr_button
 import components.SecondaryButton
 import components.TertiaryButton
 import org.jetbrains.compose.resources.painterResource
@@ -53,25 +59,31 @@ import theme.dp8
 
 
 @Composable
-fun LoginScreen(
-    navigateToPinScreen: () -> Unit,
-    navigateToBankChanger: () -> Unit,
+fun WelcomeScreen(
+    navController: NavController,
 ) {
-    val viewModel = koinViewModel<LoginViewModel>()
+    val viewModel = koinViewModel<WelcomeViewModel>()
     val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState(null)
 
-    LoginScreenContent(
+    WelcomeScreenContent(
         currentBank = currentBank,
-        navigateToPinScreen = navigateToPinScreen,
-        navigateToBankChanger = navigateToBankChanger,
+        navigateToPinScreen = { navController.navigate(RoutePin) },
+        navigateToBankChanger = { navController.navigate(RouteBankChanger) },
+        navigateToAccountOpeningScreen = { navController.navigate(RouteAccountOpening) },
+        navigateToLoginScreen = { },
+        isLoggedIn = isLoggedIn
     )
 }
 
 @Composable
-fun LoginScreenContent(
+fun WelcomeScreenContent(
     currentBank: BankConfig,
+    isLoggedIn: Boolean?,
     navigateToPinScreen: () -> Unit,
     navigateToBankChanger: () -> Unit,
+    navigateToAccountOpeningScreen: () -> Unit,
+    navigateToLoginScreen: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -91,25 +103,57 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(dp24))
 
+
         Column(
-            modifier = Modifier.padding(horizontal = dp48)
+            modifier = Modifier.padding(horizontal = dp48),
+            verticalArrangement = Arrangement.spacedBy(dp8),
         ) {
-            TertiaryButton(
-                text = stringResource(Res.string.login_qr_button, currentBank.bankName),
-                icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
-                textColor = AppTheme.colors.contentOnMainBackground,
-                onClick = {}
-            )
+            when (isLoggedIn) {
+                true -> LoggedInButtons(navigateToPinScreen = navigateToPinScreen)
+                false -> NotLoggedInButtons(
+                    navigateToAccountOpeningScreen = navigateToAccountOpeningScreen,
+                    navigateToLoginScreen = navigateToLoginScreen
+                )
 
-            Spacer(modifier = Modifier.height(dp8))
-
-            SecondaryButton(
-                text = stringResource(Res.string.login_login_button, currentBank.bankName),
-                onClick = navigateToPinScreen,
-            )
+                else -> {}
+            }
         }
     }
+}
 
+@Composable
+private fun ColumnScope.LoggedInButtons(
+    navigateToPinScreen: () -> Unit,
+) {
+    TertiaryButton(
+        text = stringResource(Res.string.welcome_qr_button, currentBank.bankName),
+        icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
+        textColor = AppTheme.colors.contentOnMainBackground,
+        onClick = {}
+    )
+
+    SecondaryButton(
+        text = stringResource(Res.string.welcome_login_button, currentBank.bankName),
+        onClick = navigateToPinScreen,
+    )
+}
+
+@Composable
+private fun NotLoggedInButtons(
+    navigateToAccountOpeningScreen: () -> Unit,
+    navigateToLoginScreen: () -> Unit,
+) {
+    TertiaryButton(
+        text = "ACCOUNT OPENING",
+        icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
+        textColor = AppTheme.colors.contentOnMainBackground,
+        onClick = navigateToAccountOpeningScreen
+    )
+
+    SecondaryButton(
+        text = "LOGIN",
+        onClick = navigateToLoginScreen,
+    )
 }
 
 @Composable

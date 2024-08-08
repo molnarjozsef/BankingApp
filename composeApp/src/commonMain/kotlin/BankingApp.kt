@@ -1,9 +1,9 @@
-
+import Routes.RouteAccountOpening
 import Routes.RouteAtmFinder
 import Routes.RouteBankChanger
 import Routes.RouteHome
-import Routes.RouteLogin
 import Routes.RoutePin
+import Routes.RouteWelcome
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -12,11 +12,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import features.accountopening.AccountOpeningScreen
 import features.atmfinder.AtmFinderScreen
 import features.bankchanger.BankChangerScreen
 import features.home.HomeScreen
-import features.login.LoginScreen
 import features.pin.PinScreen
+import features.welcome.WelcomeScreen
 import org.koin.compose.KoinContext
 import theme.AppTheme
 
@@ -31,19 +32,24 @@ fun BankingApp() {
             ) {
                 NavHost(
                     navController = navController,
-                    startDestination = RouteLogin,
+                    startDestination = RouteWelcome,
                     enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
                     exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
                 ) {
-                    composable(RouteLogin) {
-                        LoginScreen(
-                            navigateToPinScreen = { navController.navigate(RoutePin) },
-                            navigateToBankChanger = { navController.navigate(RouteBankChanger) },
+                    composable(RouteWelcome) {
+                        WelcomeScreen(
+                            navController = navController,
                         )
                     }
 
                     composable(RoutePin) {
                         PinScreen(
+                            navController = navController,
+                        )
+                    }
+
+                    composable(RouteAccountOpening) {
+                        AccountOpeningScreen(
                             navController = navController,
                         )
                     }
@@ -78,8 +84,9 @@ expect fun BackGestureHandler(
 )
 
 object Routes {
-    val RouteLogin = "login"
+    val RouteWelcome = "welcome"
     val RoutePin = "pin"
+    val RouteAccountOpening = "accountopening"
 
     val RouteHome = "home"
     val RouteDashboard = "dashboard"

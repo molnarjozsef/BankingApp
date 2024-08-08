@@ -59,6 +59,7 @@ import theme.dp8
 fun DashboardScreen() {
     val viewModel = koinViewModel<DashboardViewModel>()
     val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
+    val amount by viewModel.amount.collectAsState()
 
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
@@ -84,7 +85,8 @@ fun DashboardScreen() {
                                 showMenu = false
                             }
                         }
-                }
+                },
+                startTransferToEmail = viewModel::startTransferToEmail
             )
         }
     }
@@ -92,7 +94,7 @@ fun DashboardScreen() {
 
     DashboardScreenContent(
         currentBank = currentBank,
-        money = viewModel.money,
+        money = amount?.let { "$it Ft" },
         showNewTransferSheet = { showMenu = true },
     )
 }
@@ -100,7 +102,7 @@ fun DashboardScreen() {
 @Composable
 fun DashboardScreenContent(
     currentBank: BankConfig,
-    money: String,
+    money: String?,
     showNewTransferSheet: () -> Unit,
 ) {
     Column(

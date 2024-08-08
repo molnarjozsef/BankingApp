@@ -7,16 +7,19 @@ import de.jensklingenberg.ktorfit.Ktorfit
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.auth
+import dev.gitlive.firebase.firestore.FirebaseFirestore
+import dev.gitlive.firebase.firestore.firestore
 import dev.icerock.moko.biometry.BiometryAuthenticator
 import dev.icerock.moko.permissions.PermissionsController
+import features.accountopening.AccountOpeningViewModel
 import features.atmfinder.AtmFinderViewModel
 import features.bankchanger.BankChangerViewModel
 import features.dashboard.DashboardViewModel
 import features.extras.ExtrasViewModel
 import features.home.HomeViewModel
-import features.login.LoginViewModel
 import features.pin.PinViewModel
 import features.products.ProductsViewModel
+import features.welcome.WelcomeViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -51,6 +54,9 @@ val networkModule = module {
     single<FirebaseAuth> {
         Firebase.auth
     }
+    single<FirebaseFirestore> {
+        Firebase.firestore
+    }
 }
 
 val dataModule = module {
@@ -66,12 +72,13 @@ val dataModule = module {
 }
 
 val viewModelModule = module {
-    viewModelOf(::LoginViewModel)
+    viewModelOf(::WelcomeViewModel)
     viewModel { (biometryAuthenticator: BiometryAuthenticator) ->
         PinViewModel(
             biometryAuthenticator = biometryAuthenticator
         )
     }
+    viewModelOf(::AccountOpeningViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::DashboardViewModel)
     viewModelOf(::ProductsViewModel)
