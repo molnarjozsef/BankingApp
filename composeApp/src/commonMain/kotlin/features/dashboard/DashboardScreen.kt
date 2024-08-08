@@ -73,7 +73,7 @@ fun DashboardScreen() {
                 topStart = dp8,
                 topEnd = dp8,
             ),
-            windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
+            contentWindowInsets = { BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom) },
         ) {
             NewTransferBottomSheetContent(
                 closeSheet = {

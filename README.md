@@ -15,3 +15,6 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 Add a Google Maps API key to the local.properties in the following format:
 MAPS_API_KEY=YOUR_API_KEY
+
+Add google-services.json to the composeApp folder.
+Add the GoogleService-Info.plist to the iosApp/iosApp folder.

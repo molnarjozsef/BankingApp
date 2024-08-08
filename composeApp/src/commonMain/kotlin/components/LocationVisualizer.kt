@@ -9,8 +9,6 @@ import dev.icerock.moko.geo.LatLng
 expect fun LocationVisualizer(
     position: GpsPosition,
     markers: List<Marker>,
-    title: String,
-    parentScrollEnableState: MutableState<Boolean>,
     modifier: Modifier = Modifier,
 )
 

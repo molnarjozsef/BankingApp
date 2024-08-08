@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.secrets)
+    alias(libs.plugins.googleServices)
 }
 
 kotlin {
@@ -81,6 +82,8 @@ kotlin {
             implementation(libs.permissions.compose)
             implementation(libs.geo)
             implementation(libs.geo.compose)
+
+            implementation(libs.firebase.auth)
         }
     }
 }

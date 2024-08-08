@@ -48,7 +48,7 @@ fun HomeScreen(
             containerColor = AppTheme.colors.backgroundNeutral,
             dragHandle = null,
             shape = RoundedCornerShape(topStart = dp8, topEnd = dp8),
-            windowInsets = BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom),
+            contentWindowInsets = { BottomSheetDefaults.windowInsets.only(WindowInsetsSides.Bottom) },
         ) {
             Menu(
                 currentBank = currentBank,

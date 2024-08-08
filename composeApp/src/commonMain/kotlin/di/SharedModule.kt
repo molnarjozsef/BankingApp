@@ -1,6 +1,9 @@
 package di
 
 import de.jensklingenberg.ktorfit.Ktorfit
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseAuth
+import dev.gitlive.firebase.auth.auth
 import dev.icerock.moko.biometry.BiometryAuthenticator
 import dev.icerock.moko.permissions.PermissionsController
 import features.atmfinder.AtmFinderViewModel
@@ -42,6 +45,9 @@ val networkModule = module {
             .build()
     }
     single<BankingService> { get<Ktorfit>().createBankingService() }
+    single<FirebaseAuth> {
+        Firebase.auth
+    }
 }
 
 val dataModule = module {
@@ -53,35 +59,23 @@ val dataModule = module {
 }
 
 val viewModelModule = module {
-    viewModel {
-        LoginViewModel(repository = get())
-    }
+    viewModelOf(::LoginViewModel)
     viewModel { (biometryAuthenticator: BiometryAuthenticator) ->
         PinViewModel(
             biometryAuthenticator = biometryAuthenticator
         )
     }
     viewModelOf(::HomeViewModel)
-    viewModel {
-        DashboardViewModel(repository = get())
-    }
-    viewModel {
-        ProductsViewModel(repository = get())
-    }
-    viewModel {
-        ExtrasViewModel(repository = get())
-    }
+    viewModelOf(::DashboardViewModel)
+    viewModelOf(::ProductsViewModel)
+    viewModelOf(::ExtrasViewModel)
     viewModel { (permissionsController: PermissionsController) ->
         AtmFinderViewModel(
             permissionsController = permissionsController,
             repository = get()
         )
     }
-    viewModel {
-        BankChangerViewModel(
-            repository = get()
-        )
-    }
+    viewModelOf(::BankChangerViewModel)
 }
 
 val sharedModule = module {

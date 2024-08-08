@@ -2,7 +2,6 @@ package features.atmfinder
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,8 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
@@ -40,7 +37,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import theme.AppTheme
 import theme.dp16
-import theme.dp24
 import theme.dp8
 
 @Composable
@@ -52,6 +48,7 @@ fun AtmFinderScreen(
     }
     val location = viewModel.location.collectAsState(null).value
     val loadingState by viewModel.loadingState.collectAsState()
+    val atms = viewModel.atms.collectAsState().value
 
     bindPermissionsController(viewModel.permissionsController)
     bindLocationTracker(viewModel.locationTracker)
@@ -70,7 +67,7 @@ fun AtmFinderScreen(
         LoadingState.Success ->
             AtmFinderScreenContent(
                 location = location,
-                atms = viewModel.atms.collectAsState().value,
+                atms = atms ?: emptyList(),
                 navigateUp = navController::navigateUp,
             )
 
@@ -103,7 +100,7 @@ fun FullScreenLoading(
 @Composable
 fun AtmFinderScreenContent(
     location: GpsPosition?,
-    atms: List<Atm>?,
+    atms: List<Atm>,
     navigateUp: () -> Unit,
 ) {
     Scaffold(
@@ -114,58 +111,40 @@ fun AtmFinderScreenContent(
             )
         }
     ) { contentPadding ->
-        Box(Modifier.padding(contentPadding)) {
-            if (atms == null) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(color = AppTheme.colors.main)
-                }
-            } else {
-
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(vertical = dp24)
-                ) {
+        LazyColumn(
+            modifier = Modifier.padding(contentPadding),
+            contentPadding = PaddingValues(bottom = dp16)
+        ) {
+            item {
+                LocationVisualizer(
+                    position = location ?: DefaultPosition,
+                    modifier = Modifier.fillMaxWidth().aspectRatio(1.5f),
+                    markers = atms.take(10).map { atm ->
+                        Marker(
+                            position = GpsPosition(atm.lat, atm.lon),
+                            name = atm.name ?: ""
+                        )
+                    },
+                )
+            }
+            atms.sortedBy { atm ->
+                location?.distanceToInMeters(atm.getLocation())
+            }
+                .forEachIndexed { index, atm ->
                     item {
-                        LocationVisualizer(
-                            position = location ?: DefaultPosition,
-                            modifier = Modifier.fillMaxWidth().aspectRatio(1.5f),
-                            markers = atms.take(10).map { atm ->
-                                Marker(
-                                    position = GpsPosition(atm.lat, atm.lon),
-                                    name = atm.name ?: ""
+                        Atm(
+                            atm = atm,
+                            index = index,
+                            distanceInMeters = location?.distanceToInMeters(atm.getLocation()),
+                            modifier = Modifier
+                                .padding(horizontal = dp16)
+                                .padding(
+                                    top = if (index == atms.indices.first) dp16 else dp8,
+                                    bottom = if (index == atms.indices.last) dp16 else dp8
                                 )
-                            },
-                            title = "Budapest",
-                            parentScrollEnableState = remember { mutableStateOf(false) },
                         )
                     }
-                    atms.sortedBy { atm ->
-                        location?.distanceToInMeters(atm.getLocation())
-                    }
-                        .forEachIndexed { index, atm ->
-                            item {
-                                Box(
-                                    modifier = Modifier
-                                        .background(AppTheme.colors.backgroundNeutral)
-                                        .padding(horizontal = dp16)
-                                        .padding(
-                                            top = if (index == atms.indices.first) dp16 else dp8,
-                                            bottom = if (index == atms.indices.last) dp16 else dp8
-                                        )
-                                ) {
-                                    Atm(
-                                        atm = atm,
-                                        index = index,
-                                        distanceInMeters = location?.distanceToInMeters(atm.getLocation()),
-                                    )
-                                }
-                            }
-                        }
                 }
-            }
         }
     }
 }
