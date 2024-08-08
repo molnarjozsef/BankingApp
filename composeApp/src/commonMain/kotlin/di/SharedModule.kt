@@ -1,5 +1,8 @@
 package di
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import createDataStore
 import de.jensklingenberg.ktorfit.Ktorfit
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseAuth
@@ -53,8 +56,12 @@ val networkModule = module {
 val dataModule = module {
     single<BankingRepository> {
         DefaultBankingRepository(
-            bankingService = get()
+            bankingService = get(),
+            dataStore = get()
         )
+    }
+    single<DataStore<Preferences>> {
+        createDataStore()
     }
 }
 

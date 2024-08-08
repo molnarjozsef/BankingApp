@@ -1,6 +1,7 @@
 package features.extras
 
 import BankConfig
+import DefaultBank
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,7 +45,7 @@ import theme.dp40
 @Composable
 fun ExtrasScreen() {
     val viewModel = koinViewModel<ExtrasViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
 
     ExtrasScreenContent(
         currentBank = currentBank

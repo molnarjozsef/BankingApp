@@ -1,6 +1,7 @@
 package features.products
 
 import BankConfig
+import DefaultBank
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -68,7 +69,7 @@ import kotlin.random.Random
 @Composable
 fun ProductsScreen() {
     val viewModel = koinViewModel<ProductsViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
 
     ProductsScreenContent(currentBank = currentBank)
 }

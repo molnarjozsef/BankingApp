@@ -84,6 +84,9 @@ kotlin {
             implementation(libs.geo.compose)
 
             implementation(libs.firebase.auth)
+
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastore.preferences)
         }
     }
 }

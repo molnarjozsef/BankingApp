@@ -1,3 +1,4 @@
+
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.logo_erste
 import bankingapp.composeapp.generated.resources.logo_granit
@@ -40,3 +41,5 @@ enum class BankConfig(
         iconRes = Res.drawable.logo_granit
     )
 }
+
+val DefaultBank = BankConfig.Otp

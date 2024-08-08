@@ -32,7 +32,7 @@ import theme.dp16
 @Composable
 fun BankChangerScreen(navController: NavHostController) {
     val viewModel = koinViewModel<BankChangerViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(null)
 
     BankChangerScreenContent(
         navigateUp = navController::navigateUp,
@@ -44,7 +44,7 @@ fun BankChangerScreen(navController: NavHostController) {
 
 @Composable
 fun BankChangerScreenContent(
-    currentBank: BankConfig,
+    currentBank: BankConfig?,
     setCurrentBank: (BankConfig) -> Unit,
     navigateUp: () -> Unit,
 ) {
