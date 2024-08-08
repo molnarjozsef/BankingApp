@@ -1,6 +1,7 @@
 package features.login
 
 import BankConfig
+import DefaultBank
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -57,7 +58,7 @@ fun LoginScreen(
     navigateToBankChanger: () -> Unit,
 ) {
     val viewModel = koinViewModel<LoginViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
 
     LoginScreenContent(
         currentBank = currentBank,

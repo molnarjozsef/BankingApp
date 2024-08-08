@@ -2,6 +2,7 @@
 
 package features.home
 
+import DefaultBank
 import Routes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -35,7 +36,7 @@ fun HomeScreen(
 ) {
     val viewModel = koinViewModel<HomeViewModel>()
 
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
     val homeNavController = rememberNavController()
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }

@@ -3,6 +3,7 @@
 package features.dashboard
 
 import BankConfig
+import DefaultBank
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -57,7 +58,7 @@ import theme.dp8
 @Composable
 fun DashboardScreen() {
     val viewModel = koinViewModel<DashboardViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState()
+    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
 
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
