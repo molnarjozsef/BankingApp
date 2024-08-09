@@ -130,4 +130,6 @@
 
     <string name="bank_changer_title">bankválasztó</string>
     <string name="bank_changer_back_button">vissza</string>
+
+    <string name="default_currency">Ft</string>
 </resources>

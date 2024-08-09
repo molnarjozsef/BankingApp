@@ -8,10 +8,6 @@ import bankingapp.composeapp.generated.resources.logo_raiffeisen
 import bankingapp.composeapp.generated.resources.logo_revolut
 import org.jetbrains.compose.resources.DrawableResource
 
-object Config {
-     var currentBank = BankConfig.Otp
-}
-
 enum class BankConfig(
     val bankName: String,
     val iconRes: DrawableResource,

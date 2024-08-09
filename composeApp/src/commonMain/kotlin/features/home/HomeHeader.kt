@@ -62,7 +62,7 @@ private fun MenuButton(
                 .size(dp24)
                 .background(
                     shape = CircleShape,
-                    color = AppTheme.colors.bubbleOnColoredBackground
+                    color = AppTheme.colors.buttonDisabled
                 )
         ) {
             Icon(

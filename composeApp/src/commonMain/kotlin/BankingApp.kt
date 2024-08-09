@@ -2,7 +2,10 @@ import Routes.RouteAccountOpening
 import Routes.RouteAtmFinder
 import Routes.RouteBankChanger
 import Routes.RouteHome
+import Routes.RouteNewTransfer
 import Routes.RoutePin
+import Routes.RouteSignTransfer
+import Routes.RouteSuccessTransfer
 import Routes.RouteWelcome
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -17,6 +20,9 @@ import features.atmfinder.AtmFinderScreen
 import features.bankchanger.BankChangerScreen
 import features.home.HomeScreen
 import features.pin.PinScreen
+import features.transfer.NewTransferScreen
+import features.transfer.SignTransferScreen
+import features.transfer.SuccessTransferScreen
 import features.welcome.WelcomeScreen
 import org.koin.compose.KoinContext
 import theme.AppTheme
@@ -71,6 +77,24 @@ fun BankingApp() {
                             navController = navController
                         )
                     }
+
+                    composable(RouteNewTransfer) {
+                        NewTransferScreen(
+                            navController = navController,
+                        )
+                    }
+
+                    composable(RouteSignTransfer) {
+                        SignTransferScreen(
+                            navController = navController,
+                        )
+                    }
+
+                    composable(RouteSuccessTransfer) {
+                        SuccessTransferScreen(
+                            navController = navController,
+                        )
+                    }
                 }
             }
         }
@@ -96,6 +120,10 @@ object Routes {
     val RouteAtmFinder = "atmfinder"
 
     val RouteBankChanger = "bankchanger"
+
+    val RouteNewTransfer = "newtransfer"
+    val RouteSignTransfer = "signtransfer"
+    val RouteSuccessTransfer = "success"
 }
 
 const val NavigationAnimationDurationMillis = 200

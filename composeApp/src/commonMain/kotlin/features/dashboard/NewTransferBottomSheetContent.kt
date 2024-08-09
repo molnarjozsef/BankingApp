@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.new_beneficiary_account_number_tab
 import bankingapp.composeapp.generated.resources.new_beneficiary_beneficiary_account_number
@@ -45,6 +44,7 @@ import components.CloseButton
 import components.Header
 import components.MainButton
 import components.TextField
+import components.TextFieldTitle
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
@@ -129,7 +129,7 @@ fun NewTransferBottomSheetContent(
 @Composable
 private fun AccountNumberInput() {
     Column {
-        InputFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
+        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
         Spacer(Modifier.height(dp4))
         TextField(
             value = "",
@@ -139,7 +139,7 @@ private fun AccountNumberInput() {
 
         Spacer(modifier = Modifier.height(dp24))
 
-        InputFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
+        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
         Spacer(Modifier.height(dp4))
         TextField(
             value = "",
@@ -147,7 +147,7 @@ private fun AccountNumberInput() {
             placeholder = stringResource(Res.string.new_beneficiary_beneficiary_name_hint)
         )
 
-        ContinueButtonSection {}
+        ContinueButtonSection(onClick = {})
     }
 }
 
@@ -156,9 +156,10 @@ private fun EmailAddressInput(
     startTransferToEmail: (String) -> Unit,
 ) {
     var email by rememberSaveable { mutableStateOf("") }
+    val regex = Regex("^[^@]+@[^@]+\\.[^@]+\$")
 
     Column {
-        InputFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_email_address))
+        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_email_address))
         Spacer(Modifier.height(dp4))
         TextField(
             value = email,
@@ -167,7 +168,8 @@ private fun EmailAddressInput(
         )
 
         ContinueButtonSection(
-            onClick = { startTransferToEmail(email) }
+            onClick = { startTransferToEmail(email) },
+            enabled = regex.matches(email)
         )
     }
 }
@@ -175,45 +177,37 @@ private fun EmailAddressInput(
 @Composable
 private fun PhoneNumberInput() {
     Column {
-        InputFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_phone_number))
+        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_phone_number))
         Spacer(Modifier.height(dp4))
         TextField("", {})
 
-        ContinueButtonSection {}
+        ContinueButtonSection(onClick = {})
     }
 }
 
 @Composable
 private fun TaxNumberInput() {
     Column {
-        InputFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_tax_number))
+        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_tax_number))
         Spacer(Modifier.height(dp4))
         TextField("", {})
 
-        ContinueButtonSection {}
+        ContinueButtonSection(onClick = {})
     }
 }
 
-@Composable
-private fun InputFieldTitle(
-    text: String,
-) {
-    Text(
-        text = text,
-        color = AppTheme.colors.textDark,
-        fontSize = 14.sp,
-    )
-}
 
 @Composable
 private fun ColumnScope.ContinueButtonSection(
     onClick: () -> Unit,
+    enabled: Boolean = false,
 ) {
     Spacer(Modifier.weight(1f))
     Spacer(Modifier.height(dp16))
     MainButton(
         text = stringResource(Res.string.new_beneficiary_next_button),
         onClick = onClick,
+        enabled = enabled,
     )
 }
 

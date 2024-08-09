@@ -14,4 +14,12 @@ interface BankingRepository {
     suspend fun fetchAtmsIfNeeded(location: GpsPosition)
 
     suspend fun setCurrentBank(bank: BankConfig)
+    fun getTransferRecipientEmail(): StateFlow<String?>
+    fun setTransferRecipientEmail(recipientEmail: String)
+    fun getTransferAmount(): StateFlow<Int?>
+    fun setTransferAmount(amount: Int)
+    suspend fun createAccount(email: String, password: String)
+    fun getCurrentAmount(): Flow<Int>
+    suspend fun transferMoney(recipientEmail: String, amount: Int): TransferMoneyResult
+    fun getUserEmail(): Flow<String?>
 }

@@ -6,6 +6,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import components.GpsPosition
+import dev.gitlive.firebase.auth.FirebaseAuth
+import dev.gitlive.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
@@ -17,9 +19,31 @@ import kotlin.math.cos
 class DefaultBankingRepository(
     private val bankingService: BankingService,
     private val dataStore: DataStore<Preferences>,
+    private val firebaseAuth: FirebaseAuth,
+    private val firebaseFirestore: FirebaseFirestore,
 ) : BankingRepository {
+    private val transferRecipientEmail = MutableStateFlow<String?>(null)
+    private val transferAmount = MutableStateFlow<Int?>(null)
+
     private val atms = MutableStateFlow<List<Atm>?>(null)
     private val lastLocation = MutableStateFlow<GpsPosition?>(null)
+
+    override fun getTransferRecipientEmail() = transferRecipientEmail.asStateFlow()
+    override fun setTransferRecipientEmail(recipientEmail: String) {
+        transferRecipientEmail.value = recipientEmail
+    }
+
+    override fun getUserEmail() = firebaseAuth.authStateChanged.map { it?.email }
+
+    override fun getTransferAmount() = transferAmount.asStateFlow()
+    override fun setTransferAmount(amount: Int) {
+        transferAmount.value = amount
+    }
+
+    override fun getCurrentAmount() = firebaseFirestore.collection("users")
+        .document(firebaseAuth.currentUser?.email ?: error("no current user"))
+        .snapshots
+        .map { it.get<Int>("amount") }
 
     override fun getAtms() = atms.asStateFlow()
 
@@ -59,10 +83,54 @@ class DefaultBankingRepository(
         }
     }
 
+    override suspend fun transferMoney(
+        recipientEmail: String,
+        amount: Int,
+    ): TransferMoneyResult {
+        val currentUserEmail = firebaseAuth.currentUser?.email!!
+
+        val currentAmount = firebaseFirestore.collection("users")
+            .document(currentUserEmail)
+            .get()
+            .get<Int>("amount")
+
+        val recipientDocument = firebaseFirestore.collection("users")
+            .document(recipientEmail)
+            .get()
+
+        return when {
+            currentAmount < amount -> TransferMoneyResult.InsufficientFunds
+            !recipientDocument.exists -> TransferMoneyResult.RecipientNotFound
+            else -> {
+                firebaseFirestore.collection("users")
+                    .document(currentUserEmail)
+                    .set(mapOf("amount" to currentAmount - amount))
+                firebaseFirestore.collection("users")
+                    .document(recipientEmail)
+                    .set(mapOf("amount" to recipientDocument.get<Int>("amount") + amount))
+                TransferMoneyResult.Success
+            }
+        }
+    }
+
     override suspend fun setCurrentBank(bank: BankConfig) {
         dataStore.edit {
             it[bankPreferencesKey] = bank.name
         }
+    }
+
+    override suspend fun createAccount(
+        email: String,
+        password: String,
+    ) {
+        val result = firebaseAuth.createUserWithEmailAndPassword(
+            email = email,
+            password = password
+        )
+        firebaseFirestore
+            .collection("users")
+            .document(email)
+            .set(mapOf("amount" to AccountOpeningCampaignCredit))
     }
 
     private fun getAtmQueryData(boundingBox: BoundingBox) =
@@ -102,3 +170,11 @@ class DefaultBankingRepository(
 
 private const val DistanceThresholdMeters = 100
 private val bankPreferencesKey = stringPreferencesKey("bank")
+private const val AccountOpeningCampaignCredit = 30_000
+
+sealed interface TransferMoneyResult {
+    sealed interface TransferMoneyError : TransferMoneyResult
+    data object Success : TransferMoneyResult
+    data object InsufficientFunds : TransferMoneyError
+    data object RecipientNotFound : TransferMoneyError
+}

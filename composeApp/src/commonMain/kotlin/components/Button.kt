@@ -20,12 +20,16 @@ import theme.dp8
 fun MainButton(
     text: String,
     onClick: () -> Unit,
+    enabled: Boolean = true,
 ) {
     Button(
         text = text,
         onClick = onClick,
         containerColor = AppTheme.colors.main,
         contentColor = AppTheme.colors.backgroundNeutral,
+        disabledContainerColor = AppTheme.colors.buttonDisabled,
+        disabledContentColor = AppTheme.colors.textLight,
+        enabled = enabled,
     )
 }
 
@@ -49,12 +53,17 @@ private fun Button(
     onClick: () -> Unit,
     containerColor: Color,
     contentColor: Color,
+    disabledContainerColor: Color = ButtonDefaults.buttonColors().disabledContainerColor,
+    disabledContentColor: Color = ButtonDefaults.buttonColors().disabledContentColor,
+    enabled: Boolean = true,
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,
+            disabledContainerColor = disabledContainerColor,
+            disabledContentColor = disabledContentColor,
         ),
         shape = CircleShape,
         modifier = Modifier
@@ -62,6 +71,7 @@ private fun Button(
             .heightIn(min = 40.dp),
         contentPadding = PaddingValues(dp8),
         elevation = null,
+        enabled = enabled,
     ) {
         Text(
             text = text,

@@ -12,7 +12,7 @@ fun DashboardScreenPreview() {
     AppTheme {
         DashboardScreenContent(
             currentBank = BankConfig.Otp,
-            money = "12 345 Ft",
+            money = 12345,
             showNewTransferSheet = { },
         )
     }

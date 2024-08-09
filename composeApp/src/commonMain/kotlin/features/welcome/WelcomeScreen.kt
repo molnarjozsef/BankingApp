@@ -1,7 +1,6 @@
 package features.welcome
 
 import BankConfig
-import Config.currentBank
 import DefaultBank
 import Routes.RouteAccountOpening
 import Routes.RouteBankChanger
@@ -109,7 +108,11 @@ fun WelcomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(dp8),
         ) {
             when (isLoggedIn) {
-                true -> LoggedInButtons(navigateToPinScreen = navigateToPinScreen)
+                true -> LoggedInButtons(
+                    currentBank = currentBank,
+                    navigateToPinScreen = navigateToPinScreen,
+                )
+
                 false -> NotLoggedInButtons(
                     navigateToAccountOpeningScreen = navigateToAccountOpeningScreen,
                     navigateToLoginScreen = navigateToLoginScreen
@@ -123,6 +126,7 @@ fun WelcomeScreenContent(
 
 @Composable
 private fun ColumnScope.LoggedInButtons(
+    currentBank: BankConfig,
     navigateToPinScreen: () -> Unit,
 ) {
     TertiaryButton(

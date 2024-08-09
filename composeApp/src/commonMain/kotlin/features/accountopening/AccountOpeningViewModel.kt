@@ -5,15 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.gitlive.firebase.auth.FirebaseAuth
-import dev.gitlive.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import repository.BankingRepository
 
 class AccountOpeningViewModel(
-    private val firebaseAuth: FirebaseAuth,
-    private val firebaseFirestore: FirebaseFirestore,
+    private val repository: BankingRepository,
 ) : ViewModel() {
 
     private val _accountOpeningSuccessfulEvents = MutableSharedFlow<Any>()
@@ -34,11 +32,10 @@ class AccountOpeningViewModel(
             error = null
 
             try {
-                val result = firebaseAuth.createUserWithEmailAndPassword(email, password)
-                firebaseFirestore
-                    .collection("users")
-                    .document(email)
-                    .set(mapOf("amount" to 10000))
+                repository.createAccount(
+                    email = email,
+                    password = password
+                )
                 _accountOpeningSuccessfulEvents.emit(Any())
             } catch (e: Exception) {
                 println("Exception in openAccount: $e")

@@ -19,6 +19,9 @@ import features.extras.ExtrasViewModel
 import features.home.HomeViewModel
 import features.pin.PinViewModel
 import features.products.ProductsViewModel
+import features.transfer.NewTransferViewModel
+import features.transfer.SignTransferViewModel
+import features.transfer.SuccessTransferViewModel
 import features.welcome.WelcomeViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -26,6 +29,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.compose.viewmodel.dsl.viewModel
 import org.koin.compose.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import repository.BankingRepository
 import repository.DefaultBankingRepository
@@ -60,12 +64,9 @@ val networkModule = module {
 }
 
 val dataModule = module {
-    single<BankingRepository> {
-        DefaultBankingRepository(
-            bankingService = get(),
-            dataStore = get()
-        )
-    }
+    singleOf(::DefaultBankingRepository)
+    single<BankingRepository> { get<DefaultBankingRepository>() }
+
     single<DataStore<Preferences>> {
         createDataStore()
     }
@@ -90,6 +91,9 @@ val viewModelModule = module {
         )
     }
     viewModelOf(::BankChangerViewModel)
+    viewModelOf(::NewTransferViewModel)
+    viewModelOf(::SignTransferViewModel)
+    viewModelOf(::SuccessTransferViewModel)
 }
 
 val sharedModule = module {

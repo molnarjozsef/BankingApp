@@ -130,4 +130,6 @@
 
     <string name="bank_changer_title">bank changer</string>
     <string name="bank_changer_back_button">back</string>
+
+    <string name="default_currency">HUF</string>
 </resources>
