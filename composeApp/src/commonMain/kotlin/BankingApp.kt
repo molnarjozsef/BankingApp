@@ -2,8 +2,10 @@ import Routes.RouteAccountOpening
 import Routes.RouteAtmFinder
 import Routes.RouteBankChanger
 import Routes.RouteHome
+import Routes.RouteLogin
 import Routes.RouteNewTransfer
 import Routes.RoutePin
+import Routes.RouteProfile
 import Routes.RouteSignTransfer
 import Routes.RouteSuccessTransfer
 import Routes.RouteWelcome
@@ -19,7 +21,9 @@ import features.accountopening.AccountOpeningScreen
 import features.atmfinder.AtmFinderScreen
 import features.bankchanger.BankChangerScreen
 import features.home.HomeScreen
+import features.login.LoginScreen
 import features.pin.PinScreen
+import features.profile.ProfileScreen
 import features.transfer.NewTransferScreen
 import features.transfer.SignTransferScreen
 import features.transfer.SuccessTransferScreen
@@ -95,6 +99,18 @@ fun BankingApp() {
                             navController = navController,
                         )
                     }
+
+                    composable(RouteProfile) {
+                        ProfileScreen(
+                            navController = navController,
+                        )
+                    }
+
+                    composable(RouteLogin) {
+                        LoginScreen(
+                            navController = navController,
+                        )
+                    }
                 }
             }
         }
@@ -111,6 +127,8 @@ object Routes {
     val RouteWelcome = "welcome"
     val RoutePin = "pin"
     val RouteAccountOpening = "accountopening"
+    val RouteLogin = "login"
+    val RouteProfile = "profile"
 
     val RouteHome = "home"
     val RouteDashboard = "dashboard"

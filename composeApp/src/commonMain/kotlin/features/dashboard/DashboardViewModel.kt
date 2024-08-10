@@ -4,18 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import repository.BankingRepository
+import repository.ConfigRepository
+import repository.TransferRepository
 
 class DashboardViewModel(
-    private val repository: BankingRepository,
+    configRepository: ConfigRepository,
+    private val transferRepository: TransferRepository,
 ) : ViewModel() {
 
-    val amount = repository.getCurrentAmount()
+    val amount = transferRepository.getCurrentAmount()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val currentBank = repository.getCurrentBank()
+    val currentBank = configRepository.getCurrentBank()
 
     fun setRecipientEmail(email: String) {
-        repository.setTransferRecipientEmail(email)
+        transferRepository.setTransferRecipientEmail(email)
     }
 }

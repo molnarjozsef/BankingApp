@@ -1,10 +1,10 @@
 package features.products
 
 import androidx.lifecycle.ViewModel
-import repository.BankingRepository
+import repository.ConfigRepository
 
 class ProductsViewModel(
-    repository: BankingRepository,
+    configRepository: ConfigRepository,
 ) : ViewModel() {
-    val currentBank = repository.getCurrentBank()
+    val currentBank = configRepository.getCurrentBank()
 }

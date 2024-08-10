@@ -31,6 +31,7 @@ import theme.dp4
 fun HomeHeader(
     currentBank: BankConfig,
     homeNavController: NavController,
+    appNavController: NavController,
     showMenu: () -> Unit,
 ) {
     val navBackStackEntry by homeNavController.currentBackStackEntryAsState()
@@ -47,7 +48,9 @@ fun HomeHeader(
             title = title,
             containerColor = AppTheme.colors.backgroundColored,
             startButton = { MenuButton(onClick = showMenu) },
-            endButton = { ProfileButton() }
+            endButton = {
+                ProfileButton(onClick = { appNavController.navigate(Routes.RouteProfile) })
+            }
         )
     }
 }
@@ -75,8 +78,10 @@ private fun MenuButton(
 }
 
 @Composable
-private fun ProfileButton() {
-    IconButton(onClick = {}) {
+private fun ProfileButton(
+    onClick: () -> Unit,
+) {
+    IconButton(onClick = onClick) {
         Box(
             modifier = Modifier
                 .size(dp24)

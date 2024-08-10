@@ -4,6 +4,7 @@ import BankConfig
 import DefaultBank
 import Routes.RouteAccountOpening
 import Routes.RouteBankChanger
+import Routes.RouteLogin
 import Routes.RoutePin
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
@@ -70,7 +71,7 @@ fun WelcomeScreen(
         navigateToPinScreen = { navController.navigate(RoutePin) },
         navigateToBankChanger = { navController.navigate(RouteBankChanger) },
         navigateToAccountOpeningScreen = { navController.navigate(RouteAccountOpening) },
-        navigateToLoginScreen = { },
+        navigateToLoginScreen = { navController.navigate(RouteLogin) },
         isLoggedIn = isLoggedIn
     )
 }

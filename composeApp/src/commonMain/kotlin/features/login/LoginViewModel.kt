@@ -1,4 +1,4 @@
-package features.accountopening
+package features.login
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import repository.AuthenticationRepository
 
-class AccountOpeningViewModel(
+class LoginViewModel(
     private val authenticationRepository: AuthenticationRepository,
 ) : ViewModel() {
 
-    private val _accountOpeningSuccessfulEvents = MutableSharedFlow<Any>()
-    val accountOpeningSuccessfulEvents = _accountOpeningSuccessfulEvents.asSharedFlow()
+    private val _loginSuccessfulEvents = MutableSharedFlow<Any>()
+    val loginSuccessfulEvents = _loginSuccessfulEvents.asSharedFlow()
 
     var isLoading: Boolean by mutableStateOf(false)
         private set
@@ -23,7 +23,7 @@ class AccountOpeningViewModel(
     var error: String? by mutableStateOf(null)
         private set
 
-    fun openAccount(
+    fun login(
         email: String,
         password: String,
     ) {
@@ -32,13 +32,13 @@ class AccountOpeningViewModel(
             error = null
 
             try {
-                authenticationRepository.createAccount(
+                authenticationRepository.login(
                     email = email,
                     password = password
                 )
-                _accountOpeningSuccessfulEvents.emit(Any())
+                _loginSuccessfulEvents.emit(Any())
             } catch (e: Exception) {
-                println("Exception in openAccount: $e")
+                println("Exception in login: $e")
                 error = e.message
             } finally {
                 isLoading = false

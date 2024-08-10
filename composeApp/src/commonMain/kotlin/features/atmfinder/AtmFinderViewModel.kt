@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import repository.BankingRepository
+import repository.AtmFinderRepository
 
 class AtmFinderViewModel(
     val permissionsController: PermissionsController,
-    repository: BankingRepository,
+    atmFinderRepository: AtmFinderRepository,
 ) : ViewModel() {
 
     private val _loadingState = MutableStateFlow(LoadingState.Initial)
@@ -25,7 +25,7 @@ class AtmFinderViewModel(
     private val _location = MutableStateFlow<GpsPosition?>(null)
     val location = _location.asStateFlow()
 
-    val atms = repository.getAtms()
+    val atms = atmFinderRepository.getAtms()
 
     init {
         viewModelScope.launch {
@@ -41,7 +41,7 @@ class AtmFinderViewModel(
             )
 
             _loadingState.value = LoadingState.LoadingAtms
-            repository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
+            atmFinderRepository.fetchAtmsIfNeeded(GpsPosition(location.latitude, location.longitude))
 
             _loadingState.value = LoadingState.Success
         }

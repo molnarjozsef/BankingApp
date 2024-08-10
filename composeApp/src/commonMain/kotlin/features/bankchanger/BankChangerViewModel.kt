@@ -4,16 +4,16 @@ import BankConfig
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import repository.BankingRepository
+import repository.ConfigRepository
 
 class BankChangerViewModel(
-    private val repository: BankingRepository,
+    private val configRepository: ConfigRepository,
 ) : ViewModel() {
-    val currentBank = repository.getCurrentBank()
+    val currentBank = configRepository.getCurrentBank()
 
     fun setCurrentBank(bank: BankConfig) {
         viewModelScope.launch {
-            repository.setCurrentBank(bank)
+            configRepository.setCurrentBank(bank)
         }
     }
 }

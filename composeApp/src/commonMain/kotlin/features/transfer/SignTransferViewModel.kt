@@ -10,11 +10,13 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import repository.BankingRepository
-import repository.TransferMoneyResult
+import repository.AuthenticationRepository
+import repository.TransferRepository
+import repository.TransferRepository.TransferMoneyResult
 
 class SignTransferViewModel(
-    private val repository: BankingRepository,
+    private val transferRepository: TransferRepository,
+    authenticationRepository: AuthenticationRepository,
 ) : ViewModel() {
 
     private val _transferSuccessEvents = MutableSharedFlow<Any?>()
@@ -23,13 +25,13 @@ class SignTransferViewModel(
     var error by mutableStateOf<TransferMoneyResult.TransferMoneyError?>(null)
         private set
 
-    val recipientEmail = repository.getTransferRecipientEmail()
+    val recipientEmail = transferRepository.getTransferRecipientEmail()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val amount = repository.getTransferAmount()
+    val amount = transferRepository.getTransferAmount()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val userEmail = repository.getUserEmail()
+    val userEmail = authenticationRepository.getUserEmail()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
     fun startTransferToEmail(
@@ -38,7 +40,7 @@ class SignTransferViewModel(
     ) {
 
         viewModelScope.launch {
-            val result = repository.transferMoney(recipientEmail = recipientEmail, amount = amount)
+            val result = transferRepository.transferMoney(recipientEmail = recipientEmail, amount = amount)
             when (result) {
                 TransferMoneyResult.Success -> _transferSuccessEvents.emit(Any())
                 is TransferMoneyResult.TransferMoneyError -> error = result

@@ -24,7 +24,7 @@ import components.Header
 import components.MainButton
 import components.formatMoney
 import org.koin.compose.viewmodel.koinViewModel
-import repository.TransferMoneyResult
+import repository.TransferRepository.TransferMoneyResult
 import theme.AppTheme
 import theme.dp16
 import theme.dp40

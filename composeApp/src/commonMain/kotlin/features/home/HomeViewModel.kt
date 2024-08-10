@@ -1,10 +1,10 @@
 package features.home
 
 import androidx.lifecycle.ViewModel
-import repository.BankingRepository
+import repository.ConfigRepository
 
 class HomeViewModel(
-    repository: BankingRepository,
+    configRepository: ConfigRepository,
 ) : ViewModel() {
-    val currentBank = repository.getCurrentBank()
+    val currentBank = configRepository.getCurrentBank()
 }

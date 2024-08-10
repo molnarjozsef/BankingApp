@@ -17,8 +17,10 @@ import features.bankchanger.BankChangerViewModel
 import features.dashboard.DashboardViewModel
 import features.extras.ExtrasViewModel
 import features.home.HomeViewModel
+import features.login.LoginViewModel
 import features.pin.PinViewModel
 import features.products.ProductsViewModel
+import features.profile.ProfileViewModel
 import features.transfer.NewTransferViewModel
 import features.transfer.SignTransferViewModel
 import features.transfer.SuccessTransferViewModel
@@ -31,8 +33,14 @@ import org.koin.compose.viewmodel.dsl.viewModel
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import repository.BankingRepository
-import repository.DefaultBankingRepository
+import repository.AtmFinderRepository
+import repository.AuthenticationRepository
+import repository.ConfigRepository
+import repository.integration.DefaultAtmFinderRepository
+import repository.integration.DefaultAuthenticationRepository
+import repository.integration.DefaultConfigRepository
+import repository.integration.DefaultTransferRepository
+import repository.TransferRepository
 import service.BankingService
 import service.createBankingService
 
@@ -64,8 +72,14 @@ val networkModule = module {
 }
 
 val dataModule = module {
-    singleOf(::DefaultBankingRepository)
-    single<BankingRepository> { get<DefaultBankingRepository>() }
+    singleOf(::DefaultAtmFinderRepository)
+    singleOf(::DefaultAuthenticationRepository)
+    singleOf(::DefaultConfigRepository)
+    singleOf(::DefaultTransferRepository)
+    single<ConfigRepository> { get<DefaultConfigRepository>() }
+    single<AtmFinderRepository> { get<DefaultAtmFinderRepository>() }
+    single<AuthenticationRepository> { get<DefaultAuthenticationRepository>() }
+    single<TransferRepository> { get<DefaultTransferRepository>() }
 
     single<DataStore<Preferences>> {
         createDataStore()
@@ -87,13 +101,15 @@ val viewModelModule = module {
     viewModel { (permissionsController: PermissionsController) ->
         AtmFinderViewModel(
             permissionsController = permissionsController,
-            repository = get()
+            atmFinderRepository = get()
         )
     }
     viewModelOf(::BankChangerViewModel)
     viewModelOf(::NewTransferViewModel)
     viewModelOf(::SignTransferViewModel)
     viewModelOf(::SuccessTransferViewModel)
+    viewModelOf(::ProfileViewModel)
+    viewModelOf(::LoginViewModel)
 }
 
 val sharedModule = module {

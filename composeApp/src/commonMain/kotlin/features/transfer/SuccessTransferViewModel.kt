@@ -4,18 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import repository.BankingRepository
+import repository.AuthenticationRepository
+import repository.TransferRepository
 
 class SuccessTransferViewModel(
-    bankingRepository: BankingRepository,
+    authenticationRepository: AuthenticationRepository,
+    transferRepository: TransferRepository,
 ) : ViewModel() {
 
-    val userEmail = bankingRepository.getUserEmail()
+    val userEmail = authenticationRepository.getUserEmail()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val recipientEmail = bankingRepository.getTransferRecipientEmail()
+    val recipientEmail = transferRepository.getTransferRecipientEmail()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
-    val amount = bankingRepository.getTransferAmount()
+    val amount = transferRepository.getTransferAmount()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 }
