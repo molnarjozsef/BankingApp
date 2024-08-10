@@ -12,7 +12,10 @@ import Routes.RouteWelcome
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,76 +43,78 @@ fun BankingApp() {
             BackGestureHandler(
                 navController = navController,
             ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = RouteWelcome,
-                    enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
-                    exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
-                ) {
-                    composable(RouteWelcome) {
-                        WelcomeScreen(
-                            navController = navController,
-                        )
-                    }
+                Box(Modifier.background(AppTheme.colors.backgroundNeutral)) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = RouteWelcome,
+                        enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
+                        exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
+                    ) {
+                        composable(RouteWelcome) {
+                            WelcomeScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RoutePin) {
-                        PinScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RoutePin) {
+                            PinScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteAccountOpening) {
-                        AccountOpeningScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteAccountOpening) {
+                            AccountOpeningScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteHome) {
-                        HomeScreen(
-                            appNavController = navController
-                        )
-                    }
+                        composable(RouteHome) {
+                            HomeScreen(
+                                appNavController = navController
+                            )
+                        }
 
-                    composable(RouteAtmFinder) {
-                        AtmFinderScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteAtmFinder) {
+                            AtmFinderScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteBankChanger) {
-                        BankChangerScreen(
-                            navController = navController
-                        )
-                    }
+                        composable(RouteBankChanger) {
+                            BankChangerScreen(
+                                navController = navController
+                            )
+                        }
 
-                    composable(RouteNewTransfer) {
-                        NewTransferScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteNewTransfer) {
+                            NewTransferScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteSignTransfer) {
-                        SignTransferScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteSignTransfer) {
+                            SignTransferScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteSuccessTransfer) {
-                        SuccessTransferScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteSuccessTransfer) {
+                            SuccessTransferScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteProfile) {
-                        ProfileScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteProfile) {
+                            ProfileScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteLogin) {
-                        LoginScreen(
-                            navController = navController,
-                        )
+                        composable(RouteLogin) {
+                            LoginScreen(
+                                navController = navController,
+                            )
+                        }
                     }
                 }
             }

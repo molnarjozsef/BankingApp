@@ -44,14 +44,12 @@ import components.CloseButton
 import components.Header
 import components.MainButton
 import components.TextField
-import components.TextFieldTitle
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.dp16
 import theme.dp2
 import theme.dp24
-import theme.dp4
 import theme.dp40
 
 @Composable
@@ -129,9 +127,8 @@ fun NewTransferBottomSheetContent(
 @Composable
 private fun AccountNumberInput() {
     Column {
-        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
-        Spacer(Modifier.height(dp4))
         TextField(
+            title = stringResource(Res.string.new_beneficiary_beneficiary_account_number),
             value = "",
             onValueChange = {},
             placeholder = stringResource(Res.string.new_beneficiary_beneficiary_account_number_hint)
@@ -139,9 +136,8 @@ private fun AccountNumberInput() {
 
         Spacer(modifier = Modifier.height(dp24))
 
-        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_account_number))
-        Spacer(Modifier.height(dp4))
         TextField(
+            title = stringResource(Res.string.new_beneficiary_beneficiary_account_number),
             value = "",
             onValueChange = {},
             placeholder = stringResource(Res.string.new_beneficiary_beneficiary_name_hint)
@@ -159,9 +155,8 @@ private fun EmailAddressInput(
     val regex = Regex("^[^@]+@[^@]+\\.[^@]+\$")
 
     Column {
-        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_email_address))
-        Spacer(Modifier.height(dp4))
         TextField(
+            title = stringResource(Res.string.new_beneficiary_beneficiary_email_address),
             value = email,
             onValueChange = { email = it },
             placeholder = stringResource(Res.string.new_beneficiary_beneficiary_email_address_hint)
@@ -177,9 +172,11 @@ private fun EmailAddressInput(
 @Composable
 private fun PhoneNumberInput() {
     Column {
-        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_phone_number))
-        Spacer(Modifier.height(dp4))
-        TextField("", {})
+        TextField(
+            title = stringResource(Res.string.new_beneficiary_beneficiary_phone_number),
+            value = "",
+            onValueChange = {}
+        )
 
         ContinueButtonSection(onClick = {})
     }
@@ -188,9 +185,11 @@ private fun PhoneNumberInput() {
 @Composable
 private fun TaxNumberInput() {
     Column {
-        TextFieldTitle(text = stringResource(Res.string.new_beneficiary_beneficiary_tax_number))
-        Spacer(Modifier.height(dp4))
-        TextField("", {})
+        TextField(
+            title = stringResource(Res.string.new_beneficiary_beneficiary_tax_number),
+            value = "",
+            onValueChange = {}
+        )
 
         ContinueButtonSection(onClick = {})
     }

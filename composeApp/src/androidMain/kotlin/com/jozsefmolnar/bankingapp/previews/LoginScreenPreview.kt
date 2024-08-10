@@ -3,17 +3,17 @@ package com.jozsefmolnar.bankingapp.previews
 import DefaultBank
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import features.accountopening.AccountOpeningScreenContent
+import features.login.LoginScreenContent
 import theme.AppTheme
 
 @Preview(showBackground = true)
 @Composable
-fun AccountOpeningScreenPreview() {
+fun LoginScreenPreview() {
     AppTheme {
-        AccountOpeningScreenContent(
+        LoginScreenContent(
             currentBank = DefaultBank,
-            error = "error",
-            openAccount = { _, _ -> },
+            error = null,
+            login = { _, _ -> },
             navigateUp = { },
         )
     }

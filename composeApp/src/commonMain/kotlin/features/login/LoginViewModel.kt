@@ -6,16 +6,23 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import repository.AuthenticationRepository
+import repository.ConfigRepository
 
 class LoginViewModel(
     private val authenticationRepository: AuthenticationRepository,
+    configRepository: ConfigRepository,
 ) : ViewModel() {
 
     private val _loginSuccessfulEvents = MutableSharedFlow<Any>()
     val loginSuccessfulEvents = _loginSuccessfulEvents.asSharedFlow()
+
+    val currentBank = configRepository.getCurrentBank()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
     var isLoading: Boolean by mutableStateOf(false)
         private set

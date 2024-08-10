@@ -45,7 +45,6 @@ import components.BackButton
 import components.Header
 import components.MainButton
 import components.TextField
-import components.TextFieldTitle
 import components.formatMoney
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -96,25 +95,23 @@ fun NewTransferScreenContent(
         }
     ) { contentPadding ->
         Column(
-            modifier = Modifier.padding(contentPadding)
+            modifier = Modifier
+                .padding(contentPadding)
                 .fillMaxSize()
                 .imePadding()
                 .verticalScroll(rememberScrollState())
                 .padding(dp16)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                AccountCard(currentBank, currentAmount, Modifier.weight(2f))
-                Icon(
-                    painter = rememberVectorPainter(Icons.AutoMirrored.Rounded.ArrowForward),
-                    tint = AppTheme.colors.textDark,
-                    contentDescription = null,
-                    modifier = Modifier.size(dp32).weight(1f),
-                )
-                RecipientCard(recipientEmail, Modifier.weight(2f))
-            }
+            TransferParticipantsSection(
+                currentBank = currentBank,
+                currentAmount = currentAmount,
+                recipientEmail = recipientEmail
+            )
+
             Spacer(Modifier.height(dp16))
-            TextFieldTitle("amount")
+
             TextField(
+                title = "amount",
                 value = amount.toString().dropWhile { it == '0' },
                 onValueChange = { newValue ->
                     amount = newValue
@@ -132,6 +129,28 @@ fun NewTransferScreenContent(
                 onClick = { onContinueClick(amount) },
             )
         }
+    }
+}
+
+@Composable
+private fun TransferParticipantsSection(
+    currentBank: BankConfig?,
+    currentAmount: Int?,
+    recipientEmail: String?,
+){
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        AccountCard(
+            currentBank = currentBank,
+            currentAmount = currentAmount,
+            modifier = Modifier.weight(2f)
+        )
+        Icon(
+            painter = rememberVectorPainter(Icons.AutoMirrored.Rounded.ArrowForward),
+            tint = AppTheme.colors.textDark,
+            contentDescription = null,
+            modifier = Modifier.size(dp32).weight(1f),
+        )
+        RecipientCard(recipientEmail, Modifier.weight(2f))
     }
 }
 

@@ -85,8 +85,7 @@ fun FullScreenLoading(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                AppTheme.colors.backgroundNeutral
-                    .apply { if (isOverlay) copy(alpha = 0.5f) }
+                AppTheme.colors.backgroundNeutral.copy(alpha = if (isOverlay) 0.9f else 1f)
             ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
