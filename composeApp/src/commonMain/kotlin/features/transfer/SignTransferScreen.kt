@@ -1,5 +1,6 @@
 package features.transfer
 
+import Routes.RouteHome
 import Routes.RouteSuccessTransfer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -54,7 +55,9 @@ fun SignTransferScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.transferSuccessEvents.collect {
-            navController.navigate(RouteSuccessTransfer)
+            navController.navigate(RouteSuccessTransfer){
+                popUpTo(RouteHome)
+            }
         }
     }
 

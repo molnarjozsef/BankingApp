@@ -52,9 +52,7 @@ fun LoginScreen(
     LaunchedEffect(viewModel) {
         viewModel.loginSuccessfulEvents.collect {
             navController.navigate(Routes.RouteHome) {
-                popUpTo(Routes.RouteWelcome) {
-                    inclusive = false
-                }
+                popUpTo(Routes.RouteWelcome)
             }
         }
     }

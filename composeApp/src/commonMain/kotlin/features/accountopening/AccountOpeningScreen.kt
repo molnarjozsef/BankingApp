@@ -52,9 +52,7 @@ fun AccountOpeningScreen(
     LaunchedEffect(viewModel) {
         viewModel.accountOpeningSuccessfulEvents.collect {
             navController.navigate(Routes.RouteHome) {
-                popUpTo(Routes.RouteWelcome) {
-                    inclusive = false
-                }
+                popUpTo(Routes.RouteWelcome)
             }
         }
     }

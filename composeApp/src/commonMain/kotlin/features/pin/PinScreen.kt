@@ -56,9 +56,7 @@ fun PinScreen(
     val biometricResult = viewModel.biometricResult.collectAsState().value
     val navigateToHome = {
         navController.navigate(route = Routes.RouteHome) {
-            popUpTo(Routes.RouteWelcome) {
-                inclusive = false
-            }
+            popUpTo(Routes.RouteWelcome)
         }
     }
 

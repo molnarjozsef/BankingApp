@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -25,11 +24,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.kuvik
+import bankingapp.composeapp.generated.resources.kuvik_logo
 import bankingapp.composeapp.generated.resources.success_transfer_back_to_dashboard
 import bankingapp.composeapp.generated.resources.success_transfer_heading
 import bankingapp.composeapp.generated.resources.success_transfer_title
@@ -181,10 +182,18 @@ fun SuccessTransferScreenContent(
             Spacer(modifier = Modifier.height(dp40))
 
             Image(
+                painter = painterResource(Res.drawable.kuvik_logo),
+                modifier = Modifier
+                    .fillMaxWidth(KuvikPaymentLogoWidthRatio)
+                    .align(Alignment.CenterHorizontally),
+                contentDescription = null,
+                contentScale = ContentScale.FillWidth,
+            )
+            Image(
                 painter = painterResource(Res.drawable.kuvik),
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .width(KuvikPaymentLogoWidth),
+                    .fillMaxWidth(KuvikPaymentIllustrationWidthRatio)
+                    .align(Alignment.CenterHorizontally),
                 contentDescription = null,
             )
         }
@@ -192,4 +201,5 @@ fun SuccessTransferScreenContent(
 }
 
 private val SuccessCheckmarkSize = 160.dp
-private val KuvikPaymentLogoWidth = 160.dp
+private const val KuvikPaymentLogoWidthRatio = 0.6f
+private const val KuvikPaymentIllustrationWidthRatio = 0.5f
