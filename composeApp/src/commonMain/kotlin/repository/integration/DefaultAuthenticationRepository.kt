@@ -41,6 +41,5 @@ class DefaultAuthenticationRepository(
     override suspend fun logout() {
         firebaseAuth.signOut()
     }
-
 }
 

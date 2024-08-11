@@ -37,6 +37,7 @@ data class Colors(
 
     val success: Color,
     val error: Color,
+    val transaction: Color,
 )
 
 val lightColors = Colors(
@@ -69,7 +70,8 @@ val lightColors = Colors(
     productGreen = Color(0xFF298883),
 
     success = Color(0xFF9BCB65),
-    error = Color(0xFFD64041)
+    error = Color(0xFFD64041),
+    transaction = Color(0xFFF79D13),
 )
 
 val darkColors = lightColors.copy(

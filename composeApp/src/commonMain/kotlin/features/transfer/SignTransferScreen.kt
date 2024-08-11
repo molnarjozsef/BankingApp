@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,14 +20,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.sign_transfer_sign_transaction
+import bankingapp.composeapp.generated.resources.sign_transfer_title
+import bankingapp.composeapp.generated.resources.transfer_instant
+import bankingapp.composeapp.generated.resources.transfer_payee_email
+import bankingapp.composeapp.generated.resources.transfer_payee_information
+import bankingapp.composeapp.generated.resources.transfer_payer_email
+import bankingapp.composeapp.generated.resources.transfer_payer_information
 import components.BackButton
 import components.Header
 import components.MainButton
+import components.TransactionTypeSection
+import components.TransferProfileSection
 import components.formatMoney
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import repository.TransferRepository.TransferMoneyResult
 import theme.AppTheme
 import theme.dp16
+import theme.dp24
 import theme.dp40
 
 @Composable
@@ -72,7 +85,7 @@ fun SignTransferScreenContent(
     Scaffold(
         topBar = {
             Header(
-                title = "sign transfer",
+                title = stringResource(Res.string.sign_transfer_title),
                 startButton = { BackButton(navigateUp) },
             )
         },
@@ -80,10 +93,14 @@ fun SignTransferScreenContent(
             Box(
                 modifier = Modifier
                     .background(AppTheme.colors.backgroundNeutral)
-                    .padding(dp16)
+                    .navigationBarsPadding()
+                    .padding(
+                        horizontal = dp40,
+                        vertical = dp24
+                    )
             ) {
                 MainButton(
-                    text = "sign transfer",
+                    text = stringResource(Res.string.sign_transfer_sign_transaction),
                     onClick = signTransfer,
                 )
             }
@@ -96,6 +113,10 @@ fun SignTransferScreenContent(
                 .verticalScroll(rememberScrollState())
                 .padding(dp16)
         ) {
+            TransactionTypeSection()
+
+            Spacer(Modifier.height(dp16))
+
             recipientEmail?.let {
                 Text(
                     text = recipientEmail,
@@ -103,7 +124,14 @@ fun SignTransferScreenContent(
                     fontSize = 17.sp,
                 )
             }
+            Text(
+                text = stringResource(Res.string.transfer_instant),
+                fontSize = 12.sp,
+                color = AppTheme.colors.textDarker,
+            )
+
             Spacer(modifier = Modifier.height(dp16))
+
             amount?.let {
                 Text(
                     text = formatMoney(amount),
@@ -121,17 +149,18 @@ fun SignTransferScreenContent(
 
             recipientEmail?.let {
                 Spacer(modifier = Modifier.height(dp40))
-                components.TransferProfileSection(
-                    sectionTitle = "recipient",
-                    contentTitle = "email",
+                TransferProfileSection(
+                    sectionTitle = stringResource(Res.string.transfer_payee_information),
+                    contentTitle = stringResource(Res.string.transfer_payee_email),
                     contentDescription = recipientEmail,
                 )
             }
+
             userEmail?.let {
                 Spacer(modifier = Modifier.height(dp40))
-                components.TransferProfileSection(
-                    sectionTitle = "sender",
-                    contentTitle = "source",
+                TransferProfileSection(
+                    sectionTitle = stringResource(Res.string.transfer_payer_information),
+                    contentTitle = stringResource(Res.string.transfer_payer_email),
                     contentDescription = userEmail,
                 )
             }
@@ -139,3 +168,4 @@ fun SignTransferScreenContent(
         }
     }
 }
+

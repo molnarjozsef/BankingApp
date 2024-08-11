@@ -204,6 +204,7 @@ private fun ColumnScope.ContinueButtonSection(
     Spacer(Modifier.weight(1f))
     Spacer(Modifier.height(dp16))
     MainButton(
+        modifier = Modifier.padding(horizontal = dp24),
         text = stringResource(Res.string.new_beneficiary_next_button),
         onClick = onClick,
         enabled = enabled,

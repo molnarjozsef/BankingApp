@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import theme.AppTheme
 import theme.dp16
@@ -53,8 +54,9 @@ internal fun TransferProfileSection(
             Column(verticalArrangement = Arrangement.spacedBy(dp4)) {
                 Text(
                     text = contentTitle,
-                    color = AppTheme.colors.textDark,
+                    color = AppTheme.colors.textLight,
                     fontSize = 14.sp,
+                    fontWeight = FontWeight.Light,
                 )
                 Text(
                     text = contentDescription,

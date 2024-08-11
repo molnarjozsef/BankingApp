@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome_qr_button">%1$s e-bank kódbeolvasás</string>
-    <string name="welcome_login_button">%1$s mobilbank belépés</string>
+    <string name="welcome_authenticate_button">%1$s mobilbank belépés</string>
+    <string name="welcome_account_opening_button">%1$s ügyfél szeretnék lenni</string>
+    <string name="welcome_login_button">%1$s ügyfél vagyok, aktiválok</string>
+
+    <string name="login_title">%1$s mobilbank aktiválása</string>
+    <string name="login_heading">add meg az e-mail címed és jelszavad</string>
+    <string name="login_email">%1$s mobilbank e-mail cím</string>
+    <string name="login_password">%1$s mobilbank jelszó</string>
+    <string name="login_continue">tovább</string>
+    <string name="login_loading">bejelentkezés</string>
+
+    <string name="account_opening_title">%1$s számlanyitás</string>
+    <string name="account_opening_heading">add meg az e-mail címed és válassz jelszót</string>
+    <string name="account_opening_email">e-mail cím</string>
+    <string name="account_opening_password">jelszó</string>
+    <string name="account_opening_continue">tovább</string>
+    <string name="account_opening_loading">számla nyitása</string>
 
     <string name="pin_title">azonosítás</string>
     <string name="pin_heading">add meg az mPIN kódodat</string>
@@ -97,6 +113,10 @@
 
     <string name="extras_purchase_history">előző vásárlásaim</string>
 
+    <string name="profile_title">profilom</string>
+    <string name="profile_logout">kijelentkezés</string>
+    <string name="profile_logout_loading">kijelentkezés</string>
+
     <string name="new_beneficiary_title">új kedvezményezett</string>
 
     <string name="new_beneficiary_account_number_tab">számlaszám</string>
@@ -130,6 +150,27 @@
 
     <string name="bank_changer_title">bankválasztó</string>
     <string name="bank_changer_back_button">vissza</string>
+
+    <string name="new_transfer_title">forintátutalás</string>
+    <string name="new_transfer_payer">megbízó</string>
+    <string name="new_transfer_payee">kedvezményezett</string>
+    <string name="new_transfer_amount">összeg</string>
+    <string name="new_transfer_sign_transaction">megbízás aláírása</string>
+
+    <string name="sign_transfer_title">aláírás</string>
+    <string name="sign_transfer_sign_transaction">aláírom</string>
+
+    <string name="success_transfer_title">visszaigazolás</string>
+    <string name="success_transfer_heading">sikeres forintátutalás</string>
+    <string name="success_transfer_back_to_dashboard">vissza a kezdőlapra</string>
+
+    <string name="transfer_transaction_type">tranzakció típusa</string>
+    <string name="transfer_huf_payment">forintátutalás</string>
+    <string name="transfer_instant">azonnali</string>
+    <string name="transfer_payee_information">kedvezményezett adatai</string>
+    <string name="transfer_payee_email">kedvezményezett e-mail címe</string>
+    <string name="transfer_payer_information">megbízó adatai</string>
+    <string name="transfer_payer_email">megbízó e-mail címe</string>
 
     <string name="default_currency">Ft</string>
 </resources>

@@ -25,7 +25,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
-import bankingapp.composeapp.generated.resources.pin_title
+import bankingapp.composeapp.generated.resources.account_opening_continue
+import bankingapp.composeapp.generated.resources.account_opening_email
+import bankingapp.composeapp.generated.resources.account_opening_heading
+import bankingapp.composeapp.generated.resources.account_opening_loading
+import bankingapp.composeapp.generated.resources.account_opening_password
+import bankingapp.composeapp.generated.resources.account_opening_title
 import components.BackButton
 import components.Header
 import components.MainButton
@@ -46,7 +51,11 @@ fun AccountOpeningScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.accountOpeningSuccessfulEvents.collect {
-            navController.navigate(Routes.RouteHome)
+            navController.navigate(Routes.RouteHome) {
+                popUpTo(Routes.RouteWelcome) {
+                    inclusive = false
+                }
+            }
         }
     }
 
@@ -66,7 +75,7 @@ fun AccountOpeningScreen(
 
         if (viewModel.isLoading) {
             FullScreenLoading(
-                text = "registration in progress",
+                text = stringResource(Res.string.account_opening_loading),
                 isOverlay = true,
             )
         }
@@ -82,10 +91,12 @@ fun AccountOpeningScreenContent(
 ) {
     Scaffold(
         topBar = {
-            Header(
-                title = stringResource(Res.string.pin_title),
-                startButton = { BackButton(onClick = navigateUp) },
-            )
+            currentBank?.let {
+                Header(
+                    title = stringResource(Res.string.account_opening_title, currentBank),
+                    startButton = { BackButton(onClick = navigateUp) },
+                )
+            }
         }
     ) { contentPadding ->
         Column(
@@ -100,7 +111,7 @@ fun AccountOpeningScreenContent(
             var password by rememberSaveable { mutableStateOf("") }
 
             Text(
-                text = "add meg az e-mail címed és jelszavad",
+                text = stringResource(Res.string.account_opening_heading),
                 color = AppTheme.colors.textDark,
                 fontSize = 22.sp,
             )
@@ -108,19 +119,17 @@ fun AccountOpeningScreenContent(
             Spacer(Modifier.height(dp24))
 
             TextField(
-                title = "${currentBank?.bankName} e-bank username",
+                title = stringResource(Res.string.account_opening_email),
                 value = email,
                 onValueChange = { email = it },
-                placeholder = "email"
             )
 
             Spacer(Modifier.height(dp16))
 
             TextField(
-                title = "${currentBank?.bankName} e-bank password",
+                title = stringResource(Res.string.account_opening_password),
                 value = password,
                 onValueChange = { password = it },
-                placeholder = "password",
                 visualTransformation = PasswordVisualTransformation(),
             )
 
@@ -138,7 +147,7 @@ fun AccountOpeningScreenContent(
 
             MainButton(
                 modifier = Modifier.padding(horizontal = dp24),
-                text = "register",
+                text = stringResource(Res.string.account_opening_continue),
                 onClick = { openAccount(email, password) }
             )
         }

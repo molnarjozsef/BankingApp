@@ -41,6 +41,11 @@ import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.dashboard_debit_account_name
 import bankingapp.composeapp.generated.resources.default_currency
+import bankingapp.composeapp.generated.resources.new_transfer_amount
+import bankingapp.composeapp.generated.resources.new_transfer_payee
+import bankingapp.composeapp.generated.resources.new_transfer_payer
+import bankingapp.composeapp.generated.resources.new_transfer_sign_transaction
+import bankingapp.composeapp.generated.resources.new_transfer_title
 import components.BackButton
 import components.Header
 import components.MainButton
@@ -51,7 +56,9 @@ import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.DefaultCardElevation
 import theme.dp16
+import theme.dp24
 import theme.dp32
+import theme.dp4
 import theme.dp8
 
 @Composable
@@ -89,7 +96,7 @@ fun NewTransferScreenContent(
     Scaffold(
         topBar = {
             Header(
-                title = "new transfer",
+                title = stringResource(Res.string.new_transfer_title),
                 startButton = { BackButton(navigateUp) }
             )
         }
@@ -111,7 +118,7 @@ fun NewTransferScreenContent(
             Spacer(Modifier.height(dp16))
 
             TextField(
-                title = "amount",
+                title = stringResource(Res.string.new_transfer_amount),
                 value = amount.toString().dropWhile { it == '0' },
                 onValueChange = { newValue ->
                     amount = newValue
@@ -125,7 +132,10 @@ fun NewTransferScreenContent(
             Spacer(Modifier.height(dp16))
             Spacer(Modifier.weight(1f))
             MainButton(
-                text = "continue",
+                modifier = Modifier
+                    .padding(horizontal = dp24)
+                    .padding(bottom = dp8),
+                text = stringResource(Res.string.new_transfer_sign_transaction),
                 onClick = { onContinueClick(amount) },
             )
         }
@@ -137,9 +147,9 @@ private fun TransferParticipantsSection(
     currentBank: BankConfig?,
     currentAmount: Int?,
     recipientEmail: String?,
-){
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        AccountCard(
+        PayerCard(
             currentBank = currentBank,
             currentAmount = currentAmount,
             modifier = Modifier.weight(2f)
@@ -150,17 +160,18 @@ private fun TransferParticipantsSection(
             contentDescription = null,
             modifier = Modifier.size(dp32).weight(1f),
         )
-        RecipientCard(recipientEmail, Modifier.weight(2f))
+        PayeeCard(recipientEmail, Modifier.weight(2f))
     }
 }
 
 @Composable
-private fun AccountCard(
+private fun PayerCard(
     currentBank: BankConfig?,
     currentAmount: Int?,
     modifier: Modifier = Modifier,
 ) {
     TransferParticipantCard(
+        participantName = stringResource(Res.string.new_transfer_payer),
         modifier = modifier,
         color = AppTheme.colors.main,
     ) {
@@ -186,11 +197,12 @@ private fun AccountCard(
 }
 
 @Composable
-private fun RecipientCard(
+private fun PayeeCard(
     recipientEmail: String?,
     modifier: Modifier = Modifier,
 ) {
     TransferParticipantCard(
+        participantName = stringResource(Res.string.new_transfer_payee),
         modifier = modifier,
         color = AppTheme.colors.cardSilver,
     ) {
@@ -209,32 +221,41 @@ private fun RecipientCard(
 
 @Composable
 private fun TransferParticipantCard(
+    participantName: String,
     color: Color,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    Card(
-        modifier = modifier
-            .aspectRatio(0.8f),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = DefaultCardElevation),
-        colors = CardDefaults.cardColors(
-            containerColor = AppTheme.colors.surfaceNeutralOnColored,
+    Column(modifier = modifier) {
+        Text(
+            text = participantName,
+            color = AppTheme.colors.textDark,
+            letterSpacing = 0.sp,
+            fontSize = 14.sp,
         )
-    ) {
-        Column {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(3f)
-                    .background(color)
+        Spacer(Modifier.height(dp4))
+        Card(
+            modifier = Modifier.aspectRatio(0.8f),
+            elevation = CardDefaults.elevatedCardElevation(defaultElevation = DefaultCardElevation),
+            colors = CardDefaults.cardColors(
+                containerColor = AppTheme.colors.surfaceNeutralOnColored,
             )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(2f)
-                    .padding(dp8)
-            ) {
-                content()
+        ) {
+            Column {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(3f)
+                        .background(color)
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(2f)
+                        .padding(dp8)
+                ) {
+                    content()
+                }
             }
         }
     }

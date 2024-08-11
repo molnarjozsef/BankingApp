@@ -14,7 +14,7 @@ fun NewTransferScreenPreview() {
             currentBank = DefaultBank,
             currentAmount = 1_234_567,
             recipientEmail = "test@email.com",
-            onContinueClick = {  },
+            onContinueClick = { },
             navigateUp = { },
         )
     }

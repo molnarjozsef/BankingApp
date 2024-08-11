@@ -24,11 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import bankingapp.composeapp.generated.resources.Res
+import bankingapp.composeapp.generated.resources.login_continue
+import bankingapp.composeapp.generated.resources.login_email
+import bankingapp.composeapp.generated.resources.login_heading
+import bankingapp.composeapp.generated.resources.login_loading
+import bankingapp.composeapp.generated.resources.login_password
+import bankingapp.composeapp.generated.resources.login_title
 import components.BackButton
 import components.Header
 import components.MainButton
 import components.TextField
 import features.atmfinder.FullScreenLoading
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
@@ -43,7 +51,11 @@ fun LoginScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.loginSuccessfulEvents.collect {
-            navController.navigate(Routes.RouteHome)
+            navController.navigate(Routes.RouteHome) {
+                popUpTo(Routes.RouteWelcome) {
+                    inclusive = false
+                }
+            }
         }
     }
 
@@ -62,7 +74,7 @@ fun LoginScreen(
 
         if (viewModel.isLoading) {
             FullScreenLoading(
-                text = "login in progress",
+                text = stringResource(Res.string.login_loading),
                 isOverlay = true,
             )
         }
@@ -81,10 +93,12 @@ fun LoginScreenContent(
 
     Scaffold(
         topBar = {
-            Header(
-                title = "login",
-                startButton = { BackButton(onClick = navigateUp) },
-            )
+            currentBank?.let {
+                Header(
+                    title = stringResource(Res.string.login_title, currentBank),
+                    startButton = { BackButton(onClick = navigateUp) },
+                )
+            }
         }
     ) { contentPadding ->
         Column(
@@ -96,7 +110,7 @@ fun LoginScreenContent(
                 .padding(dp16)
         ) {
             Text(
-                text = "add meg az e-mail címed és jelszavad",
+                text = stringResource(Res.string.login_heading),
                 color = AppTheme.colors.textDark,
                 fontSize = 22.sp,
             )
@@ -104,19 +118,17 @@ fun LoginScreenContent(
             Spacer(Modifier.height(dp24))
 
             TextField(
-                title = "${currentBank?.bankName} e-bank username",
+                title = currentBank?.bankName?.let { bankName -> stringResource(Res.string.login_email, bankName) },
                 value = email,
                 onValueChange = { email = it },
-                placeholder = "email"
             )
 
             Spacer(Modifier.height(dp16))
 
             TextField(
-                title = "${currentBank?.bankName} e-bank password",
+                title = currentBank?.bankName?.let { bankName -> stringResource(Res.string.login_password, bankName) },
                 value = password,
                 onValueChange = { password = it },
-                placeholder = "password",
                 visualTransformation = PasswordVisualTransformation(),
             )
 
@@ -134,7 +146,7 @@ fun LoginScreenContent(
 
             MainButton(
                 modifier = Modifier.padding(horizontal = dp24),
-                text = "login",
+                text = stringResource(Res.string.login_continue),
                 onClick = { login(email, password) }
             )
         }

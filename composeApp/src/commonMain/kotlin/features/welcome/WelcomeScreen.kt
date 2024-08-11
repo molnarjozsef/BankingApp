@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.login_arrows
+import bankingapp.composeapp.generated.resources.welcome_account_opening_button
+import bankingapp.composeapp.generated.resources.welcome_authenticate_button
 import bankingapp.composeapp.generated.resources.welcome_login_button
 import bankingapp.composeapp.generated.resources.welcome_qr_button
 import components.SecondaryButton
@@ -115,6 +117,7 @@ fun WelcomeScreenContent(
                 )
 
                 false -> NotLoggedInButtons(
+                    currentBank = currentBank,
                     navigateToAccountOpeningScreen = navigateToAccountOpeningScreen,
                     navigateToLoginScreen = navigateToLoginScreen
                 )
@@ -125,6 +128,7 @@ fun WelcomeScreenContent(
     }
 }
 
+@Suppress("UnusedReceiverParameter")
 @Composable
 private fun ColumnScope.LoggedInButtons(
     currentBank: BankConfig,
@@ -138,25 +142,26 @@ private fun ColumnScope.LoggedInButtons(
     )
 
     SecondaryButton(
-        text = stringResource(Res.string.welcome_login_button, currentBank.bankName),
+        text = stringResource(Res.string.welcome_authenticate_button, currentBank.bankName),
         onClick = navigateToPinScreen,
     )
 }
 
+@Suppress("UnusedReceiverParameter")
 @Composable
-private fun NotLoggedInButtons(
+private fun ColumnScope.NotLoggedInButtons(
+    currentBank: BankConfig,
     navigateToAccountOpeningScreen: () -> Unit,
     navigateToLoginScreen: () -> Unit,
 ) {
     TertiaryButton(
-        text = "ACCOUNT OPENING",
-        icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
+        text = stringResource(Res.string.welcome_account_opening_button, currentBank),
         textColor = AppTheme.colors.contentOnMainBackground,
         onClick = navigateToAccountOpeningScreen
     )
 
     SecondaryButton(
-        text = "LOGIN",
+        text = stringResource(Res.string.welcome_login_button, currentBank),
         onClick = navigateToLoginScreen,
     )
 }
