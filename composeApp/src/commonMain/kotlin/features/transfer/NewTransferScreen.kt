@@ -178,7 +178,7 @@ private fun PayerCard(
         Column {
             currentBank?.let {
                 Text(
-                    text = stringResource(Res.string.dashboard_debit_account_name, currentBank.bankName),
+                    text = stringResource(Res.string.dashboard_debit_account_name, currentBank),
                     color = AppTheme.colors.textDark,
                     maxLines = 1,
                     letterSpacing = 0.sp,

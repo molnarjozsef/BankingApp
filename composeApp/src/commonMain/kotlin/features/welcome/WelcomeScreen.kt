@@ -135,14 +135,14 @@ private fun ColumnScope.LoggedInButtons(
     navigateToPinScreen: () -> Unit,
 ) {
     TertiaryButton(
-        text = stringResource(Res.string.welcome_qr_button, currentBank.bankName),
+        text = stringResource(Res.string.welcome_qr_button, currentBank),
         icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
         textColor = AppTheme.colors.contentOnMainBackground,
         onClick = {}
     )
 
     SecondaryButton(
-        text = stringResource(Res.string.welcome_authenticate_button, currentBank.bankName),
+        text = stringResource(Res.string.welcome_authenticate_button, currentBank),
         onClick = navigateToPinScreen,
     )
 }

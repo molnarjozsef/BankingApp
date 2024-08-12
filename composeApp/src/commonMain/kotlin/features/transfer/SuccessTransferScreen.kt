@@ -53,6 +53,7 @@ import theme.dp16
 import theme.dp24
 import theme.dp32
 import theme.dp40
+import theme.dp8
 
 @Composable
 fun SuccessTransferScreen(
@@ -189,6 +190,7 @@ fun SuccessTransferScreenContent(
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
             )
+            Spacer(modifier = Modifier.height(dp8))
             Image(
                 painter = painterResource(Res.drawable.kuvik),
                 modifier = Modifier

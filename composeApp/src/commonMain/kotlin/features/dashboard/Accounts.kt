@@ -48,21 +48,21 @@ fun Accounts(
         item {
             Account(
                 money = money,
-                accountName = stringResource(Res.string.dashboard_debit_account_name, currentBank.bankName),
+                accountName = stringResource(Res.string.dashboard_debit_account_name, currentBank),
                 color = AppTheme.colors.main
             )
         }
         item {
             Account(
                 money = 0,
-                accountName = stringResource(Res.string.dashboard_credit_account_name, currentBank.bankName),
+                accountName = stringResource(Res.string.dashboard_credit_account_name, currentBank),
                 color = AppTheme.colors.productOrange
             )
         }
         item {
             Account(
                 money = 0,
-                accountName = stringResource(Res.string.dashboard_savings_account_name, currentBank.bankName),
+                accountName = stringResource(Res.string.dashboard_savings_account_name, currentBank),
                 color = AppTheme.colors.productGreen
             )
         }

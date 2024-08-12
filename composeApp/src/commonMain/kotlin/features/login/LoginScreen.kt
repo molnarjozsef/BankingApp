@@ -116,7 +116,7 @@ fun LoginScreenContent(
             Spacer(Modifier.height(dp24))
 
             TextField(
-                title = currentBank?.bankName?.let { bankName -> stringResource(Res.string.login_email, bankName) },
+                title = currentBank?.let { stringResource(Res.string.login_email, currentBank) },
                 value = email,
                 onValueChange = { email = it },
             )
@@ -124,7 +124,7 @@ fun LoginScreenContent(
             Spacer(Modifier.height(dp16))
 
             TextField(
-                title = currentBank?.bankName?.let { bankName -> stringResource(Res.string.login_password, bankName) },
+                title = currentBank?.let { stringResource(Res.string.login_password, currentBank) },
                 value = password,
                 onValueChange = { password = it },
                 visualTransformation = PasswordVisualTransformation(),

@@ -39,7 +39,7 @@ fun HomeHeader(
     val title = when (currentDestination?.route) {
         Routes.RouteDashboard -> stringResource(Res.string.dashboard_title)
         Routes.RouteProducts -> stringResource(Res.string.products_title)
-        Routes.RouteExtras -> stringResource(Res.string.extras_title, currentBank.bankName)
+        Routes.RouteExtras -> stringResource(Res.string.extras_title, currentBank)
         else -> null
     }
 

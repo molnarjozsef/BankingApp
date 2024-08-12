@@ -129,6 +129,6 @@ sealed class BottomNavigationRoute(
         selectedIcon = Icons.Filled.ConfirmationNumber,
         unselectedIcon = Icons.Outlined.ConfirmationNumber,
         route = Routes.RouteExtras,
-        label = { stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank.bankName) },
+        label = { stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank) },
     )
 }
