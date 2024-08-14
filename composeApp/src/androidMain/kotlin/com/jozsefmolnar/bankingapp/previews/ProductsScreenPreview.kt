@@ -4,11 +4,14 @@ import BankConfig
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import features.products.ProductsScreenContent
+import theme.AppTheme
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ProductsScreenPreview() {
-    ProductsScreenContent(
-        currentBank = BankConfig.Otp,
-    )
+    AppTheme {
+        ProductsScreenContent(
+            currentBank = BankConfig.Otp,
+        )
+    }
 }

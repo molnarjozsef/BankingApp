@@ -86,6 +86,7 @@ geo = { module = "dev.icerock.moko:geo", version.ref = "geo" }
 geo-compose = { module = "dev.icerock.moko:geo-compose", version.ref = "geo" }
 
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase" }
+firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebase" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

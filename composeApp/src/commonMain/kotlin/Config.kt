@@ -1,4 +1,3 @@
-
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.logo_erste
 import bankingapp.composeapp.generated.resources.logo_granit
@@ -8,12 +7,8 @@ import bankingapp.composeapp.generated.resources.logo_raiffeisen
 import bankingapp.composeapp.generated.resources.logo_revolut
 import org.jetbrains.compose.resources.DrawableResource
 
-object Config {
-     var currentBank = BankConfig.Otp
-}
-
 enum class BankConfig(
-    val bankName: String,
+    private val bankName: String,
     val iconRes: DrawableResource,
 ) {
     Otp(
@@ -39,7 +34,11 @@ enum class BankConfig(
     Granit(
         bankName = "Gránit",
         iconRes = Res.drawable.logo_granit
-    )
+    );
+
+    override fun toString(): String {
+        return bankName
+    }
 }
 
 val DefaultBank = BankConfig.Otp

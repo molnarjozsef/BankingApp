@@ -171,7 +171,7 @@ private fun Loans(
         title = stringResource(Res.string.products_loans),
         products = listOf(
             Product(
-                name = stringResource(Res.string.products_loans_personal_loan, currentBank.bankName),
+                name = stringResource(Res.string.products_loans_personal_loan, currentBank),
                 icon = Icons.Outlined.Payments,
             )
         ),
@@ -188,30 +188,30 @@ private fun Insurances(
         title = stringResource(Res.string.products_insurances),
         products = listOf(
             Product(
-                name = stringResource(Res.string.products_insurances_travel, currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_travel, currentBank),
                 icon = Icons.Outlined.Flight,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_home, currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_home, currentBank),
                 icon = Icons.Outlined.Home,
             ),
             Product(
                 name = stringResource(
                     Res.string.products_insurances_motor_third_party_liability,
-                    currentBank.bankName
+                    currentBank
                 ),
                 icon = Icons.Outlined.CarCrash,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_casco, currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_casco, currentBank),
                 icon = Icons.Outlined.CarRepair,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_life, currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_life, currentBank),
                 icon = Icons.Outlined.FavoriteBorder,
             ),
             Product(
-                name = stringResource(Res.string.products_insurances_sme, currentBank.bankName),
+                name = stringResource(Res.string.products_insurances_sme, currentBank),
                 icon = Icons.Outlined.BusinessCenter,
             ),
         ),

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login_qr_button">%1$s e-bank code reading</string>
-    <string name="login_login_button">%1$s mobilbank login</string>
+    <string name="welcome_qr_button">%1$s e-bank code reading</string>
+    <string name="welcome_authenticate_button">%1$s mobilbank login</string>
+    <string name="welcome_account_opening_button">become a %1$s customer</string>
+    <string name="welcome_login_button">activate as a %1$s customer</string>
+
+    <string name="login_title">%1$s mobilbank activation</string>
+    <string name="login_heading">enter your e-mail and password</string>
+    <string name="login_email">%1$s mobilbank e-mail address</string>
+    <string name="login_password">%1$s mobilbank password</string>
+    <string name="login_continue">continue</string>
+    <string name="login_loading">logging in</string>
+
+    <string name="account_opening_title">%1$s account opening</string>
+    <string name="account_opening_heading">enter your e-mail and choose a password</string>
+    <string name="account_opening_email">e-mail address</string>
+    <string name="account_opening_password">password</string>
+    <string name="account_opening_continue">continue</string>
+    <string name="account_opening_loading">opening account</string>
 
     <string name="pin_title">authentication</string>
     <string name="pin_heading">enter your mPIN</string>
@@ -97,6 +113,10 @@
 
     <string name="extras_purchase_history">purchase history</string>
 
+    <string name="profile_title">my profile</string>
+    <string name="profile_logout">logout</string>
+    <string name="profile_logout_loading">logging out</string>
+
     <string name="new_beneficiary_title">new beneficiary</string>
 
     <string name="new_beneficiary_account_number_tab">account number</string>
@@ -130,4 +150,27 @@
 
     <string name="bank_changer_title">bank changer</string>
     <string name="bank_changer_back_button">back</string>
+
+    <string name="new_transfer_title">HUF payment</string>
+    <string name="new_transfer_payer">payer</string>
+    <string name="new_transfer_payee">payee</string>
+    <string name="new_transfer_amount">amount</string>
+    <string name="new_transfer_sign_transaction">sign transaction</string>
+
+    <string name="sign_transfer_title">signing</string>
+    <string name="sign_transfer_sign_transaction">sign transaction</string>
+
+    <string name="success_transfer_title">confirmation</string>
+    <string name="success_transfer_heading">successful HUF payment</string>
+    <string name="success_transfer_back_to_dashboard">back to dashboard</string>
+
+    <string name="transfer_transaction_type">transaction type</string>
+    <string name="transfer_huf_payment">HUF payment</string>
+    <string name="transfer_instant">instant</string>
+    <string name="transfer_payee_information">payee information</string>
+    <string name="transfer_payee_email">payee e-mail address</string>
+    <string name="transfer_payer_information">payer information</string>
+    <string name="transfer_payer_email">payer e-mail address</string>
+
+    <string name="default_currency">HUF</string>
 </resources>

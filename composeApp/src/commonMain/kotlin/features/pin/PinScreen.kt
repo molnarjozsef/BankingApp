@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.pin_biometric_cancel
 import bankingapp.composeapp.generated.resources.pin_biometric_description
@@ -56,12 +55,9 @@ fun PinScreen(
 
     val biometricResult = viewModel.biometricResult.collectAsState().value
     val navigateToHome = {
-        navController.navigate(
-            route = Routes.RouteHome,
-            navOptions = NavOptions.Builder()
-                .setPopUpTo(Routes.RouteLogin, inclusive = false)
-                .build()
-        )
+        navController.navigate(route = Routes.RouteHome) {
+            popUpTo(Routes.RouteWelcome)
+        }
     }
 
     val biometricTitle = stringResource(Res.string.pin_biometric_title)
@@ -113,8 +109,8 @@ fun PinScreenContent(
     ) { contentPadding ->
         Column(
             modifier = Modifier.fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(contentPadding)
+                .verticalScroll(rememberScrollState())
                 .padding(40.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

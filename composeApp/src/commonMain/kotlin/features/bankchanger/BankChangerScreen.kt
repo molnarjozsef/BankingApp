@@ -65,7 +65,7 @@ fun BankChangerScreenContent(
         ) {
             BankConfig.entries.forEach { bank ->
                 HorizontalCardButton(
-                    text = bank.bankName,
+                    text = bank.toString(),
                     icon = painterResource(bank.iconRes),
                     onClick = { setCurrentBank(bank) },
                     endContent = {

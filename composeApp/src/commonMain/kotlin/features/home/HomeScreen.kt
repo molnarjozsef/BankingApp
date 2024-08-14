@@ -88,6 +88,7 @@ fun HomeScreen(
         topBar = {
             HomeHeader(
                 currentBank = currentBank,
+                appNavController = appNavController,
                 homeNavController = homeNavController,
                 showMenu = { showMenu = true },
             )

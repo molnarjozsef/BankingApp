@@ -1,22 +1,36 @@
-
+import Routes.RouteAccountOpening
 import Routes.RouteAtmFinder
 import Routes.RouteBankChanger
 import Routes.RouteHome
 import Routes.RouteLogin
+import Routes.RouteNewTransfer
 import Routes.RoutePin
+import Routes.RouteProfile
+import Routes.RouteSignTransfer
+import Routes.RouteSuccessTransfer
+import Routes.RouteWelcome
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import features.accountopening.AccountOpeningScreen
 import features.atmfinder.AtmFinderScreen
 import features.bankchanger.BankChangerScreen
 import features.home.HomeScreen
 import features.login.LoginScreen
 import features.pin.PinScreen
+import features.profile.ProfileScreen
+import features.transfer.NewTransferScreen
+import features.transfer.SignTransferScreen
+import features.transfer.SuccessTransferScreen
+import features.welcome.WelcomeScreen
 import org.koin.compose.KoinContext
 import theme.AppTheme
 
@@ -29,41 +43,78 @@ fun BankingApp() {
             BackGestureHandler(
                 navController = navController,
             ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = RouteLogin,
-                    enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
-                    exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
-                ) {
-                    composable(RouteLogin) {
-                        LoginScreen(
-                            navigateToPinScreen = { navController.navigate(RoutePin) },
-                            navigateToBankChanger = { navController.navigate(RouteBankChanger) },
-                        )
-                    }
+                Box(Modifier.background(AppTheme.colors.backgroundNeutral)) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = RouteWelcome,
+                        enterTransition = { fadeIn(animationSpec = tween(NavigationAnimationDurationMillis)) },
+                        exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
+                    ) {
+                        composable(RouteWelcome) {
+                            WelcomeScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RoutePin) {
-                        PinScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RoutePin) {
+                            PinScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteHome) {
-                        HomeScreen(
-                            appNavController = navController
-                        )
-                    }
+                        composable(RouteAccountOpening) {
+                            AccountOpeningScreen(
+                                navController = navController,
+                            )
+                        }
 
-                    composable(RouteAtmFinder) {
-                        AtmFinderScreen(
-                            navController = navController,
-                        )
-                    }
+                        composable(RouteHome) {
+                            HomeScreen(
+                                appNavController = navController
+                            )
+                        }
 
-                    composable(RouteBankChanger) {
-                        BankChangerScreen(
-                            navController = navController
-                        )
+                        composable(RouteAtmFinder) {
+                            AtmFinderScreen(
+                                navController = navController,
+                            )
+                        }
+
+                        composable(RouteBankChanger) {
+                            BankChangerScreen(
+                                navController = navController
+                            )
+                        }
+
+                        composable(RouteNewTransfer) {
+                            NewTransferScreen(
+                                navController = navController,
+                            )
+                        }
+
+                        composable(RouteSignTransfer) {
+                            SignTransferScreen(
+                                navController = navController,
+                            )
+                        }
+
+                        composable(RouteSuccessTransfer) {
+                            SuccessTransferScreen(
+                                navController = navController,
+                            )
+                        }
+
+                        composable(RouteProfile) {
+                            ProfileScreen(
+                                navController = navController,
+                            )
+                        }
+
+                        composable(RouteLogin) {
+                            LoginScreen(
+                                navController = navController,
+                            )
+                        }
                     }
                 }
             }
@@ -78,8 +129,11 @@ expect fun BackGestureHandler(
 )
 
 object Routes {
-    val RouteLogin = "login"
+    val RouteWelcome = "welcome"
     val RoutePin = "pin"
+    val RouteAccountOpening = "accountopening"
+    val RouteLogin = "login"
+    val RouteProfile = "profile"
 
     val RouteHome = "home"
     val RouteDashboard = "dashboard"
@@ -89,6 +143,10 @@ object Routes {
     val RouteAtmFinder = "atmfinder"
 
     val RouteBankChanger = "bankchanger"
+
+    val RouteNewTransfer = "newtransfer"
+    val RouteSignTransfer = "signtransfer"
+    val RouteSuccessTransfer = "success"
 }
 
 const val NavigationAnimationDurationMillis = 200

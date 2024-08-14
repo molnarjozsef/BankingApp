@@ -14,10 +14,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import features.dashboard.DashboardScreen
-import features.dashboard.DashboardViewModel
 import features.extras.ExtrasScreen
 import features.products.ProductsScreen
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeNavGraph(
@@ -32,7 +30,9 @@ fun HomeNavGraph(
         exitTransition = { fadeOut(animationSpec = tween(NavigationAnimationDurationMillis)) },
     ) {
         composable(RouteDashboard) {
-            DashboardScreen()
+            DashboardScreen(
+                navController = appNavController,
+            )
         }
         composable(RouteProducts) {
             ProductsScreen()

@@ -64,7 +64,7 @@ fun ExtrasScreenContent(
     ) {
         Text(
             modifier = Modifier.padding(horizontal = dp16),
-            text = stringResource(Res.string.extras_available_extras, currentBank.bankName),
+            text = stringResource(Res.string.extras_available_extras, currentBank),
             color = AppTheme.colors.textDarker,
             fontWeight = FontWeight.Bold,
             fontSize = 19.sp
@@ -94,7 +94,7 @@ private fun Offers(
         title = stringResource(Res.string.extras_offers),
         products = listOf(
             Product(
-                name = stringResource(Res.string.extras_offer_cashback, currentBank.bankName),
+                name = stringResource(Res.string.extras_offer_cashback, currentBank),
                 icon = Icons.Outlined.Loyalty,
             )
         ),

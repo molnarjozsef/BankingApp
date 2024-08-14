@@ -79,10 +79,14 @@ fun AtmFinderScreen(
 @Composable
 fun FullScreenLoading(
     text: String? = null,
+    isOverlay: Boolean = false,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
-            .background(AppTheme.colors.backgroundNeutral),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                AppTheme.colors.backgroundNeutral.copy(alpha = if (isOverlay) 0.9f else 1f)
+            ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

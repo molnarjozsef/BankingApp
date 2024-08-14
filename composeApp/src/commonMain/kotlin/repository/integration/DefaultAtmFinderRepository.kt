@@ -1,34 +1,22 @@
-package repository
+package repository.integration
 
-import BankConfig
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import components.GpsPosition
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
 import model.domain.Atm
+import repository.AtmFinderRepository
 import service.BankingService
 import kotlin.math.PI
 import kotlin.math.cos
 
-class DefaultBankingRepository(
+class DefaultAtmFinderRepository(
     private val bankingService: BankingService,
-    private val dataStore: DataStore<Preferences>,
-) : BankingRepository {
+) : AtmFinderRepository {
+
     private val atms = MutableStateFlow<List<Atm>?>(null)
     private val lastLocation = MutableStateFlow<GpsPosition?>(null)
 
     override fun getAtms() = atms.asStateFlow()
-
-    override fun getCurrentBank() = dataStore.data.map { data ->
-        val currentBankName = data[bankPreferencesKey]
-        val currentBank = BankConfig.entries.firstOrNull { bank -> bank.name == currentBankName }
-
-        currentBank ?: BankConfig.Otp
-    }
 
     override suspend fun fetchAtmsIfNeeded(location: GpsPosition) {
         val shouldFetchForNewLocation = lastLocation.value?.let {
@@ -59,12 +47,6 @@ class DefaultBankingRepository(
         }
     }
 
-    override suspend fun setCurrentBank(bank: BankConfig) {
-        dataStore.edit {
-            it[bankPreferencesKey] = bank.name
-        }
-    }
-
     private fun getAtmQueryData(boundingBox: BoundingBox) =
         "[out:json];node[amenity=atm](${boundingBox.south},${boundingBox.west}," +
                 "${boundingBox.north},${boundingBox.east});out%20meta;"
@@ -74,13 +56,6 @@ class DefaultBankingRepository(
         "no" -> false
         else -> null
     }
-
-    data class BoundingBox(
-        val north: Double,
-        val east: Double,
-        val south: Double,
-        val west: Double,
-    )
 
     private fun getBoundingBox(
         coordinate: GpsPosition,
@@ -96,9 +71,22 @@ class DefaultBankingRepository(
         val east = coordinate.longitude + deltaLongitude * 180 / PI
         val west = coordinate.longitude - deltaLongitude * 180 / PI
 
-        return BoundingBox(north, east, south, west)
+        return BoundingBox(
+            north = north,
+            east = east,
+            south = south,
+            west = west
+        )
+    }
+
+    companion object {
+        data class BoundingBox(
+            val north: Double,
+            val east: Double,
+            val south: Double,
+            val west: Double,
+        )
     }
 }
 
 private const val DistanceThresholdMeters = 100
-private val bankPreferencesKey = stringPreferencesKey("bank")

@@ -26,6 +26,7 @@ import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.dashboard_credit_account_name
 import bankingapp.composeapp.generated.resources.dashboard_debit_account_name
 import bankingapp.composeapp.generated.resources.dashboard_savings_account_name
+import components.formatMoney
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 import theme.DefaultCardElevation
@@ -37,7 +38,7 @@ import theme.dp8
 @Composable
 fun Accounts(
     currentBank: BankConfig,
-    money: String,
+    money: Int?,
 ) {
 
     LazyRow(
@@ -47,21 +48,21 @@ fun Accounts(
         item {
             Account(
                 money = money,
-                accountName = stringResource(Res.string.dashboard_debit_account_name, currentBank.bankName),
+                accountName = stringResource(Res.string.dashboard_debit_account_name, currentBank),
                 color = AppTheme.colors.main
             )
         }
         item {
             Account(
-                money = money,
-                accountName = stringResource(Res.string.dashboard_credit_account_name, currentBank.bankName),
+                money = 0,
+                accountName = stringResource(Res.string.dashboard_credit_account_name, currentBank),
                 color = AppTheme.colors.productOrange
             )
         }
         item {
             Account(
-                money = money,
-                accountName = stringResource(Res.string.dashboard_savings_account_name, currentBank.bankName),
+                money = 0,
+                accountName = stringResource(Res.string.dashboard_savings_account_name, currentBank),
                 color = AppTheme.colors.productGreen
             )
         }
@@ -71,7 +72,7 @@ fun Accounts(
 @Composable
 private fun Account(
     accountName: String,
-    money: String,
+    money: Int?,
     color: Color,
 ) {
     Card(
@@ -107,7 +108,7 @@ private fun Account(
                 Spacer(Modifier.height(dp4))
 
                 Text(
-                    text = money,
+                    text = money?.let { formatMoney(it) } ?: "...",
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = AppTheme.colors.textDarker,

@@ -4,13 +4,16 @@ import BankConfig
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import features.dashboard.DashboardScreenContent
+import theme.AppTheme
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun DashboardScreenPreview() {
-    DashboardScreenContent(
-        currentBank = BankConfig.Otp,
-        money = "12 345 Ft",
-        showNewTransferSheet = { },
-    )
+    AppTheme {
+        DashboardScreenContent(
+            currentBank = BankConfig.Otp,
+            money = 12345,
+            showNewTransferSheet = { },
+        )
+    }
 }

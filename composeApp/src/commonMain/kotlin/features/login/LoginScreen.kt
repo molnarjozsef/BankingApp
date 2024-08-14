@@ -1,179 +1,152 @@
 package features.login
 
 import BankConfig
-import DefaultBank
-import androidx.compose.animation.core.animateIntOffsetAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import Routes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.QrCodeScanner
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
-import bankingapp.composeapp.generated.resources.login_arrows
-import bankingapp.composeapp.generated.resources.login_login_button
-import bankingapp.composeapp.generated.resources.login_qr_button
-import components.SecondaryButton
-import components.TertiaryButton
-import org.jetbrains.compose.resources.painterResource
+import bankingapp.composeapp.generated.resources.login_continue
+import bankingapp.composeapp.generated.resources.login_email
+import bankingapp.composeapp.generated.resources.login_heading
+import bankingapp.composeapp.generated.resources.login_loading
+import bankingapp.composeapp.generated.resources.login_password
+import bankingapp.composeapp.generated.resources.login_title
+import components.BackButton
+import components.Header
+import components.MainButton
+import components.TextField
+import features.atmfinder.FullScreenLoading
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import theme.AppTheme
 import theme.dp16
 import theme.dp24
-import theme.dp48
-import theme.dp56
-import theme.dp64
-import theme.dp8
-
 
 @Composable
 fun LoginScreen(
-    navigateToPinScreen: () -> Unit,
-    navigateToBankChanger: () -> Unit,
+    navController: NavController,
 ) {
     val viewModel = koinViewModel<LoginViewModel>()
-    val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
+    val currentBank by viewModel.currentBank.collectAsState()
 
-    LoginScreenContent(
-        currentBank = currentBank,
-        navigateToPinScreen = navigateToPinScreen,
-        navigateToBankChanger = navigateToBankChanger,
-    )
+    LaunchedEffect(viewModel) {
+        viewModel.loginSuccessfulEvents.collect {
+            navController.navigate(Routes.RouteHome) {
+                popUpTo(Routes.RouteWelcome)
+            }
+        }
+    }
+
+    Box {
+        LoginScreenContent(
+            currentBank = currentBank,
+            error = viewModel.error,
+            login = { email, password ->
+                viewModel.login(
+                    email = email,
+                    password = password
+                )
+            },
+            navigateUp = navController::navigateUp,
+        )
+
+        if (viewModel.isLoading) {
+            FullScreenLoading(
+                text = stringResource(Res.string.login_loading),
+                isOverlay = true,
+            )
+        }
+    }
 }
 
 @Composable
 fun LoginScreenContent(
-    currentBank: BankConfig,
-    navigateToPinScreen: () -> Unit,
-    navigateToBankChanger: () -> Unit,
+    currentBank: BankConfig?,
+    error: String?,
+    login: (email: String, password: String) -> Unit,
+    navigateUp: () -> Unit,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.backgroundMain)
-            .systemBarsPadding()
-            .padding(
-                top = dp56,
-                bottom = dp64,
-            )
-    ) {
-        AnimatedBubbles(
-            currentBank = currentBank,
-            navigateToBankChanger = navigateToBankChanger
-        )
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
 
-        Spacer(modifier = Modifier.height(dp24))
-
+    Scaffold(
+        topBar = {
+            currentBank?.let {
+                Header(
+                    title = stringResource(Res.string.login_title, currentBank),
+                    startButton = { BackButton(onClick = navigateUp) },
+                )
+            }
+        }
+    ) { contentPadding ->
         Column(
-            modifier = Modifier.padding(horizontal = dp48)
+            modifier = Modifier
+                .padding(contentPadding)
+                .fillMaxSize()
+                .imePadding()
+                .verticalScroll(rememberScrollState())
+                .padding(dp16)
         ) {
-            TertiaryButton(
-                text = stringResource(Res.string.login_qr_button, currentBank.bankName),
-                icon = rememberVectorPainter(Icons.Outlined.QrCodeScanner),
-                textColor = AppTheme.colors.contentOnMainBackground,
-                onClick = {}
+            Text(
+                text = stringResource(Res.string.login_heading),
+                color = AppTheme.colors.textDark,
+                fontSize = 22.sp,
             )
 
-            Spacer(modifier = Modifier.height(dp8))
+            Spacer(Modifier.height(dp24))
 
-            SecondaryButton(
-                text = stringResource(Res.string.login_login_button, currentBank.bankName),
-                onClick = navigateToPinScreen,
+            TextField(
+                title = currentBank?.let { stringResource(Res.string.login_email, currentBank) },
+                value = email,
+                onValueChange = { email = it },
+            )
+
+            Spacer(Modifier.height(dp16))
+
+            TextField(
+                title = currentBank?.let { stringResource(Res.string.login_password, currentBank) },
+                value = password,
+                onValueChange = { password = it },
+                visualTransformation = PasswordVisualTransformation(),
+            )
+
+            Spacer(Modifier.height(dp16))
+
+            error?.let {
+                Text(
+                    text = error,
+                    color = AppTheme.colors.error,
+                )
+            }
+
+            Spacer(Modifier.height(dp16))
+            Spacer(Modifier.weight(1f))
+
+            MainButton(
+                modifier = Modifier.padding(horizontal = dp24),
+                text = stringResource(Res.string.login_continue),
+                onClick = { login(email, password) }
             )
         }
     }
-
 }
-
-@Composable
-fun ColumnScope.AnimatedBubbles(
-    currentBank: BankConfig,
-    navigateToBankChanger: () -> Unit,
-) {
-    var isShown by remember { mutableStateOf(false) }
-    val density = LocalDensity.current
-    val iconXOffset by animateIntOffsetAsState(
-        targetValue = IntOffset(
-            y = 0,
-            x = if (isShown) {
-                with(density) { dp16.roundToPx() }
-            } else {
-                with(density) { IconBubbleSize.roundToPx() }
-            },
-        ),
-        animationSpec = tween(1000)
-    )
-    val arrowsXOffset by animateIntOffsetAsState(
-        targetValue = IntOffset(
-            y = 0,
-            x = if (isShown) {
-                with(density) { dp16.roundToPx() }
-            } else {
-                with(density) { -ArrowsSize.roundToPx() }
-            },
-        ),
-        animationSpec = tween(1000)
-    )
-
-    SideEffect { isShown = true }
-
-    Box(
-        modifier = Modifier
-            .offset { iconXOffset }
-            .align(Alignment.End)
-            .size(IconBubbleSize)
-            .clip(CircleShape)
-            .background(AppTheme.colors.bubbleOnMain)
-            .clickable { navigateToBankChanger() },
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            modifier = Modifier.size(80.dp),
-            painter = painterResource(currentBank.iconRes),
-            contentDescription = null,
-            tint = AppTheme.colors.contentOnMainSurface,
-        )
-    }
-
-    Spacer(Modifier.weight(1f))
-
-    Icon(
-        modifier = Modifier
-            .size(ArrowsSize)
-            .offset { arrowsXOffset }
-            .align(Alignment.Start),
-        painter = painterResource(Res.drawable.login_arrows),
-        contentDescription = null,
-        tint = AppTheme.colors.arrowsOnMain,
-    )
-}
-
-val IconBubbleSize = 140.dp
-val ArrowsSize = 120.dp

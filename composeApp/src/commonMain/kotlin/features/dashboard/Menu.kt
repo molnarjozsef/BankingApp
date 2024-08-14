@@ -119,7 +119,7 @@ private fun NavigationSection(
         onClick = onProductsClick,
     )
     MenuItem(
-        title = stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank.bankName),
+        title = stringResource(Res.string.dashboard_bottom_navigation_extras, currentBank),
         icon = Icons.Outlined.ConfirmationNumber,
         onClick = onExtrasClick,
     )
@@ -139,9 +139,9 @@ private fun ExtrasSection(
 
     Spacer(Modifier.height(dp16))
 
-    val searchPrompt = stringResource(Res.string.szep_card_search_prompt, currentBank.bankName)
+    val searchPrompt = stringResource(Res.string.szep_card_search_prompt, currentBank)
     MenuItem(
-        title = stringResource(Res.string.dashboard_menu_szep_card, currentBank.bankName),
+        title = stringResource(Res.string.dashboard_menu_szep_card, currentBank),
         icon = Icons.Outlined.BeachAccess,
         onClick = {
             openWebBrowser(url = "https://www.google.com/search?q=$searchPrompt")

@@ -1,10 +1,10 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package features.dashboard
 
 import BankConfig
 import DefaultBank
-import androidx.compose.foundation.ExperimentalFoundationApi
+import Routes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import bankingapp.composeapp.generated.resources.Res
 import bankingapp.composeapp.generated.resources.dashboard_administrative_transactions
 import bankingapp.composeapp.generated.resources.dashboard_financial_transactions
@@ -56,9 +57,12 @@ import theme.dp8
 
 
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    navController: NavController,
+) {
     val viewModel = koinViewModel<DashboardViewModel>()
     val currentBank by viewModel.currentBank.collectAsState(DefaultBank)
+    val amount by viewModel.amount.collectAsState()
 
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
@@ -84,6 +88,10 @@ fun DashboardScreen() {
                                 showMenu = false
                             }
                         }
+                },
+                startTransferToEmail = { email ->
+                    viewModel.setRecipientEmail(email)
+                    navController.navigate(Routes.RouteNewTransfer)
                 }
             )
         }
@@ -92,7 +100,7 @@ fun DashboardScreen() {
 
     DashboardScreenContent(
         currentBank = currentBank,
-        money = viewModel.money,
+        money = amount,
         showNewTransferSheet = { showMenu = true },
     )
 }
@@ -100,7 +108,7 @@ fun DashboardScreen() {
 @Composable
 fun DashboardScreenContent(
     currentBank: BankConfig,
-    money: String,
+    money: Int?,
     showNewTransferSheet: () -> Unit,
 ) {
     Column(
