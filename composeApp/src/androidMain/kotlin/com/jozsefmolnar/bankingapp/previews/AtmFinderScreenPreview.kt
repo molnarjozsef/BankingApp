@@ -2,10 +2,10 @@ package com.jozsefmolnar.bankingapp.previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import components.DefaultPosition
-import features.atmfinder.AtmFinderScreenContent
-import model.domain.Atm
-import theme.AppTheme
+import com.jozsefmolnar.bankingapp.components.DefaultPosition
+import com.jozsefmolnar.bankingapp.features.atmfinder.AtmFinderScreenContent
+import com.jozsefmolnar.bankingapp.model.domain.Atm
+import com.jozsefmolnar.bankingapp.theme.AppTheme
 
 @Preview(showBackground = true)
 @Composable
